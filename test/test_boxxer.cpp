@@ -1,9 +1,9 @@
 
-#include "filter_kernels.h"
-#include "GaussFilter.h"
-#include "Maxima.h"
-#include "Boxxer2D.h"
-#include "Boxxer3D.h"
+#include "Boxxer/filter_kernels.h"
+#include "Boxxer/GaussFilter.h"
+#include "Boxxer/Maxima.h"
+#include "Boxxer/Boxxer2D.h"
+#include "Boxxer/Boxxer3D.h"
 
 using std::cout;
 using std::endl;
