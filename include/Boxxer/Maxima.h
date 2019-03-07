@@ -19,7 +19,8 @@ public:
     using IMatT = arma::Mat<IdxT>;
     using VecT = arma::Col<FloatT>;
     using ImageT = arma::Mat<FloatT>;
-    const IdxT dim=2;
+    static const IdxT MinBoxsize;
+    static const IdxT Ndim;
     IVecT size;
     IdxT boxsize;
     Maxima2D(const IVecT &sizeX, IdxT boxsize=3);

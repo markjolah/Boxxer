@@ -5,24 +5,39 @@
  * @brief The class definitions for Maxima2D and Maxima3D, local maxima finders.
  */
 
+#include "Boxxer/BoxxerError.h"
 #include "Boxxer/Maxima.h"
 
 namespace boxxer {
 
 template<class FloatT, class IdxT>
-Maxima2D<FloatT, IdxT>::Maxima2D(const IVecT &size, IdxT boxsize)
+static const typename Maxima2D<FloatT,IdxT>::IdxT Maxima2D<FloatT,IdxT>::MinBoxsize = 3;
+template<class FloatT, class IdxT>
+static const typename Maxima2D<FloatT,IdxT>::IdxT Maxima2D<FloatT,IdxT>::Ndim = 2;
+
+template<class FloatT, class IdxT>
+Maxima2D<FloatT,IdxT>::Maxima2D(const IVecT &size, IdxT boxsize)
     : size(size), boxsize(boxsize)
 {
-    assert(boxsize>=3 && boxsize%2==1);
-    assert(arma::all(size>=boxsize));
-    max_maxima=size(0)*size(1)/4;
+    if(size.n_elem ~= Ndim) throw ParameterShapeError("Size must match Ndim=2");
+    if(boxsize<MinBoxsize || boxsize%2==0) {
+        std::ostringstream msg;
+        msg<<"Boxsize must be odd and >="<<MinBoxsize<<" got: "<<boxsize;
+        throw ParameterValueError(msg.str());
+    }
+    if(!arma::all(size>=boxsize)) {
+         std::ostringstream msg;
+        msg<<"Boxsize: "<<boxsize<<" greater than image size dimensions: "<<size.t();
+        throw ParameterValueError(msg.str());
+    }
+    max_maxima = size(0)*size(1)/4;
     maxima.set_size(dim,max_maxima);
     max_vals.set_size(max_maxima);
     skip_buf.set_size(size(0),2);
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::find_maxima(const ImageT &im)
+IdxT Maxima2D<FloatT,IdxT>::find_maxima(const ImageT &im)
 {
     if(boxsize==3) return maxima_3x3(im);
     else return maxima_nxn(im,boxsize);
@@ -30,19 +45,19 @@ IdxT Maxima2D<FloatT, IdxT>::find_maxima(const ImageT &im)
 
 template<class FloatT, class IdxT>
 inline
-void Maxima2D<FloatT, IdxT>::detect_maxima(IdxT &Nmaxima, IdxT x, IdxT y, FloatT val)
+void Maxima2D<FloatT,IdxT>::detect_maxima(IdxT &Nmaxima, IdxT x, IdxT y, FloatT val)
 {
     assert(Nmaxima<max_maxima);
-    maxima(0,Nmaxima)=x;
-    maxima(1,Nmaxima)=y;
-    max_vals(Nmaxima)=val;
+    maxima(0,Nmaxima) = x;
+    maxima(1,Nmaxima) = y;
+    max_vals(Nmaxima) = val;
     Nmaxima++;
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out)
+IdxT Maxima2D<FloatT,IdxT>::find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out)
 {
-    IdxT Nmaxima=find_maxima(im);
+    IdxT Nmaxima = find_maxima(im);
     maxima_out.resize(dim,Nmaxima);
     max_vals_out.resize(Nmaxima);
     read_maxima(Nmaxima, maxima_out,max_vals_out);
@@ -50,10 +65,10 @@ IdxT Maxima2D<FloatT, IdxT>::find_maxima(const ImageT &im, IMatT &maxima_out, Ve
 }
 
 template<class FloatT, class IdxT>
-void Maxima2D<FloatT, IdxT>::read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const
+void Maxima2D<FloatT,IdxT>::read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const
 {
-    assert(static_cast<IdxT>(maxima_out.n_rows)==dim && static_cast<IdxT>(maxima_out.n_cols)==Nmaxima);
-    assert(static_cast<IdxT>(max_vals_out.n_elem)==Nmaxima);
+    maxima_out.set_size(dim, Nmaxima);
+    max_vals_out.set_size(Nmaxima);
     if(Nmaxima>0) {
         maxima_out=maxima.cols(0,Nmaxima-1);
         max_vals_out=max_vals.rows(0,Nmaxima-1);
@@ -61,14 +76,14 @@ void Maxima2D<FloatT, IdxT>::read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &
 }
 
 template<class FloatT, class IdxT>
-void Maxima2D<FloatT, IdxT>::test_maxima(const ImageT &im)
+void Maxima2D<FloatT,IdxT>::test_maxima(const ImageT &im)
 {
-    IdxT Nmaxima=maxima_3x3(im);
+    IdxT Nmaxima = maxima_3x3(im);
     IMatT maxima_out(dim,Nmaxima);
     VecT max_vals_out(Nmaxima);
     read_maxima(Nmaxima, maxima_out, max_vals_out);
 
-    IdxT Nmaxima_slow=maxima_3x3_slow(im);
+    IdxT Nmaxima_slow = maxima_3x3_slow(im);
     IMatT maxima_out_slow(dim,Nmaxima_slow);
     VecT max_vals_out_slow(Nmaxima_slow);
     read_maxima(Nmaxima_slow, maxima_out_slow, max_vals_out_slow);
@@ -81,7 +96,7 @@ void Maxima2D<FloatT, IdxT>::test_maxima(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::maxima_3x3(const ImageT &im)
+IdxT Maxima2D<FloatT,IdxT>::maxima_3x3(const ImageT &im)
 {
     IdxT Nmaxima=maxima_3x3_edges(im);
     skip_buf.zeros();
@@ -119,7 +134,7 @@ IdxT Maxima2D<FloatT, IdxT>::maxima_3x3(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::maxima_3x3_slow(const ImageT &im)
+IdxT Maxima2D<FloatT,IdxT>::maxima_3x3_slow(const ImageT &im)
 {
     IdxT Nmaxima=maxima_3x3_edges(im);
     for(IdxT y=1; y<size(1)-1; y++) for(IdxT x=1; x<size(0)-1; x++) {
@@ -133,7 +148,7 @@ IdxT Maxima2D<FloatT, IdxT>::maxima_3x3_slow(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::maxima_3x3_edges(const ImageT &im)
+IdxT Maxima2D<FloatT,IdxT>::maxima_3x3_edges(const ImageT &im)
 {
     IdxT x=0, y=0;
     IdxT Nmaxima=0;
@@ -177,7 +192,7 @@ IdxT Maxima2D<FloatT, IdxT>::maxima_3x3_edges(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::maxima_5x5(const ImageT &im)
+IdxT Maxima2D<FloatT,IdxT>::maxima_5x5(const ImageT &im)
 {
     IdxT Nmaxima=maxima_3x3(im);
     IMatT new_maxima(dim, Nmaxima);
@@ -216,7 +231,7 @@ IdxT Maxima2D<FloatT, IdxT>::maxima_5x5(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima2D<FloatT, IdxT>::maxima_nxn(const ImageT &im, IdxT filter_size)
+IdxT Maxima2D<FloatT,IdxT>::maxima_nxn(const ImageT &im, IdxT filter_size)
 {
     IdxT Nmaxima = maxima_3x3(im);
     assert(filter_size%2==1); //filter(box) size is odd 
@@ -256,13 +271,22 @@ maxima2D_nxn_reject: ;//Go here when local maxima is not valid
 
 /* Maxima3D */
 template<class FloatT, class IdxT>
-Maxima3D<FloatT, IdxT>::Maxima3D(const IVecT &size, IdxT boxsize)
-: size(size), boxsize(boxsize)
+Maxima3D<FloatT,IdxT>::Maxima3D(const IVecT &size, IdxT boxsize)
+    : size(size),
+      boxsize(boxsize)
 {
-    assert(static_cast<IdxT>(size.n_elem)==dim);
-    assert(boxsize>=3 && boxsize%2==1);
-    assert(arma::all(size>=boxsize));
-    max_maxima=size(0)*size(1)*size(2)/8;
+    if(size.n_elem ~= Ndim) throw ParameterShapeError("Size must match Ndim=3");
+    if(boxsize<MinBoxsize || boxsize%2==0) {
+        std::ostringstream msg;
+        msg<<"Boxsize must be odd and >="<<MinBoxsize<<" got: "<<boxsize;
+        throw ParameterValueError(msg.str());
+    }
+    if(!arma::all(size>=boxsize)) {
+         std::ostringstream msg;
+        msg<<"Boxsize: "<<boxsize<<" greater than image size dimensions: "<<size.t();
+        throw ParameterValueError(msg.str());
+    }
+    max_maxima = size(0)*size(1)*size(2)/8;
     maxima.set_size(dim,max_maxima);
     max_vals.set_size(max_maxima);
     skip_buf.set_size(size(0),2);
@@ -270,7 +294,7 @@ Maxima3D<FloatT, IdxT>::Maxima3D(const IVecT &size, IdxT boxsize)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::find_maxima(const ImageT &im)
+IdxT Maxima3D<FloatT,IdxT>::find_maxima(const ImageT &im)
 {
     if(boxsize==3) return maxima_3x3(im);
     else return maxima_nxn(im,boxsize);
@@ -278,20 +302,20 @@ IdxT Maxima3D<FloatT, IdxT>::find_maxima(const ImageT &im)
 
 template<class FloatT, class IdxT>
 inline
-void Maxima3D<FloatT, IdxT>::detect_maxima(IdxT &Nmaxima, IdxT x, IdxT y, IdxT z, FloatT val)
+void Maxima3D<FloatT,IdxT>::detect_maxima(IdxT &Nmaxima, IdxT x, IdxT y, IdxT z, FloatT val)
 {
     assert(Nmaxima<max_maxima);
-    maxima(0,Nmaxima)=x;
-    maxima(1,Nmaxima)=y;
-    maxima(2,Nmaxima)=z;
-    max_vals(Nmaxima)=val;
+    maxima(0,Nmaxima) = x;
+    maxima(1,Nmaxima) = y;
+    maxima(2,Nmaxima) = z;
+    max_vals(Nmaxima) = val;
     Nmaxima++;
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out)
+IdxT Maxima3D<FloatT,IdxT>::find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out)
 {
-    IdxT Nmaxima=find_maxima(im);
+    IdxT Nmaxima = find_maxima(im);
     maxima_out.resize(dim,Nmaxima);
     max_vals_out.resize(Nmaxima);
     read_maxima(Nmaxima, maxima_out,max_vals_out);
@@ -299,25 +323,25 @@ IdxT Maxima3D<FloatT, IdxT>::find_maxima(const ImageT &im, IMatT &maxima_out, Ve
 }
 
 template<class FloatT, class IdxT>
-void Maxima3D<FloatT, IdxT>::read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const
+void Maxima3D<FloatT,IdxT>::read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const
 {
     assert(static_cast<IdxT>(maxima_out.n_rows)==dim && static_cast<IdxT>(maxima_out.n_cols)==Nmaxima);
     assert(static_cast<IdxT>(max_vals_out.n_elem)==Nmaxima);
     if(Nmaxima>0) {
-        maxima_out=maxima.cols(0,Nmaxima-1);
-        max_vals_out=max_vals.rows(0,Nmaxima-1);
+        maxima_out = maxima.cols(0,Nmaxima-1);
+        max_vals_out = max_vals.rows(0,Nmaxima-1);
     }
 }
 
 template<class FloatT, class IdxT>
-void Maxima3D<FloatT, IdxT>::test_maxima(const ImageT &im)
+void Maxima3D<FloatT,IdxT>::test_maxima(const ImageT &im)
 {
-    IdxT Nmaxima=maxima_3x3(im);
+    IdxT Nmaxima = maxima_3x3(im);
     IMatT maxima_out(dim,Nmaxima);
     VecT max_vals_out(Nmaxima);
     read_maxima(Nmaxima, maxima_out, max_vals_out);
 
-    IdxT Nmaxima_slow=maxima_3x3_slow(im);
+    IdxT Nmaxima_slow = maxima_3x3_slow(im);
     IMatT maxima_out_slow(dim,Nmaxima_slow);
     VecT max_vals_out_slow(Nmaxima_slow);
     read_maxima(Nmaxima_slow, maxima_out_slow, max_vals_out_slow);
@@ -331,18 +355,18 @@ void Maxima3D<FloatT, IdxT>::test_maxima(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::maxima_3x3(const ImageT &im)
+IdxT Maxima3D<FloatT,IdxT>::maxima_3x3(const ImageT &im)
 {
-    IdxT Nmaxima=maxima_3x3_edges(im);
-    IdxT sizeX=size(0);
-    IdxT sizeY=size(1);
-    IdxT sizeZ=size(2);
+    IdxT Nmaxima = maxima_3x3_edges(im);
+    IdxT sizeX = size(0);
+    IdxT sizeY = size(1);
+    IdxT sizeZ = size(2);
     skip_buf.zeros();
-    IdxT *skip=skip_buf.memptr();
-    IdxT *skip_next=skip+sizeX;
+    IdxT *skip = skip_buf.memptr();
+    IdxT *skip_next = skip+sizeX;
     skip_plane_buf.zeros();
-    IdxT *skip_plane=skip_plane_buf.memptr();
-    IdxT *skip_plane_next=skip_plane+sizeX*sizeY;
+    IdxT *skip_plane = skip_plane_buf.memptr();
+    IdxT *skip_plane_next = skip_plane+sizeX*sizeY;
     for(IdxT z=1; z<sizeZ-1; z++){
         for(IdxT y=1; y<sizeY-1; y++){
             for(IdxT x=1; x<sizeX-1; x++) {
@@ -394,7 +418,7 @@ IdxT Maxima3D<FloatT, IdxT>::maxima_3x3(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::maxima_3x3_slow(const ImageT &im)
+IdxT Maxima3D<FloatT,IdxT>::maxima_3x3_slow(const ImageT &im)
 {
     IdxT Nmaxima=maxima_3x3_edges(im);
     for(IdxT z=1; z<size(2)-1; z++) for(IdxT y=1; y<size(1)-1; y++) for(IdxT x=1; x<size(0)-1; x++) {
@@ -409,15 +433,13 @@ IdxT Maxima3D<FloatT, IdxT>::maxima_3x3_slow(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::maxima_3x3_edges(const ImageT &im)
+IdxT Maxima3D<FloatT,IdxT>::maxima_3x3_edges(const ImageT &im)
 {
     IdxT x=0, y=0, z=0;
     IdxT Nmaxima=0;
     IdxT sizeX=size(0);
     IdxT sizeY=size(1);
     IdxT sizeZ=size(2);
-//     std::cout<<"Size: "<<size<<std::endl;
-//     std::cout<<"Size: ["<<sizeX<<","<<sizeY<<","<<sizeZ<<"]"<<std::endl;
 
     /* Forward Face (z=0) Edges and Corners */
     //Top Left Forward corner x=0; y=0; z=0
@@ -626,12 +648,11 @@ IdxT Maxima3D<FloatT, IdxT>::maxima_3x3_edges(const ImageT &im)
                 detect_maxima(Nmaxima, x, y, z, val);
         }
     }
-    /* Why do cubes have so many damn corners, edges, and faces?! */
     return Nmaxima;
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::maxima_5x5(const ImageT &im)
+IdxT Maxima3D<FloatT,IdxT>::maxima_5x5(const ImageT &im)
 {
     IdxT Nmaxima=maxima_3x3(im);
     IMatT new_maxima(dim, Nmaxima);
@@ -691,7 +712,7 @@ IdxT Maxima3D<FloatT, IdxT>::maxima_5x5(const ImageT &im)
 }
 
 template<class FloatT, class IdxT>
-IdxT Maxima3D<FloatT, IdxT>::maxima_nxn(const ImageT &im, IdxT filter_size)
+IdxT Maxima3D<FloatT,IdxT>::maxima_nxn(const ImageT &im, IdxT filter_size)
 {
     IdxT Nmaxima=maxima_3x3(im);
     assert(filter_size%2==1);

@@ -8,7 +8,7 @@
 #define BOXXER_BOXXER2D_H
 
 #include <armadillo>
-#include "Boxxer/BoxxerError.h"
+#include "Boxxer/Hypercube/Hypercube.h"
 
 namespace boxxer {
 
@@ -25,10 +25,10 @@ namespace boxxer {
  *
  * This is contrary to normal image coordinates in matlab, but for this low level it is easier to think
  * about x as the first index into an image and understand that the meaning for "X" and "Y" will be reversed
- * from the matlab interpretation, but only internally within the Boxxer iface.
+ * from the matlab interpretation, but only internally within the Boxxer_IFace MexIFace class.
  * 
  */
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=unit32_t>
 class Boxxer2D
 {
 public:
@@ -39,12 +39,12 @@ public:
     using ImageT = arma::Mat<FloatT>;
     using ImageStackT = arma::Cube<FloatT>;
     using ScaledImageT = arma::Cube<FloatT>;
-    using ScaledImageStackT = Hypercube<FloatT>;
+    using ScaledImageStackT = hypercube::Hypercube<FloatT>;
  
     static const FloatT DefaultSigmaRatio;
-    static const int dim;
+    static const IdxT dim;
     
-    int nScales;
+    IdxT nScales;
     IVecT imsize; // [nrows x ncols] size of an individual frame
     MatT sigma; // size: [2 x nScales] row1=sigmaX (rows), row2=sigmaY (cols)
     FloatT sigma_ratio;
@@ -54,26 +54,26 @@ public:
 
     void filterScaledLoG(const ImageStackT &im, ScaledImageStackT &fim) const;
     void filterScaledDoG(const ImageStackT &im, ScaledImageStackT &fim) const;
-    int scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, int neighborhood_size, int scale_neighborhood_size) const;
-    int scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, int neighborhood_size, int scale_neighborhood_size) const;
+    IdxT scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size) const;
+    IdxT scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size) const;
 
     ImageT make_image() const;
-    ImageStackT make_image_stack(int nT) const;
+    ImageStackT make_image_stack(IdxT nT) const;
     ScaledImageT make_scaled_image() const;
-    ScaledImageStackT make_scaled_image_stack(int nT) const;
+    ScaledImageStackT make_scaled_image_stack(IdxT nT) const;
 
     /* Static Methods */
     static void filterLoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma);
     static void filterDoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma, FloatT sigma_ratio);
     static void filterGauss(const ImageStackT &im, ImageStackT &fim, const VecT &sigma);
     static void checkMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals);
-    static int enumerateImageMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, int neighborhood_size);
+    static IdxT enumerateImageMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size);
 
 private:
-    int scaleSpaceFrameMaximaRefine(const ScaledImageT &im, IMatT &maxima, VecT &max_vals, int scale_neighborhood_size) const;
-    int scaleSpaceFrameMaxima(const ScaledImageT &im, IMatT &maxima, VecT &max_vals, 
-                                   int neighborhood_size, int scale_neighborhood_size) const;
-    static int combine_maxima(const arma::field<IMatT> &frame_maxima, const arma::field<VecT> &frame_max_vals,
+    IdxT scaleSpaceFrameMaximaRefine(const ScaledImageT &im, IMatT &maxima, VecT &max_vals, IdxT scale_neighborhood_size) const;
+    IdxT scaleSpaceFrameMaxima(const ScaledImageT &im, IMatT &maxima, VecT &max_vals,
+                                   IdxT neighborhood_size, IdxT scale_neighborhood_size) const;
+    static IdxT combine_maxima(const arma::field<IMatT> &frame_maxima, const arma::field<VecT> &frame_max_vals,
                        IMatT &maxima, VecT &max_vals);
     static void computeDoGSigmas(const MatT &sigma, FloatT sigma_ratio, MatT &gauss_sigmaE, MatT &gauss_sigmaI);
 };
@@ -81,8 +81,8 @@ private:
 
 template<class FloatT, class IdxT>
 inline
-typename Boxxer2D<FloatT>::ImageT
-Boxxer2D<FloatT>::make_image() const
+typename Boxxer2D<FloatT,IdxT>::ImageT
+Boxxer2D<FloatT,IdxT>::make_image() const
 {
     return ImageT(imsize(0),imsize(1));
 }
@@ -90,24 +90,24 @@ Boxxer2D<FloatT>::make_image() const
 
 template<class FloatT, class IdxT>
 inline
-typename Boxxer2D<FloatT>::ImageStackT
-Boxxer2D<FloatT>::make_image_stack(int nT) const
+typename Boxxer2D<FloatT,IdxT>::ImageStackT
+Boxxer2D<FloatT,IdxT>::make_image_stack(IdxT nT) const
 {
     return ImageStackT(imsize(0),imsize(1),nT);
 }
 
 template<class FloatT, class IdxT>
 inline
-typename Boxxer2D<FloatT>::ScaledImageT
-Boxxer2D<FloatT>::make_scaled_image() const
+typename Boxxer2D<FloatT,IdxT>::ScaledImageT
+Boxxer2D<FloatT,IdxT>::make_scaled_image() const
 {
     return ScaledImageT(imsize(0),imsize(1),nScales);
 }
 
 template<class FloatT, class IdxT>
 inline
-typename Boxxer2D<FloatT>::ScaledImageStackT
-Boxxer2D<FloatT>::make_scaled_image_stack(int nT) const
+typename Boxxer2D<FloatT,IdxT>::ScaledImageStackT
+Boxxer2D<FloatT,IdxT>::make_scaled_image_stack(IdxT nT) const
 {
     return ScaledImageStackT(imsize(0),imsize(1),nScales,nT);
 }

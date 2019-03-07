@@ -7,64 +7,83 @@
 
 #include <limits>
 #include <iomanip>
-#include <armadillo>
+
 #include "Boxxer/GaussFilter.h"
-#include "Boxxer/filter_kernels.h"
+#include "Boxxer/FilterKernels.h"
 
 namespace boxxer {
 
 /* GaussFIRFilter */
 
-template<class FloatT>
-GaussFIRFilter<FloatT>::GaussFIRFilter(int dim_, const IVecT &size_, const FVecT &sigma_)
+template<class FloatT, class IdxT>
+GaussFIRFilter<FloatT,IdxT>::GaussFIRFilter(IdxT dim_, const IVecT &size_, const VecT &sigma_)
     : dim(dim_), size(size_), sigma(sigma_), hw(dim_)
 {
-    assert(1<=dim && dim<=3);
-    assert(static_cast<int>(size.n_elem)==dim);
-    assert(arma::all(size>0));
-    assert(static_cast<int>(sigma.n_elem)==dim);
-    assert(arma::all(sigma>0));
+    if(dim<1 || dim > 3) {
+        std::ostringstream msg;
+        msg<<"Got bad dim: "<<dim;
+        throw ParameterValueError(msg.str());
+    }
+    if(size.n_elem != dim) {
+        std::ostringstream msg;
+        msg<<"Got bad size #elem: "<<size.n_elem<<" dim:"<<dim;
+        throw ParameterValueError(msg.str());
+    }
+    if(!arma::all(size>0)) {
+        std::ostringstream msg;
+        msg<<"Got bad size: "<<size.t();
+        throw ParameterValueError(msg.str());
+    }
+    if(sigma.n_elem != dim) {
+        std::ostringstream msg;
+        msg<<"Got bad sigma #elem: "<<sigma.n_elem<<" dim:"<<dim;
+        throw ParameterValueError(msg.str());
+    }
+    if(!arma::all(sigma>0)) {
+        std::ostringstream msg;
+        msg<<"Got bad sigma: "<<sigma.t();
+        throw ParameterValueError(msg.str());
+    }
 }
 
-
-template<class FloatT>
-typename GaussFIRFilter<FloatT>::FVecT 
-GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(FloatT sigma, int hw)
+template<class FloatT, class IdxT>
+typename GaussFIRFilter<FloatT,IdxT>::VecT
+GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(FloatT sigma, IdxT hw)
 {
-    int W=hw+1;  //full kernel size is hw*2+1, but we only compute the right half + center pixel
+    IdxT W=hw+1;  //full kernel size is hw*2+1, but we only compute the right half + center pixel
     arma::vec kernel(W);
-    double exp_norm=-0.5/(sigma*sigma); // -1/(2*sigma^2)
+    FloatT exp_norm=-0.5/(sigma*sigma); // -1/(2*sigma^2)
     kernel(0)=1.;
-    double sum=1.;
-    for(int r=1; r<W; r++) {
-        double val=exp(r*r*exp_norm);
+    FloatT sum=1.;
+    for(IdxT r=1; r<W; r++) {
+        FloatT val=exp(r*r*exp_norm);
         kernel(r)=val;
         sum+=2*val;
     }
     kernel/=sum;
-    return arma::conv_to<FVecT>::from(kernel);
+    return arma::conv_to<VecT>::from(kernel);
 }
 
 
-template<class FloatT>
-typename GaussFIRFilter<FloatT>::FVecT 
-GaussFIRFilter<FloatT>::compute_LoG_FIR_kernel(FloatT sigma, int hw)
+template<class FloatT, class IdxT>
+typename GaussFIRFilter<FloatT,IdxT>::VecT
+GaussFIRFilter<FloatT,IdxT>::compute_LoG_FIR_kernel(FloatT sigma, IdxT hw)
 {
-    int W=hw+1;  //full kernel size is hw*2+1, but we only compute the right half + center pixel
+    IdxT W=hw+1;  //full kernel size is hw*2+1, but we only compute the right half + center pixel
     arma::vec kernel(W);
-    double sigmanorm=1./(sigma*sigma);
-    double norm=sigmanorm/(sqrt(2*arma::Datum<double>::pi)); //1/(sqrt(2*pi)*sigma^3) * sigma <-normalization term
-    double exp_norm=-0.5*sigmanorm;
+    FloatT sigmanorm=1./(sigma*sigma);
+    FloatT norm=sigmanorm/(sqrt(2*arma::Datum<FloatT>::pi)); //1/(sqrt(2*pi)*sigma^3) * sigma <-normalization term
+    FloatT exp_norm=-0.5*sigmanorm;
     kernel(0)=norm;
-//     double sum=norm;
-    for(int r=1; r<W; r++) { 
-        double rsq=r*r;
-        double val=norm*(1-rsq*sigmanorm)*exp(rsq*exp_norm);
+//     FloatT sum=norm;
+    for(IdxT r=1; r<W; r++) {
+        FloatT rsq=r*r;
+        FloatT val=norm*(1-rsq*sigmanorm)*exp(rsq*exp_norm);
         kernel(r)=val;
 //         sum+=2*val;
     }
 //     kernel(0)-=sum;
-    return arma::conv_to<FVecT>::from(kernel);
+    return arma::conv_to<VecT>::from(kernel);
 }
 
 
@@ -72,43 +91,47 @@ GaussFIRFilter<FloatT>::compute_LoG_FIR_kernel(FloatT sigma, int hw)
 
 /* GaussFilter2D */
 
-template<class FloatT>
-GaussFilter2D<FloatT>::GaussFilter2D(const IVecT &size, const FVecT &sigma)
-    : GaussFIRFilter<FloatT>(2, size, sigma), kernels(2)
+template<class FloatT, class IdxT>
+GaussFilter2D<FloatT,IdxT>::GaussFilter2D(const IVecT &size, const VecT &sigma)
+    : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), kernels(2)
 {
     auto hw=arma::conv_to<IVecT>::from(arma::ceil(this->default_sigma_hw_ratio * sigma));
     set_kernel_hw(hw);
     temp_im.set_size(size(0),size(1));
 }
 
-template<class FloatT>
-GaussFilter2D<FloatT>::GaussFilter2D(const IVecT &size, const FVecT &sigma, const IVecT &kernel_hw)
-    : GaussFIRFilter<FloatT>(2, size, sigma), kernels(2)
+template<class FloatT, class IdxT>
+GaussFilter2D<FloatT,IdxT>::GaussFilter2D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw)
+    : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), kernels(2)
 {
     set_kernel_hw(kernel_hw);
     temp_im.set_size(size(0),size(1));
 }
 
 
-template<class FloatT>
-void GaussFilter2D<FloatT>::set_kernel_hw(const IVecT &kernel_half_width)
+template<class FloatT, class IdxT>
+void GaussFilter2D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 {
-    assert(arma::all(kernel_half_width>0));
+    if(!arma::all(kernel_half_width>0)){
+        std::ostringstream msg;
+        msg<<"Received bad kernel_half_width: "<<kernel_half_width.t();
+        throw ParameterValueError(msg.str());
+    }
     this->hw=kernel_half_width;
-    for(int d=0; d<this->dim; d++) 
-        kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
+    for(IdxT d=0; d<this->dim; d++)
+        kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
 }
 
 
-template<class FloatT>
-void GaussFilter2D<FloatT>::filter(const ImageT &im, ImageT &out)
+template<class FloatT, class IdxT>
+void GaussFilter2D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
     gaussFIR_2Dx<FloatT>(im, temp_im, kernels(0));
     gaussFIR_2Dy<FloatT>(temp_im, out, kernels(1));
 }
 
-template<class FloatT>
-void GaussFilter2D<FloatT>::test_filter(const ImageT &im)
+template<class FloatT, class IdxT>
+void GaussFilter2D<FloatT,IdxT>::test_filter(const ImageT &im)
 {
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
@@ -116,13 +139,13 @@ void GaussFilter2D<FloatT>::test_filter(const ImageT &im)
     gaussFIR_2Dx_small<FloatT>(im, temp_im, kernels(0));
     gaussFIR_2Dy_small<FloatT>(temp_im, slow_out, kernels(1));
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
-    for(int y=0; y<this->size(1); y++) for(int x=0; x<this->size(0); x++)
+    for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y)-slow_out(x,y))>eps )
             printf("Fast (%i,%i):%.17f  != Slow (%i,%i):%.17f\n",x,y,fast_out(x,y),x,y,slow_out(x,y));
 }
 
-template<class FloatT>
-std::ostream& operator<< (std::ostream &out, const GaussFilter2D<FloatT> &filt)
+template<class FloatT, class IdxT>
+std::ostream& operator<< (std::ostream &out, const GaussFilter2D<FloatT,IdxT> &filt)
 {
     out<<std::setprecision(15);
     auto k0=filt.kernels(0);
@@ -140,9 +163,9 @@ std::ostream& operator<< (std::ostream &out, const GaussFilter2D<FloatT> &filt)
 
 /* GaussFilter3D */
 
-template<class FloatT>
-GaussFilter3D<FloatT>::GaussFilter3D(const IVecT &size, const FVecT &sigma)
-    : GaussFIRFilter<FloatT>(3, size, sigma), kernels(3)
+template<class FloatT, class IdxT>
+GaussFilter3D<FloatT,IdxT>::GaussFilter3D(const IVecT &size, const VecT &sigma)
+    : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), kernels(3)
 {
     auto hw=arma::conv_to<IVecT>::from(arma::ceil(this->default_sigma_hw_ratio * sigma));
     set_kernel_hw(hw);
@@ -150,9 +173,9 @@ GaussFilter3D<FloatT>::GaussFilter3D(const IVecT &size, const FVecT &sigma)
     temp_im1.set_size(size(0),size(1),size(2));
 }
 
-template<class FloatT>
-GaussFilter3D<FloatT>::GaussFilter3D(const IVecT &size, const FVecT &sigma, const IVecT &kernel_hw)
-    : GaussFIRFilter<FloatT>(3, size, sigma), kernels(3)
+template<class FloatT, class IdxT>
+GaussFilter3D<FloatT,IdxT>::GaussFilter3D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw)
+    : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), kernels(3)
 {
     set_kernel_hw(kernel_hw);
     temp_im0.set_size(size(0),size(1),size(2));
@@ -160,41 +183,45 @@ GaussFilter3D<FloatT>::GaussFilter3D(const IVecT &size, const FVecT &sigma, cons
 }
 
 
-template<class FloatT>
-void GaussFilter3D<FloatT>::set_kernel_hw(const IVecT &kernel_half_width)
+template<class FloatT, class IdxT>
+void GaussFilter3D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 {
-    assert(arma::all(kernel_half_width>0));
+    if(!arma::all(kernel_half_width>0)){
+        std::ostringstream msg;
+        msg<<"Received bad kernel_half_width: "<<kernel_half_width.t();
+        throw ParameterValueError(msg.str());
+    }
     this->hw=kernel_half_width;
-    for(int d=0; d<this->dim; d++) 
-        kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
+    for(IdxT d=0; d<this->dim; d++)
+        kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
 }
 
 
-template<class FloatT>
-void GaussFilter3D<FloatT>::filter(const ImageT &im, ImageT &out)
+template<class FloatT, class IdxT>
+void GaussFilter3D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
-    gaussFIR_3Dx<FloatT>(im, temp_im0, kernels(0));
-    gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, kernels(1));
-    gaussFIR_3Dz<FloatT>(temp_im1, out, kernels(2));
+    kernels::gaussFIR_3Dx<FloatT>(im, temp_im0, kernels(0));
+    kernels::gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, kernels(1));
+    kernels::gaussFIR_3Dz<FloatT>(temp_im1, out, kernels(2));
 }
 
-template<class FloatT>
-void GaussFilter3D<FloatT>::test_filter(const ImageT &im)
+template<class FloatT, class IdxT>
+void GaussFilter3D<FloatT,IdxT>::test_filter(const ImageT &im)
 {
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
     filter(im, fast_out);
-    gaussFIR_3Dx_small<FloatT>(im, temp_im0, kernels(0));
-    gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, kernels(1));
-    gaussFIR_3Dz_small<FloatT>(temp_im1, slow_out, kernels(2));
+    kernels::gaussFIR_3Dx_small<FloatT>(im, temp_im0, kernels(0));
+    kernels::gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, kernels(1));
+    kernels::gaussFIR_3Dz_small<FloatT>(temp_im1, slow_out, kernels(2));
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
-    for(int z=0; z<this->size(2); z++) for(int y=0; y<this->size(1); y++) for(int x=0; x<this->size(0); x++)
+    for(IdxT z=0; z<this->size(2); z++) for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y,z)-slow_out(x,y,z))>eps )
             printf("Fast (%i,%i,%i):%.17f  != Slow (%i,%i,.%i):%.17f\n",x,y,z,fast_out(x,y,z),x,y,z,slow_out(x,y,z));
 }
 
-template<class FloatT>
-std::ostream& operator<< (std::ostream &out, const GaussFilter3D<FloatT> &filt)
+template<class FloatT, class IdxT>
+std::ostream& operator<< (std::ostream &out, const GaussFilter3D<FloatT,IdxT> &filt)
 {
     out<<std::setprecision(15);
     auto k0=filt.kernels(0);
@@ -212,147 +239,179 @@ std::ostream& operator<< (std::ostream &out, const GaussFilter3D<FloatT> &filt)
 }
 
 /* DoGFilter2D */
-template<class FloatT>
-DoGFilter2D<FloatT>::DoGFilter2D(const IVecT &size, const FVecT &sigma, FloatT sigma_ratio)
-    : GaussFIRFilter<FloatT>(2, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(2), inhibit_kernels(2)
+template<class FloatT, class IdxT>
+DoGFilter2D<FloatT,IdxT>::DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio)
+    : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(2), inhibit_kernels(2)
 {
-    assert(sigma_ratio>1);
+    if(!_sigma_ratio>1){
+        std::ostringstream msg;
+        msg<<"Received bad sigma_ratio: "<<sigma_ratio;
+        throw ParameterValueError(msg.str());
+    }
     auto hw=arma::conv_to<IVecT>::from(arma::ceil(this->default_sigma_hw_ratio * sigma));
     set_kernel_hw(hw);
     temp_im0.set_size(size(0),size(1));
     temp_im1.set_size(size(0),size(1));
 }
 
-template<class FloatT>
-DoGFilter2D<FloatT>::DoGFilter2D(const IVecT &size, const FVecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)
-    : GaussFIRFilter<FloatT>(2, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(2), inhibit_kernels(2)
+template<class FloatT, class IdxT>
+DoGFilter2D<FloatT,IdxT>::DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)
+    : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(2), inhibit_kernels(2)
 {
-    assert(sigma_ratio>1);
+    if(!_sigma_ratio>1){
+        std::ostringstream msg;
+        msg<<"Received bad sigma_ratio: "<<sigma_ratio;
+        throw ParameterValueError(msg.str());
+    }
     set_kernel_hw(kernel_hw);
     temp_im0.set_size(size(0),size(1));
     temp_im1.set_size(size(0),size(1));
 }
 
 
-template<class FloatT>
-void DoGFilter2D<FloatT>::set_kernel_hw(const IVecT &kernel_half_width)
+template<class FloatT, class IdxT>
+void DoGFilter2D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 {
-    assert(arma::all(kernel_half_width>0));
+    if(!arma::all(kernel_half_width>0)){
+        std::ostringstream msg;
+        msg<<"Received bad kernel_half_width: "<<kernel_half_width.t();
+        throw ParameterValueError(msg.str());
+    }
     this->hw=kernel_half_width;
-    for(int d=0; d<this->dim; d++) {
-        excite_kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
-        inhibit_kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d)*sigma_ratio, this->hw(d));
+    for(IdxT d=0; d<this->dim; d++) {
+        excite_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
+        inhibit_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d)*sigma_ratio, this->hw(d));
     }
 }
 
-template<class FloatT>
-void DoGFilter2D<FloatT>::set_sigma_ratio(FloatT _sigma_ratio)
+template<class FloatT, class IdxT>
+void DoGFilter2D<FloatT,IdxT>::set_sigma_ratio(FloatT _sigma_ratio)
 {
-    assert(_sigma_ratio>1);
+    if(!_sigma_ratio>1){
+        std::ostringstream msg;
+        msg<<"Received bad sigma_ratio: "<<sigma_ratio;
+        throw ParameterValueError(msg.str());
+    }
     sigma_ratio = _sigma_ratio;
     set_kernel_hw(this->hw);
 }
 
-template<class FloatT>
-void DoGFilter2D<FloatT>::filter(const ImageT &im, ImageT &out)
+template<class FloatT, class IdxT>
+void DoGFilter2D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
-    gaussFIR_2Dx<FloatT>(im, temp_im0, excite_kernels(0));
-    gaussFIR_2Dy<FloatT>(temp_im0, out, excite_kernels(1));
+    kernels::gaussFIR_2Dx<FloatT>(im, temp_im0, excite_kernels(0));
+    kernels::gaussFIR_2Dy<FloatT>(temp_im0, out, excite_kernels(1));
     
-    gaussFIR_2Dx<FloatT>(im, temp_im1, inhibit_kernels(0));
-    gaussFIR_2Dy<FloatT>(temp_im1, temp_im0, inhibit_kernels(1));
+    kernels::gaussFIR_2Dx<FloatT>(im, temp_im1, inhibit_kernels(0));
+    kernels::gaussFIR_2Dy<FloatT>(temp_im1, temp_im0, inhibit_kernels(1));
     out-=temp_im0;
 }
 
-template<class FloatT>
-void DoGFilter2D<FloatT>::test_filter(const ImageT &im)
+template<class FloatT, class IdxT>
+void DoGFilter2D<FloatT,IdxT>::test_filter(const ImageT &im)
 {
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
     filter(im, fast_out);
-    gaussFIR_2Dx_small<FloatT>(im, temp_im0, excite_kernels(0));
-    gaussFIR_2Dy_small<FloatT>(temp_im0, slow_out, excite_kernels(1));
+    kernels::gaussFIR_2Dx_small<FloatT>(im, temp_im0, excite_kernels(0));
+    kernels::gaussFIR_2Dy_small<FloatT>(temp_im0, slow_out, excite_kernels(1));
     
-    gaussFIR_2Dx_small<FloatT>(im, temp_im1, inhibit_kernels(0));
-    gaussFIR_2Dy_small<FloatT>(temp_im1, temp_im0, inhibit_kernels(1));
+    kernels::gaussFIR_2Dx_small<FloatT>(im, temp_im1, inhibit_kernels(0));
+    kernels::gaussFIR_2Dy_small<FloatT>(temp_im1, temp_im0, inhibit_kernels(1));
     slow_out-=temp_im0;
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
-    for(int y=0; y<this->size(1); y++) for(int x=0; x<this->size(0); x++)
+    for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y)-slow_out(x,y))>eps )
             printf("Fast (%i,%i):%.17f  != Slow (%i,%i):%.17f\n",x,y,fast_out(x,y),x,y,slow_out(x,y));
 }
 
 /* DoGFilter3D */
-template<class FloatT>
-DoGFilter3D<FloatT>::DoGFilter3D(const IVecT &size, const FVecT &sigma, FloatT sigma_ratio)
-    : GaussFIRFilter<FloatT>(3, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(3), inhibit_kernels(3)
+template<class FloatT, class IdxT>
+DoGFilter3D<FloatT,IdxT>::DoGFilter3D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio)
+    : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(3), inhibit_kernels(3)
 {
-    assert(sigma_ratio>1);
+    if(!_sigma_ratio>1){
+        std::ostringstream msg;
+        msg<<"Received bad sigma_ratio: "<<sigma_ratio;
+        throw ParameterValueError(msg.str());
+    }
     auto hw=arma::conv_to<IVecT>::from(arma::ceil(this->default_sigma_hw_ratio * sigma));
     set_kernel_hw(hw);
     temp_im0.set_size(size(0),size(1),size(2));
     temp_im1.set_size(size(0),size(1),size(2));
 }
 
-template<class FloatT>
-DoGFilter3D<FloatT>::DoGFilter3D(const IVecT &size, const FVecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)
-    : GaussFIRFilter<FloatT>(3, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(3), inhibit_kernels(3)
+template<class FloatT, class IdxT>
+DoGFilter3D<FloatT,IdxT>::DoGFilter3D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)
+    : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(3), inhibit_kernels(3)
 {
-    assert(sigma_ratio>1);
+    if(!_sigma_ratio>1){
+        std::ostringstream msg;
+        msg<<"Received bad sigma_ratio: "<<sigma_ratio;
+        throw ParameterValueError(msg.str());
+    }
     set_kernel_hw(kernel_hw);
     temp_im0.set_size(size(0),size(1),size(2));
     temp_im1.set_size(size(0),size(1),size(2));
 }
 
 
-template<class FloatT>
-void DoGFilter3D<FloatT>::set_kernel_hw(const IVecT &kernel_half_width)
+template<class FloatT, class IdxT>
+void DoGFilter3D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 {
-    assert(arma::all(kernel_half_width>0));
+    if(!arma::all(kernel_half_width>0)){
+        std::ostringstream msg;
+        msg<<"Received bad kernel_half_width: "<<kernel_half_width.t();
+        throw ParameterValueError(msg.str());
+    }
     this->hw=kernel_half_width;
-    for(int d=0; d<this->dim; d++) {
-        excite_kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
-        inhibit_kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d)*sigma_ratio, this->hw(d));
+    for(IdxT d=0; d<this->dim; d++) {
+        excite_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
+        inhibit_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d)*sigma_ratio, this->hw(d));
     }
 }
 
-template<class FloatT>
-void DoGFilter3D<FloatT>::set_sigma_ratio(FloatT _sigma_ratio)
+template<class FloatT, class IdxT>
+void DoGFilter3D<FloatT,IdxT>::set_sigma_ratio(FloatT _sigma_ratio)
 {
-    assert(_sigma_ratio>1);
+    if(!_sigma_ratio>1){
+        std::ostringstream msg;
+        msg<<"Received bad sigma_ratio: "<<sigma_ratio;
+        throw ParameterValueError(msg.str());
+    }
     sigma_ratio = _sigma_ratio;
     set_kernel_hw(this->hw);
 }
 
-template<class FloatT>
-void DoGFilter3D<FloatT>::filter(const ImageT &im, ImageT &out)
+template<class FloatT, class IdxT>
+void DoGFilter3D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
-    gaussFIR_3Dx<FloatT>(im, temp_im0, excite_kernels(0));
-    gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, excite_kernels(1));
-    gaussFIR_3Dz<FloatT>(temp_im1, out, excite_kernels(2));
+    kernels::gaussFIR_3Dx<FloatT>(im, temp_im0, excite_kernels(0));
+    kernels::gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, excite_kernels(1));
+    kernels::gaussFIR_3Dz<FloatT>(temp_im1, out, excite_kernels(2));
     
-    gaussFIR_3Dx<FloatT>(im, temp_im0, inhibit_kernels(0));
-    gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, inhibit_kernels(1));
-    gaussFIR_3Dz<FloatT>(temp_im1, temp_im0, inhibit_kernels(2));
+    kernels::gaussFIR_3Dx<FloatT>(im, temp_im0, inhibit_kernels(0));
+    kernels::gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, inhibit_kernels(1));
+    kernels::gaussFIR_3Dz<FloatT>(temp_im1, temp_im0, inhibit_kernels(2));
     out-=temp_im0;
 }
 
-template<class FloatT>
-void DoGFilter3D<FloatT>::test_filter(const ImageT &im)
+template<class FloatT, class IdxT>
+void DoGFilter3D<FloatT,IdxT>::test_filter(const ImageT &im)
 {
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
     filter(im, fast_out);    
-    gaussFIR_3Dx_small<FloatT>(im, temp_im0, excite_kernels(0));
-    gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, excite_kernels(1));
-    gaussFIR_3Dz_small<FloatT>(temp_im1, slow_out, excite_kernels(2));
+    kernels::gaussFIR_3Dx_small<FloatT>(im, temp_im0, excite_kernels(0));
+    kernels::gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, excite_kernels(1));
+    kernels::gaussFIR_3Dz_small<FloatT>(temp_im1, slow_out, excite_kernels(2));
     
-    gaussFIR_3Dx_small<FloatT>(im, temp_im0, inhibit_kernels(0));
-    gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, inhibit_kernels(1));
-    gaussFIR_3Dz_small<FloatT>(temp_im1, temp_im0, inhibit_kernels(2));
+    kernels::gaussFIR_3Dx_small<FloatT>(im, temp_im0, inhibit_kernels(0));
+    kernels::gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, inhibit_kernels(1));
+    kernels::gaussFIR_3Dz_small<FloatT>(temp_im1, temp_im0, inhibit_kernels(2));
     slow_out-=temp_im0;
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
-    for(int z=0; z<this->size(2); z++) for(int y=0; y<this->size(1); y++) for(int x=0; x<this->size(0); x++)
+    for(IdxT z=0; z<this->size(2); z++) for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y,z)-slow_out(x,y,z))>eps )
             printf("Fast (%i,%i,%i):%.17f  != Slow (%i,%i,%i):%.17f\n",x,y,z,fast_out(x,y,z),x,y,z,slow_out(x,y,z));
 }
@@ -360,9 +419,9 @@ void DoGFilter3D<FloatT>::test_filter(const ImageT &im)
 
 /* LoGFilter2D */
 
-template<class FloatT>
-LoGFilter2D<FloatT>::LoGFilter2D(const IVecT &size, const FVecT &sigma)
-    : GaussFIRFilter<FloatT>(2, size, sigma), gauss_kernels(2), LoG_kernels(2)
+template<class FloatT, class IdxT>
+LoGFilter2D<FloatT,IdxT>::LoGFilter2D(const IVecT &size, const VecT &sigma)
+    : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), gauss_kernels(2), LoG_kernels(2)
 {
     auto hw=arma::conv_to<IVecT>::from(arma::ceil(this->default_sigma_hw_ratio * sigma));
     set_kernel_hw(hw);
@@ -370,9 +429,9 @@ LoGFilter2D<FloatT>::LoGFilter2D(const IVecT &size, const FVecT &sigma)
     temp_im1.set_size(size(0),size(1));
 }
 
-template<class FloatT>
-LoGFilter2D<FloatT>::LoGFilter2D(const IVecT &size, const FVecT &sigma, const IVecT &kernel_hw)
-    : GaussFIRFilter<FloatT>(2, size, sigma), gauss_kernels(2), LoG_kernels(2)
+template<class FloatT, class IdxT>
+LoGFilter2D<FloatT,IdxT>::LoGFilter2D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw)
+    : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), gauss_kernels(2), LoG_kernels(2)
 {
     set_kernel_hw(kernel_hw);
     temp_im0.set_size(size(0),size(1));
@@ -380,65 +439,69 @@ LoGFilter2D<FloatT>::LoGFilter2D(const IVecT &size, const FVecT &sigma, const IV
 }
 
 
-template<class FloatT>
-void LoGFilter2D<FloatT>::set_kernel_hw(const IVecT &kernel_half_width)
+template<class FloatT, class IdxT>
+void LoGFilter2D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 {
-    assert(arma::all(kernel_half_width>0));
-    this->hw=kernel_half_width;
-    for(int d=0; d<this->dim; d++) {
-        gauss_kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
-        LoG_kernels(d)=GaussFIRFilter<FloatT>::compute_LoG_FIR_kernel(this->sigma(d), this->hw(d));
+    if(!arma::all(kernel_half_width>0)){
+        std::ostringstream msg;
+        msg<<"Received bad kernel_half_width: "<<kernel_half_width.t();
+        throw ParameterValueError(msg.str());
+    }
+    this->hw = kernel_half_width;
+    for(IdxT d=0; d<this->dim; d++) {
+        gauss_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
+        LoG_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_LoG_FIR_kernel(this->sigma(d), this->hw(d));
     }
 }
 
 
 
-template<class FloatT>
-void LoGFilter2D<FloatT>::filter(const ImageT &im, ImageT &out)
+template<class FloatT, class IdxT>
+void LoGFilter2D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
-    gaussFIR_2Dy<FloatT>(im, temp_im0, LoG_kernels(1)); //G''(y)fc
-    gaussFIR_2Dx<FloatT>(temp_im0, out, gauss_kernels(0)); //G(x)
+    kernels::gaussFIR_2Dy<FloatT>(im, temp_im0, LoG_kernels(1)); //G''(y)fc
+    kernels::gaussFIR_2Dx<FloatT>(temp_im0, out, gauss_kernels(0)); //G(x)
 
-    gaussFIR_2Dy<FloatT>(im, temp_im0, gauss_kernels(1)); //G(y)
-    gaussFIR_2Dx<FloatT>(temp_im0, temp_im1, LoG_kernels(0)); //G''(x)
+    kernels::gaussFIR_2Dy<FloatT>(im, temp_im0, gauss_kernels(1)); //G(y)
+    kernels::gaussFIR_2Dx<FloatT>(temp_im0, temp_im1, LoG_kernels(0)); //G''(x)
     out+=temp_im1;
 
-//     gaussFIR_2Dy<FloatT>(im, temp_im0, LoG_kernels(1)); //G''(y)fc
-//     gaussFIR_2Dx<FloatT>(im, temp_im1, gauss_kernels(0)); //G(x)
+//     kernels::gaussFIR_2Dy<FloatT>(im, temp_im0, LoG_kernels(1)); //G''(y)fc
+//     kernels::gaussFIR_2Dx<FloatT>(im, temp_im1, gauss_kernels(0)); //G(x)
 //     temp_im0 = temp_im0 % temp_im1; //straight product
 //
-//     gaussFIR_2Dy<FloatT>(im, temp_im1, gauss_kernels(1)); //G(y)
-//     gaussFIR_2Dx<FloatT>(im, out, LoG_kernels(0)); //G''(x)
+//     kernels::gaussFIR_2Dy<FloatT>(im, temp_im1, gauss_kernels(1)); //G(y)
+//     kernels::gaussFIR_2Dx<FloatT>(im, out, LoG_kernels(0)); //G''(x)
 //     out = (out%temp_im1)+temp_im0;
 }
 
-template<class FloatT>
-void LoGFilter2D<FloatT>::test_filter(const ImageT &im)
+template<class FloatT, class IdxT>
+void LoGFilter2D<FloatT,IdxT>::test_filter(const ImageT &im)
 {
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
     filter(im, fast_out);
-    gaussFIR_2Dy_small<FloatT>(im, temp_im0, LoG_kernels(1)); //G''(y)fc
-    gaussFIR_2Dx_small<FloatT>(temp_im0, slow_out, gauss_kernels(0)); //G(x)
+    kernels::gaussFIR_2Dy_small<FloatT>(im, temp_im0, LoG_kernels(1)); //G''(y)fc
+    kernels::gaussFIR_2Dx_small<FloatT>(temp_im0, slow_out, gauss_kernels(0)); //G(x)
 
-    gaussFIR_2Dy_small<FloatT>(im, temp_im0, gauss_kernels(1)); //G(y)
-    gaussFIR_2Dx_small<FloatT>(temp_im0, temp_im1, LoG_kernels(0)); //G''(x)
+    kernels::gaussFIR_2Dy_small<FloatT>(im, temp_im0, gauss_kernels(1)); //G(y)
+    kernels::gaussFIR_2Dx_small<FloatT>(temp_im0, temp_im1, LoG_kernels(0)); //G''(x)
     slow_out+=temp_im1;
 
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
-    for(int y=0; y<this->size(1); y++) for(int x=0; x<this->size(0); x++)
+    for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y)-slow_out(x,y))>eps )
             printf("Fast (%i,%i):%.17f  != Slow (%i,%i):%.17f\n",x,y,fast_out(x,y),x,y,slow_out(x,y));
 }
 
-template<class FloatT>
-std::ostream& operator<< (std::ostream &out, const LoGFilter2D<FloatT> &filt)
+template<class FloatT, class IdxT>
+std::ostream& operator<< (std::ostream &out, const LoGFilter2D<FloatT,IdxT> &filt)
 {
     out<<std::setprecision(15);
-    auto gk0=filt.gauss_kernels(0);
-    auto gk1=filt.gauss_kernels(1);
-    auto logk0=filt.LoG_kernels(0);
-    auto logk1=filt.LoG_kernels(1);
+    auto gk0 = filt.gauss_kernels(0);
+    auto gk1 = filt.gauss_kernels(1);
+    auto logk0 = filt.LoG_kernels(0);
+    auto logk1 = filt.LoG_kernels(1);
     
     out<<"LoGFilter2D:[size=["<<filt.size(0)<<","<<filt.size(1)<<"]"
         <<" sigma=["<<filt.sigma(0)<<","<<filt.sigma(1)<<"]"
@@ -453,9 +516,9 @@ std::ostream& operator<< (std::ostream &out, const LoGFilter2D<FloatT> &filt)
 
 /* LoGFilter3D */
 
-template<class FloatT>
-LoGFilter3D<FloatT>::LoGFilter3D(const IVecT &size, const FVecT &sigma)
-    : GaussFIRFilter<FloatT>(3, size, sigma), gauss_kernels(3), LoG_kernels(3)
+template<class FloatT, class IdxT>
+LoGFilter3D<FloatT,IdxT>::LoGFilter3D(const IVecT &size, const VecT &sigma)
+    : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), gauss_kernels(3), LoG_kernels(3)
 {
     auto hw=arma::conv_to<IVecT>::from(arma::ceil(this->default_sigma_hw_ratio * sigma));
     set_kernel_hw(hw);
@@ -464,9 +527,9 @@ LoGFilter3D<FloatT>::LoGFilter3D(const IVecT &size, const FVecT &sigma)
 //     temp_im2.set_size(size(0),size(1),size(2));
 }
 
-template<class FloatT>
-LoGFilter3D<FloatT>::LoGFilter3D(const IVecT &size, const FVecT &sigma, const IVecT &kernel_hw)
-    : GaussFIRFilter<FloatT>(3, size, sigma), gauss_kernels(3), LoG_kernels(3)
+template<class FloatT, class IdxT>
+LoGFilter3D<FloatT,IdxT>::LoGFilter3D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw)
+    : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), gauss_kernels(3), LoG_kernels(3)
 {
     set_kernel_hw(kernel_hw);
     temp_im0.set_size(size(0),size(1),size(2));
@@ -475,79 +538,83 @@ LoGFilter3D<FloatT>::LoGFilter3D(const IVecT &size, const FVecT &sigma, const IV
 }
 
 
-template<class FloatT>
-void LoGFilter3D<FloatT>::set_kernel_hw(const IVecT &kernel_half_width)
+template<class FloatT, class IdxT>
+void LoGFilter3D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 {
-    assert(arma::all(kernel_half_width>0));
+    if(!arma::all(kernel_half_width>0)){
+        std::ostringstream msg;
+        msg<<"Received bad kernel_half_width: "<<kernel_half_width.t();
+        throw ParameterValueError(msg.str());
+    }
     this->hw=kernel_half_width;
-    for(int d=0; d<this->dim; d++) {
-        gauss_kernels(d)=GaussFIRFilter<FloatT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
-        LoG_kernels(d)=GaussFIRFilter<FloatT>::compute_LoG_FIR_kernel(this->sigma(d), this->hw(d));
+    for(IdxT d=0; d<this->dim; d++) {
+        gauss_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(this->sigma(d), this->hw(d));
+        LoG_kernels(d)=GaussFIRFilter<FloatT,IdxT>::compute_LoG_FIR_kernel(this->sigma(d), this->hw(d));
     }
 }
 
 
-template<class FloatT>
-void LoGFilter3D<FloatT>::filter(const ImageT &im, ImageT &out)
+template<class FloatT, class IdxT>
+void LoGFilter3D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
-    gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
-    gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
-    gaussFIR_3Dx<FloatT>(temp_im1, out, LoG_kernels(0));
+    kernels::gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
+    kernels::gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
+    kernels::gaussFIR_3Dx<FloatT>(temp_im1, out, LoG_kernels(0));
 
-    gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
-    gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, LoG_kernels(1));
-    gaussFIR_3Dx<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
+    kernels::gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
+    kernels::gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, LoG_kernels(1));
+    kernels::gaussFIR_3Dx<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
     out+=temp_im0;
 
-    gaussFIR_3Dz<FloatT>(im, temp_im0, LoG_kernels(2));
-    gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
-    gaussFIR_3Dx<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
+    kernels::gaussFIR_3Dz<FloatT>(im, temp_im0, LoG_kernels(2));
+    kernels::gaussFIR_3Dy<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
+    kernels::gaussFIR_3Dx<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
     out+=temp_im0;
-//     gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
-//     gaussFIR_3Dy<FloatT>(im, temp_im1, gauss_kernels(1));
-//     gaussFIR_3Dx<FloatT>(im, out, LoG_kernels(0));
+//     kernels::gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
+//     kernels::gaussFIR_3Dy<FloatT>(im, temp_im1, gauss_kernels(1));
+//     kernels::gaussFIR_3Dx<FloatT>(im, out, LoG_kernels(0));
 //     out = out%temp_im0%temp_im1;
 //
-//     gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
-//     gaussFIR_3Dy<FloatT>(im, temp_im1, LoG_kernels(1));
+//     kernels::gaussFIR_3Dz<FloatT>(im, temp_im0, gauss_kernels(2));
+//     kernels::gaussFIR_3Dy<FloatT>(im, temp_im1, LoG_kernels(1));
 //     temp_im0 = temp_im0%temp_im1;
-//     gaussFIR_3Dx<FloatT>(im, temp_im1, gauss_kernels(0));
+//     kernels::gaussFIR_3Dx<FloatT>(im, temp_im1, gauss_kernels(0));
 //     out += temp_im0%temp_im1;
 //
-//     gaussFIR_3Dz<FloatT>(im, temp_im0, LoG_kernels(2));
-//     gaussFIR_3Dy<FloatT>(im, temp_im1, gauss_kernels(1));
+//     kernels::gaussFIR_3Dz<FloatT>(im, temp_im0, LoG_kernels(2));
+//     kernels::gaussFIR_3Dy<FloatT>(im, temp_im1, gauss_kernels(1));
 //     temp_im0 = temp_im0%temp_im1;
-//     gaussFIR_3Dx<FloatT>(im, temp_im0, gauss_kernels(0));
+//     kernels::gaussFIR_3Dx<FloatT>(im, temp_im0, gauss_kernels(0));
 //     out += temp_im0%temp_im1;
 }
 
-template<class FloatT>
-void LoGFilter3D<FloatT>::test_filter(const ImageT &im)
+template<class FloatT, class IdxT>
+void LoGFilter3D<FloatT,IdxT>::test_filter(const ImageT &im)
 {
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
     filter(im, fast_out);
-    gaussFIR_3Dz_small<FloatT>(im, temp_im0, gauss_kernels(2));
-    gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
-    gaussFIR_3Dx_small<FloatT>(temp_im1, slow_out, LoG_kernels(0));
+    kernels::gaussFIR_3Dz_small<FloatT>(im, temp_im0, gauss_kernels(2));
+    kernels::gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
+    kernels::gaussFIR_3Dx_small<FloatT>(temp_im1, slow_out, LoG_kernels(0));
 
-    gaussFIR_3Dz_small<FloatT>(im, temp_im0, gauss_kernels(2));
-    gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, LoG_kernels(1));
-    gaussFIR_3Dx_small<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
+    kernels::gaussFIR_3Dz_small<FloatT>(im, temp_im0, gauss_kernels(2));
+    kernels::gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, LoG_kernels(1));
+    kernels::gaussFIR_3Dx_small<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
     slow_out+=temp_im0;
 
-    gaussFIR_3Dz_small<FloatT>(im, temp_im0, LoG_kernels(2));
-    gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
-    gaussFIR_3Dx_small<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
+    kernels::gaussFIR_3Dz_small<FloatT>(im, temp_im0, LoG_kernels(2));
+    kernels::gaussFIR_3Dy_small<FloatT>(temp_im0, temp_im1, gauss_kernels(1));
+    kernels::gaussFIR_3Dx_small<FloatT>(temp_im1, temp_im0, gauss_kernels(0));
     slow_out+=temp_im0;
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
-    for(int z=0; z<this->size(2); z++) for(int y=0; y<this->size(1); y++) for(int x=0; x<this->size(0); x++)
+    for(IdxT z=0; z<this->size(2); z++) for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y,z)-slow_out(x,y,z))>eps )
             printf("Fast (%i,%i,%i):%.17f  != Slow (%i,%i,.%i):%.17f\n",x,y,z,fast_out(x,y,z),x,y,z,slow_out(x,y,z));
 }
 
-template<class FloatT>
-std::ostream& operator<< (std::ostream &out, const LoGFilter3D<FloatT> &filt)
+template<class FloatT, class IdxT>
+std::ostream& operator<< (std::ostream &out, const LoGFilter3D<FloatT,IdxT> &filt)
 {
     out<<std::setprecision(15);
     auto gk0=filt.gauss_kernels(0);
