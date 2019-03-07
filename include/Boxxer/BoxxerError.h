@@ -24,7 +24,7 @@ struct ParameterValueError : public BoxxerError
  */
 struct ParameterShapeError : public BoxxerError
 {
-    ParameterValueError(std::string message) : BoxxerError("ParameterShapeError",message) {}
+    ParameterShapeError(std::string message) : BoxxerError("ParameterShapeError",message) {}
 };
 
 /** @brief Internal logical error.  Bad logic or broken promises.

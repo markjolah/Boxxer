@@ -7,6 +7,7 @@
 #ifndef BOXXER_BOXXER3D_H
 #define BOXXER_BOXXER3D_H
 
+#include <cstdint>
 #include <armadillo>
 #include "Boxxer/Hypercube/Hypercube.h"
 
@@ -22,7 +23,7 @@ namespace boxxer {
  * they don't care what the coordinate dimensions represent scientifically, but this class is associated with the
  * Matlab Boxxer3D class and so maintains the knowledge that the actual coordinates are [L Y X T].
  */
-template<class FloatT=float, class IdxT=unit32_t>
+template<class FloatT=float, class IdxT=uint32_t>
 class Boxxer3D
 {
 public:
@@ -51,9 +52,9 @@ public:
     IdxT scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size);
     IdxT scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size);
 
-    ImageT make_image() const;
-    ImageStackT make_image_stack(IdxT nT) const;
-    ScaledImageT make_scaled_image() const;
+    ImageT make_image() const { return ImageT(imsize(0),imsize(1),imsize(2)); }
+    ImageStackT make_image_stack(IdxT nT) const { return ImageStackT(imsize(0),imsize(1),imsize(2),nT); }
+    ScaledImageT make_scaled_image() const { return ScaledImageT(imsize(0),imsize(1),imsize(2),nScales); }
 
     /* Static Methods */
     static void filterLoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma);
@@ -71,27 +72,6 @@ private:
     void initialize_log_scale_filters();
     void initialize_dog_scale_filters();
 };
-
-template<class FloatT, class IdxT>
-typename Boxxer3D<FloatT,IdxT>::ImageT
-Boxxer3D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(imsize(0),imsize(1),imsize(2));
-}
-
-template<class FloatT, class IdxT>
-typename Boxxer3D<FloatT,IdxT>::ImageStackT
-Boxxer3D<FloatT,IdxT>::make_image_stack(IdxT nT) const
-{
-    return ImageStackT(imsize(0),imsize(1),imsize(2),nT);
-}
-
-template<class FloatT, class IdxT>
-typename Boxxer3D<FloatT,IdxT>::ScaledImageT
-Boxxer3D<FloatT,IdxT>::make_scaled_image() const
-{
-    return ScaledImageT(imsize(0),imsize(1),imsize(2),nScales);
-}
 
 } /* namespace boxxer */
 

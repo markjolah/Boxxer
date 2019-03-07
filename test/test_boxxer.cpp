@@ -1,5 +1,5 @@
 
-#include "Boxxer/filter_kernels.h"
+#include "Boxxer/FilterKernels.h"
 #include "Boxxer/GaussFilter.h"
 #include "Boxxer/Maxima.h"
 #include "Boxxer/Boxxer2D.h"
@@ -8,6 +8,7 @@
 using std::cout;
 using std::endl;
 using namespace arma;
+using namespace boxxer;
 // #include "maxima.h"
 
 // void time1D(int N, double sigma, double tol)
@@ -169,7 +170,7 @@ void testGaussFilter2D()
 {
     typedef float TestFloat;
     GaussFilter2D<TestFloat>::IVecT size={100,100};
-    GaussFilter2D<TestFloat>::FVecT sigma={0.8,1.14};
+    GaussFilter2D<TestFloat>::VecT sigma={0.8,1.14};
     GaussFilter2D<TestFloat> gauss_filt(size, sigma);
     Maxima2D<TestFloat> maxima2D(size);
     cout<<gauss_filt<<"\n";
@@ -194,7 +195,7 @@ void testLoGFilter2D()
 {
     typedef float TestFloat;
     LoGFilter2D<TestFloat>::IVecT size={100,100};
-    LoGFilter2D<TestFloat>::FVecT sigma={0.8,1.14};
+    LoGFilter2D<TestFloat>::VecT sigma={0.8,1.14};
     LoGFilter2D<TestFloat> log_filt(size, sigma);
     Maxima2D<TestFloat> maxima2D(size);
     std::cout<<log_filt<<"\n";
@@ -216,27 +217,30 @@ void testLoGFilter2D()
 void testGaussFilter3D()
 {
     typedef float TestFloat;
-    GaussFilter3D<TestFloat>::IVecT size={100,100,100};
-    GaussFilter3D<TestFloat>::FVecT sigma={0.8,1.14,1.0};
+    unsigned N=100;
+    GaussFilter3D<TestFloat>::IVecT size={N/2,N-1,2*N-1};
+    GaussFilter3D<TestFloat>::VecT sigma={1.4,0.7,1.0};
     GaussFilter3D<TestFloat> gauss_filt(size, sigma);
     Maxima3D<TestFloat> maxima3D(size);
     std::cout<<gauss_filt<<"\n";
     auto image=gauss_filt.make_image();
     image.randu();
 
-    int Nmaxima=maxima3D.find_maxima(image);
-    cout<<"NMaxima: "<<Nmaxima<<endl;
-    maxima3D.test_maxima(image);
 
+//     image(N-1,0,0) = 1;
+//     image(0,N-1,0) = 1;
+//     image(0,0,N-1) = 1;
+    int Nmaxima=maxima3D.find_maxima(image);
+    cout<<"Test image NMaxima: "<<Nmaxima<<endl;
+    maxima3D.test_maxima(image);
 
     auto out=gauss_filt.make_image();
     gauss_filt.test_filter(image);
     gauss_filt.filter(image, out);
 
     Nmaxima=maxima3D.find_maxima(out);
-    cout<<"NMaxima: "<<Nmaxima<<endl;
+    cout<<"Test filtered image NMaxima: "<<Nmaxima<<endl;
     maxima3D.test_maxima(out);
-
 }
 
 
@@ -244,7 +248,7 @@ void testLoGFilter3D()
 {
     typedef float TestFloat;
     LoGFilter3D<TestFloat>::IVecT size={100,100,100};
-    LoGFilter3D<TestFloat>::FVecT sigma={0.8,1.14,1.0};
+    LoGFilter3D<TestFloat>::VecT sigma={0.8,1.14,1.0};
     LoGFilter3D<TestFloat> log_filt(size, sigma);
     std::cout<<log_filt<<"\n";
     auto image=log_filt.make_image();
@@ -257,8 +261,8 @@ void testLoGFilter3D()
 
 void testBoxxer2D()
 {
-    int nT=7;
-    int sz=100;
+    uint32_t nT = 7;
+    uint32_t sz = 100;
     typedef float TestFloat;
     Boxxer2D<TestFloat>::IVecT size={sz,sz};
     Boxxer2D<TestFloat>::VecT sigma={1.0, 1.0};
@@ -279,15 +283,15 @@ void testBoxxer2D()
     int Nmaxima=static_cast<int>(maxima.n_cols);
     cout<<"Boxxer2D: Size:["<<size(0)<<","<<size(1)<<","<<nT<<"]\n";
     cout<<"Nmaxima: "<<Nmaxima<<endl;
-    for(int n=0; n<Nmaxima; n++){
-        printf("Maxima[%i]: (%i,%i, %i):%.9g\n",n,maxima(0,n),maxima(1,n),maxima(2,n),max_vals(n));
-    }
+//     for(int n=0; n<Nmaxima; n++){
+//         printf("Maxima[%i]: (%i,%i, %i):%.9g\n",n,maxima(0,n),maxima(1,n),maxima(2,n),max_vals(n));
+//     }
 }
 
 void testScaleSpace2D()
 {
-    int nT=10;
-    int sz=16;
+    uint32_t nT=10;
+    uint32_t sz=16;
     typedef float TestFloat;
     Boxxer2D<TestFloat>::IVecT size={sz,sz};
     Boxxer2D<TestFloat>::MatT sigma;
@@ -305,33 +309,33 @@ void testScaleSpace2D()
     int Nmaxima=static_cast<int>(maxima.n_cols);
     cout<<"Boxxer2D: Size:["<<size(0)<<","<<size(1)<<","<<sigma.n_cols<<","<<nT<<"]\n";
     cout<<"Nmaxima: "<<Nmaxima<<endl;
-    for(int n=0; n<Nmaxima; n++){
-        printf("Maxima[%i]: (%i,%i, %i, %i):%.9g\n",n,maxima(0,n),maxima(1,n),maxima(2,n),maxima(3,n),max_vals(n));
-    }
+//     for(int n=0; n<Nmaxima; n++){
+//         printf("Maxima[%i]: (%i,%i, %i, %i):%.9g\n",n,maxima(0,n),maxima(1,n),maxima(2,n),maxima(3,n),max_vals(n));
+//     }
 }
 
 
 void testBoxxer3D()
 {
-    int nT=10;
-    int sz=70;
+    uint32_t nT=10;
+    uint32_t sz=70;
     typedef float TestFloat;
     Boxxer3D<TestFloat>::IVecT size={sz,2*sz, 3*sz};
     Boxxer3D<TestFloat>::VecT sigma={1.0, 1.0, 1.0};
     Boxxer3D<TestFloat> boxxer(size, sigma);
     auto ims=boxxer.make_image_stack(nT);
-    for(int n=0; n<nT; n++){
+    for(uint32_t n=0; n<nT; n++){
         ims.slice(n).randu();
     }
     ims(sz/2,sz/2,sz/2,0)=1.;
 
 
-    cout<<"IN: \n"<<ims.slice(0)<<endl;
+//     cout<<"IN: \n"<<ims.slice(0)<<endl;
     //     Boxxer2D<TestFloat>::ImageStackT DoG_out(256,256,10000);
     auto LoG_out=boxxer.make_image_stack(nT);
     Boxxer3D<TestFloat>::filterLoG(ims,LoG_out,sigma);
     //     boxxer.filterDoG(ims,DoG_out,1.6);
-    cout<<"Out: \n"<<LoG_out.slice(0)<<endl;
+//     cout<<"Out: \n"<<LoG_out.slice(0)<<endl;
     Boxxer3D<TestFloat>::IMatT maxima;
     Boxxer3D<TestFloat>::VecT max_vals;
     Boxxer3D<TestFloat>::enumerateImageMaxima(LoG_out,maxima, max_vals, 3);
@@ -339,9 +343,9 @@ void testBoxxer3D()
     int Nmaxima=static_cast<int>(maxima.n_cols);
     cout<<"Boxxer3D: Size:["<<size(0)<<","<<size(1)<<","<<size(2)<<","<<nT<<"]\n";
     cout<<"Nmaxima: "<<Nmaxima<<endl;
-    for(int n=0; n<Nmaxima; n++){
-        printf("Maxima[%i]: (%i,%i,%i,%i):%.9g\n",n,maxima(0,n),maxima(1,n),maxima(2,n),maxima(3,n),max_vals(n));
-    }
+//     for(int n=0; n<Nmaxima; n++){
+//         printf("Maxima[%i]: (%i,%i,%i,%i):%.9g\n",n,maxima(0,n),maxima(1,n),maxima(2,n),maxima(3,n),max_vals(n));
+//     }
     boxxer.checkMaxima(LoG_out, maxima, max_vals);
 }
 
@@ -368,8 +372,8 @@ void testMaxima2D()
 
     int Nmaxima=maxima2D.find_maxima(image,maxima,max_vals);
     cout<<"NMaxima: "<<Nmaxima<<endl;
-    for(int n=0; n<Nmaxima; n++)
-        cout<<"("<<maxima(0,n)<<","<<maxima(1,n)<<"):"<<max_vals(n)<<endl;
+//     for(int n=0; n<Nmaxima; n++)
+//         cout<<"("<<maxima(0,n)<<","<<maxima(1,n)<<"):"<<max_vals(n)<<endl;
 }
 
 
@@ -425,8 +429,8 @@ void testMaxima3D()
 
     int Nmaxima=maxima3D.find_maxima(image,maxima,max_vals);
     cout<<"NMaxima: "<<Nmaxima<<endl;
-    for(int n=0; n<Nmaxima; n++)
-        cout<<"("<<maxima(0,n)<<","<<maxima(1,n)<<","<<maxima(2,n)<<"):"<<max_vals(n)<<endl;
+//     for(int n=0; n<Nmaxima; n++)
+//         cout<<"("<<maxima(0,n)<<","<<maxima(1,n)<<","<<maxima(2,n)<<"):"<<max_vals(n)<<endl;
 }
 
 
@@ -434,6 +438,7 @@ int main(){
     arma::arma_rng::set_seed_random();
 //     test1D<float>(10, 1., 1e-3);
 //     test1D<double>(10, 1., 1e-3);
+    arma_rng::set_seed(0);
     testGaussFilter2D();
     testGaussFilter3D();
     testLoGFilter2D();

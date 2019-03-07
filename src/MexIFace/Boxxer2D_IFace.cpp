@@ -4,9 +4,9 @@
  * @brief Boxxer2D_IFace mexFunction entry point
  */
 
-#include "Boxxer/Boxxer2D_IFace.h"
+#include "Boxxer2D_IFace.h"
 
-Boxxer2D_IFace<float,int32_t> iface; /**< Global iface object provides a iface.mexFunction */
+Boxxer2D_IFace<float,uint32_t> iface; /**< Global iface object provides a iface.mexFunction */
 
 void mexFunction(int nlhs, mxArray *lhs[], int nrhs, const mxArray *rhs[])
 {

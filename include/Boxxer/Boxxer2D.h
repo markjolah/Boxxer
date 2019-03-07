@@ -7,6 +7,7 @@
 #ifndef BOXXER_BOXXER2D_H
 #define BOXXER_BOXXER2D_H
 
+#include <cstdint>
 #include <armadillo>
 #include "Boxxer/Hypercube/Hypercube.h"
 
@@ -28,7 +29,7 @@ namespace boxxer {
  * from the matlab interpretation, but only internally within the Boxxer_IFace MexIFace class.
  * 
  */
-template<class FloatT=float, class IdxT=unit32_t>
+template<class FloatT=float, class IdxT=uint32_t>
 class Boxxer2D
 {
 public:
@@ -57,10 +58,10 @@ public:
     IdxT scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size) const;
     IdxT scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size) const;
 
-    ImageT make_image() const;
-    ImageStackT make_image_stack(IdxT nT) const;
-    ScaledImageT make_scaled_image() const;
-    ScaledImageStackT make_scaled_image_stack(IdxT nT) const;
+    ImageT make_image() const { return ImageT(imsize(0),imsize(1)); }
+    ImageStackT make_image_stack(IdxT nT) const { return ImageStackT(imsize(0),imsize(1),nT); }
+    ScaledImageT make_scaled_image() const { return ScaledImageT(imsize(0),imsize(1),nScales); }
+    ScaledImageStackT make_scaled_image_stack(IdxT nT) const { return ScaledImageStackT(imsize(0),imsize(1),nScales,nT); }
 
     /* Static Methods */
     static void filterLoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma);
@@ -77,40 +78,6 @@ private:
                        IMatT &maxima, VecT &max_vals);
     static void computeDoGSigmas(const MatT &sigma, FloatT sigma_ratio, MatT &gauss_sigmaE, MatT &gauss_sigmaI);
 };
-
-
-template<class FloatT, class IdxT>
-inline
-typename Boxxer2D<FloatT,IdxT>::ImageT
-Boxxer2D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(imsize(0),imsize(1));
-}
-
-
-template<class FloatT, class IdxT>
-inline
-typename Boxxer2D<FloatT,IdxT>::ImageStackT
-Boxxer2D<FloatT,IdxT>::make_image_stack(IdxT nT) const
-{
-    return ImageStackT(imsize(0),imsize(1),nT);
-}
-
-template<class FloatT, class IdxT>
-inline
-typename Boxxer2D<FloatT,IdxT>::ScaledImageT
-Boxxer2D<FloatT,IdxT>::make_scaled_image() const
-{
-    return ScaledImageT(imsize(0),imsize(1),nScales);
-}
-
-template<class FloatT, class IdxT>
-inline
-typename Boxxer2D<FloatT,IdxT>::ScaledImageStackT
-Boxxer2D<FloatT,IdxT>::make_scaled_image_stack(IdxT nT) const
-{
-    return ScaledImageStackT(imsize(0),imsize(1),nScales,nT);
-}
 
 } /* namespace boxxer */
 

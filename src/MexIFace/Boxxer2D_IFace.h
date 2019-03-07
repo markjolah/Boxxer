@@ -7,22 +7,22 @@
 #ifndef BOXXER_BOXXER2D_IFACE
 #define BOXXER_BOXXER2D_IFACE
 
-#include<functional>
+#include <functional>
 
 #include "MexIFace/MexIFace.h"
 #include "Boxxer/Boxxer2D.h"
 
-using namespace boxxer;
+// using namespace boxxer;
 
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT_=uint32_t>
 class Boxxer2D_IFace : public mexiface::MexIFace,
-                       public mexiface::MexIFaceHandler<Boxxer2D<FloatT,IdxT>>
+                       public mexiface::MexIFaceHandler<boxxer::Boxxer2D<FloatT,IdxT_>>
 {
 public:
     Boxxer2D_IFace();
 
 private:
-    using BoxxerT = Boxxer2D<FloatT,IdxT>;
+    using BoxxerT = boxxer::Boxxer2D<FloatT,IdxT_>;
     using mexiface::MexIFaceHandler<BoxxerT>::obj;
     using IMatT = typename BoxxerT::IMatT;
     using VecT = typename BoxxerT::VecT;
@@ -59,14 +59,14 @@ Boxxer2D_IFace<FloatT,IdxT>::Boxxer2D_IFace()
     staticmethodmap["enumerateImageMaxima"] = std::bind(&Boxxer2D_IFace::objEnumerateImageMaxima, this);
 }
 
-template<class FloatT, class IdxT>
-void Boxxer2D_IFace<FloatT,IdxT>::objConstruct()
+template<class FloatT, class IdxT_>
+void Boxxer2D_IFace<FloatT,IdxT_>::objConstruct()
 {
     // [in] imsize - size:[2] type IdxT. Image size [X Y]
     // [in] sigma - size:[2, nScales] type FloatT.  scale-space sigmas Each column is a scale.
     // [out] handle - A new MexIFace object handle
     checkNumArgs(1,2);
-    auto imsize = getVec<IdxT>();
+    auto imsize = getVec<IdxT_>();
     auto sigma = getMat<FloatT>();
     this->outputHandle(new BoxxerT(imsize,sigma));
 }

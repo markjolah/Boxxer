@@ -7,6 +7,7 @@
 #ifndef BOXXER_FILTER_KERNELS_H
 #define BOXXER_FILTER_KERNELS_H
 
+#include <cstdint>
 #include <armadillo>
 
 namespace boxxer {
@@ -29,15 +30,15 @@ namespace kernels {
 /**@{*/
 /** 1D Gauss FIR Filters */
 template <class FloatT=float, class IntT=int32_t>
-void gaussFIR_1D(const arma::Col<FloatT> &data, arma::Col<FloatT> &fdata, const arma::Col<FloatT> &kernel)
-{
-    IntT hw=static_cast<IntT>(kernel.n_elem)-1;
-    IntT size=static_cast<IntT>(data.n_elem);
-    gaussFIR_1D(size, data.memptr(), fdata.memptr(), hw, kernel.memptr());
-}
+void gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[]);
 
 template <class FloatT=float, class IntT=int32_t>
-void gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[]);
+void gaussFIR_1D(const arma::Col<FloatT> &data, arma::Col<FloatT> &fdata, const arma::Col<FloatT> &kernel)
+{
+    IntT hw = static_cast<IntT>(kernel.n_elem)-1;
+    IntT size = static_cast<IntT>(data.n_elem);
+    gaussFIR_1D<FloatT,IntT>(size, data.memptr(), fdata.memptr(), hw, kernel.memptr());
+}
 
 template <class FloatT=float, class IntT=int32_t>
 void gaussFIR_1D_small(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[]);

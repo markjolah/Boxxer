@@ -10,13 +10,14 @@
 #ifndef BOXXER_GAUSSFILTER_H
 #define BOXXER_GAUSSFILTER_H
 
-#include <ostreram>
+#include <cstdint>
+#include <ostream>
 #include <armadillo>
 
 namespace boxxer {
 
 /** Base filters */
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class GaussFIRFilter
 {
 public:
@@ -36,41 +37,41 @@ public:
     static VecT compute_Gauss_FIR_kernel(FloatT sigma, IdxT hw);
     static VecT compute_LoG_FIR_kernel(FloatT sigma, IdxT hw);
 protected:
-    static const IdxT max_kernel_hw=30;
-    static const FloatT default_sigma_hw_ratio=3.; //hw will be 3sigma if not specified.
+    static const IdxT max_kernel_hw;
+    static const FloatT default_sigma_hw_ratio;
 };
 
 /**@{*/
 /** 2D Filters */
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class GaussFilter2D : public GaussFIRFilter<FloatT,IdxT>
 {
 public:
-    using GaussFIRFilter<FloatT,IdxT>::IVecT;
-    using GaussFIRFilter<FloatT,IdxT>::VecT;
+    using IVecT = typename GaussFIRFilter<FloatT,IdxT>::IVecT;
+    using VecT = typename GaussFIRFilter<FloatT,IdxT>::VecT;
     using ImageT = arma::Mat<FloatT>;
 
     GaussFilter2D(const IVecT &size, const VecT &sigma);
     GaussFilter2D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw);
     void set_kernel_hw(const IVecT &kernel_half_width);
-    ImageT make_image() const;
+    ImageT make_image() const { return ImageT(this->size(0),this->size(1)); }
 
     void filter(const ImageT &im, ImageT &out);
     void test_filter(const ImageT &im);
 
-    template <class T>
-    friend std::ostream& operator<<(std::ostream &out, const GaussFilter2D<T> &filt);
+    template<class FloatT_, class IdxT_>
+    friend std::ostream& operator<<(std::ostream &out, const GaussFilter2D<FloatT_,IdxT_> &filt);
 private:
     ImageT temp_im;
     arma::field<VecT> kernels;
 };
 
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class DoGFilter2D : public GaussFIRFilter<FloatT,IdxT>
 {
 public:
-    using GaussFIRFilter<FloatT,IdxT>::IVecT;
-    using GaussFIRFilter<FloatT,IdxT>::VecT;
+    using IVecT = typename GaussFIRFilter<FloatT,IdxT>::IVecT;
+    using VecT = typename GaussFIRFilter<FloatT,IdxT>::VecT;
     using ImageT = arma::Mat<FloatT>;
 
     FloatT sigma_ratio;
@@ -79,13 +80,13 @@ public:
     DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw);
     void set_kernel_hw(const IVecT &kernel_half_width);
     void set_sigma_ratio(FloatT sigma_ratio);
-    ImageT make_image() const;
+    ImageT make_image() const { return ImageT(this->size(0),this->size(1)); }
 
     void filter(const ImageT &im, ImageT &out);
     void test_filter(const ImageT &im);
 
-    template <class T>
-    friend std::ostream& operator<<(std::ostream &out, const DoGFilter2D<T> &filt);
+    template<class FloatT_, class IdxT_>
+    friend std::ostream& operator<<(std::ostream &out, const DoGFilter2D<FloatT_,IdxT_> &filt);
 private:
     ImageT temp_im0;
     ImageT temp_im1;
@@ -93,24 +94,24 @@ private:
     arma::field<VecT> inhibit_kernels;
 };
 
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class LoGFilter2D : public GaussFIRFilter<FloatT,IdxT>
 {
 public:
-    using GaussFIRFilter<FloatT,IdxT>::IVecT;
-    using GaussFIRFilter<FloatT,IdxT>::VecT;
+    using IVecT = typename GaussFIRFilter<FloatT,IdxT>::IVecT;
+    using VecT = typename GaussFIRFilter<FloatT,IdxT>::VecT;
     using ImageT = arma::Mat<FloatT>;
 
     LoGFilter2D(const IVecT &size, const VecT &sigma);
     LoGFilter2D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw);
     void set_kernel_hw(const IVecT &kernel_half_width);
-    ImageT make_image() const;
+    ImageT make_image() const { return ImageT(this->size(0),this->size(1)); }
 
     void filter(const ImageT &im, ImageT &out);
     void test_filter(const ImageT &im);
 
-    template <class T>
-    friend std::ostream& operator<<(std::ostream &out, const LoGFilter2D<T> &filt);
+    template<class FloatT_, class IdxT_>
+    friend std::ostream& operator<<(std::ostream &out, const LoGFilter2D<FloatT_,IdxT_> &filt);
 private:
     ImageT temp_im0;
     ImageT temp_im1;
@@ -121,36 +122,36 @@ private:
 
 /**@{*/
 /** 3D Filters */
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class GaussFilter3D : public GaussFIRFilter<FloatT,IdxT>
 {
 public:
-    using GaussFIRFilter<FloatT,IdxT>::IVecT;
-    using GaussFIRFilter<FloatT,IdxT>::VecT;
+    using IVecT = typename GaussFIRFilter<FloatT,IdxT>::IVecT;
+    using VecT = typename GaussFIRFilter<FloatT,IdxT>::VecT;
     using ImageT = arma::Cube<FloatT>;
 
     GaussFilter3D(const IVecT &size, const VecT &sigma);
     GaussFilter3D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw);
     void set_kernel_hw(const IVecT &kernel_half_width);
-    ImageT make_image() const;
+    ImageT make_image() const { return ImageT(this->size(0),this->size(1),this->size(2)); }
 
     void filter(const ImageT &im, ImageT &out);
     void test_filter(const ImageT &im);
 
-    template <class T>
-    friend std::ostream& operator<<(std::ostream &out, const GaussFilter3D<T> &filt);
+    template<class FloatT_, class IdxT_>
+    friend std::ostream& operator<<(std::ostream &out, const GaussFilter3D<FloatT_,IdxT_> &filt);
 private:
     ImageT temp_im0;
     ImageT temp_im1;
     arma::field<VecT> kernels;
 };
 
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class DoGFilter3D : public GaussFIRFilter<FloatT,IdxT>
 {
 public:
-    using GaussFIRFilter<FloatT,IdxT>::IVecT;
-    using GaussFIRFilter<FloatT,IdxT>::VecT;
+    using IVecT = typename GaussFIRFilter<FloatT,IdxT>::IVecT;
+    using VecT = typename GaussFIRFilter<FloatT,IdxT>::VecT;
     using ImageT = arma::Cube<FloatT>;
 
     FloatT sigma_ratio;
@@ -159,13 +160,13 @@ public:
     DoGFilter3D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw);
     void set_kernel_hw(const IVecT &kernel_half_width);
     void set_sigma_ratio(FloatT sigma_ratio);
-    ImageT make_image() const;
+    ImageT make_image() const { return ImageT(this->size(0),this->size(1),this->size(2)); }
 
     void filter(const ImageT &im, ImageT &out);
     void test_filter(const ImageT &im);
 
-    template <class T>
-    friend std::ostream& operator<<(std::ostream &out, const GaussFilter3D<T> &filt);
+    template<class FloatT_, class IdxT_>
+    friend std::ostream& operator<<(std::ostream &out, const GaussFilter3D<FloatT_,IdxT_> &filt);
 private:
     ImageT temp_im0;
     ImageT temp_im1;
@@ -173,79 +174,30 @@ private:
     arma::field<VecT> inhibit_kernels;
 };
 
-template<class FloatT, class IdxT>
+template<class FloatT=float, class IdxT=uint32_t>
 class LoGFilter3D : public GaussFIRFilter<FloatT,IdxT>
 {
 public:
-    using GaussFIRFilter<FloatT,IdxT>::IVecT;
-    using GaussFIRFilter<FloatT,IdxT>::VecT;
+    using IVecT = typename GaussFIRFilter<FloatT,IdxT>::IVecT;
+    using VecT = typename GaussFIRFilter<FloatT,IdxT>::VecT;
     using ImageT = arma::Cube<FloatT>;
 
     LoGFilter3D(const IVecT &size, const VecT &sigma);
     LoGFilter3D(const IVecT &size, const VecT &sigma, const IVecT &kernel_hw);
     void set_kernel_hw(const IVecT &kernel_half_width);
-    ImageT make_image() const;
+    ImageT make_image() const { return ImageT(this->size(0),this->size(1),this->size(2)); }
 
     void filter(const ImageT &im, ImageT &out);
     void test_filter(const ImageT &im);
 
-    template <class T>
-    friend std::ostream& operator<<(std::ostream &out, const LoGFilter3D<T> &filt);
+    template<class FloatT_, class IdxT_>
+    friend std::ostream& operator<<(std::ostream &out, const LoGFilter3D<FloatT_,IdxT_> &filt);
 private:
     ImageT temp_im0, temp_im1;
     arma::field<VecT> gauss_kernels;
     arma::field<VecT> LoG_kernels;
 };
 /**@}*/
-
-/* Inlined Methods */
-template<class FloatT, class IdxT>
-inline
-typename GaussFilter2D<FloatT,IdxT>::ImageT
-GaussFilter2D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(this->size(0),this->size(1));
-}
-
-template<class FloatT, class IdxT>
-inline
-typename GaussFilter3D<FloatT,IdxT>::ImageT
-GaussFilter3D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(this->size(0),this->size(1),this->size(2));
-}
-
-template<class FloatT, class IdxT>
-inline
-typename DoGFilter2D<FloatT,IdxT>::ImageT
-DoGFilter2D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(this->size(0),this->size(1));
-}
-
-template<class FloatT, class IdxT>
-inline
-typename DoGFilter3D<FloatT,IdxT>::ImageT
-DoGFilter3D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(this->size(0),this->size(1),this->size(2));
-}
-
-template<class FloatT, class IdxT>
-inline
-typename LoGFilter2D<FloatT,IdxT>::ImageT
-LoGFilter2D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(this->size(0),this->size(1));
-}
-
-template<class FloatT, class IdxT>
-inline
-typename LoGFilter3D<FloatT,IdxT>::ImageT
-LoGFilter3D<FloatT,IdxT>::make_image() const
-{
-    return ImageT(this->size(0),this->size(1),this->size(2));
-}
 
 } /* namespace boxxer */
 

@@ -28,12 +28,12 @@ Boxxer3D<FloatT,IdxT>::Boxxer3D(const IVecT &imsize, const MatT &_sigma)
     if(imsize.n_elem!=dim){
         std::ostringstream msg;
         msg<<"Got image size with incorrect number of elements(dim="<<dim<<"): "<<imsize.n_elem;
-        throw ParameterSizeError(msg.str());
+        throw ParameterShapeError(msg.str());
     }
     if(sigma.n_rows!=dim){
         std::ostringstream msg;
         msg<<"Got sigmas with incorrect number of elements(dim="<<dim<<"): #rows"<<sigma.n_rows;
-        throw ParameterSizeError(msg.str());
+        throw ParameterShapeError(msg.str());
     }
 }
 
@@ -43,7 +43,7 @@ void Boxxer3D<FloatT,IdxT>::setDoGSigmaRatio(FloatT _sigma_ratio)
     if(_sigma_ratio<=1) {
         std::ostringstream msg;
         msg<<"Got bad sigma ratio: "<<_sigma_ratio;
-        throw ParameterSizeError(msg.str());
+        throw ParameterShapeError(msg.str());
     }
     sigma_ratio=_sigma_ratio;
 }
@@ -51,21 +51,28 @@ void Boxxer3D<FloatT,IdxT>::setDoGSigmaRatio(FloatT _sigma_ratio)
 template<class FloatT, class IdxT>
 void Boxxer3D<FloatT,IdxT>::filterScaledLoG(const ImageT &im, ScaledImageT &fim)
 {
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel for
     for(IdxT s=0; s<nScales; s++) {
-        LoGFilter3D<FloatT,IdxT> scale_filter(imsize,sigma.col(s));
-        scale_filter.filter(im,fim.slice(s));
+        catcher.run([&]{
+            LoGFilter3D<FloatT,IdxT> scale_filter(imsize,sigma.col(s));
+            scale_filter.filter(im,fim.slice(s));
+        });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 template<class FloatT, class IdxT>
 void Boxxer3D<FloatT,IdxT>::filterScaledDoG(const ImageT &im, ScaledImageT &fim)
 {
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel for
-    for(IdxT s=0; s<nScales; s++) {
-        DoGFilter3D<FloatT,IdxT> scale_filter(imsize,sigma.col(s),sigma_ratio);
-        scale_filter.filter(im,fim.slice(s));
-    }
+    for(IdxT s=0; s<nScales; s++)
+        catcher.run([&]{
+            DoGFilter3D<FloatT,IdxT> scale_filter(imsize,sigma.col(s),sigma_ratio);
+            scale_filter.filter(im,fim.slice(s));
+        });
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 /**
@@ -80,17 +87,20 @@ IdxT Boxxer3D<FloatT,IdxT>::scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &ma
     IdxT nT=static_cast<IdxT>(im.n_slices);
     arma::field<IMatT> frame_maxima(nT); //These will come back 3xN
     arma::field<VecT> frame_max_vals(nT);
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         auto sim = make_scaled_image();
         std::vector<LoGFilter3D<FloatT,IdxT>> scale_filters;
         for(IdxT s=0; s<nScales; s++) scale_filters.push_back(LoGFilter3D<FloatT,IdxT>(imsize,sigma.col(s)));
         #pragma omp for
-        for(IdxT n=0; n<nT; n++) {
-            for(IdxT s=0; s<nScales; s++) scale_filters[s].filter(im.slice(n),sim.slice(s));
-            scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
-        }
+        for(IdxT n=0; n<nT; n++)
+            catcher.run([&]{
+                for(IdxT s=0; s<nScales; s++) scale_filters[s].filter(im.slice(n),sim.slice(s));
+                    scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
     return combine_maxima(frame_maxima, frame_max_vals, maxima, max_vals);
 }
 
@@ -101,17 +111,20 @@ IdxT Boxxer3D<FloatT,IdxT>::scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &ma
     IdxT nT=static_cast<IdxT>(im.n_slices);
     arma::field<IMatT> frame_maxima(nT); //These will come back 3xN
     arma::field<VecT> frame_max_vals(nT);
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         auto sim = make_scaled_image();
         std::vector<DoGFilter3D<FloatT,IdxT>> scale_filters;
         for(IdxT s=0; s<nScales; s++) scale_filters.push_back(DoGFilter3D<FloatT,IdxT>(imsize,sigma.col(s),sigma_ratio));
         #pragma omp for
-        for(IdxT n=0; n<nT; n++) {
-            for(IdxT s=0; s<nScales; s++) scale_filters[s].filter(im.slice(n),sim.slice(s));
-            scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
-        }
+        for(IdxT n=0; n<nT; n++)
+            catcher.run([&]{
+                for(IdxT s=0; s<nScales; s++) scale_filters[s].filter(im.slice(n),sim.slice(s));
+                    scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
     return combine_maxima(frame_maxima, frame_max_vals, maxima, max_vals);
 }
 
@@ -150,13 +163,13 @@ Boxxer3D<FloatT,IdxT>::scaleSpaceFrameMaximaRefine(const ScaledImageT &im, IMatT
         IVecT mx = maxima.col(n);
         double mxv = max_vals(n);
         bool ok=true;
-        if ( (mx(0)-delta < 0 || mx(0)+delta>=imsize(0)) || 
-             (mx(1)-delta < 0 || mx(1)+delta>=imsize(1)) || 
-             (mx(2)-delta < 0 || mx(2)+delta>=imsize(2))) {
+        if ( (mx(0) < delta || mx(0)+delta>=imsize(0)) ||
+             (mx(1) < delta || mx(1)+delta>=imsize(1)) ||
+             (mx(2) < delta || mx(2)+delta>=imsize(2))) {
             for(IdxT s=0; s<nScales; s++)
-                for(IdxT k=max(0,mx(2)-delta); k<=min(imsize(2)-1,mx(2)+delta); k++)
-                    for(IdxT j=max(0,mx(1)-delta); j<=min(imsize(1)-1,mx(1)+delta); j++)
-                        for(IdxT i=max(0,mx(0)-delta); i<=min(imsize(0)-1,mx(0)+delta); i++) {
+                for(IdxT k= (mx(2) <= delta ? 0 : mx(2)-delta); k<imsize(2) && k<=mx(2)+delta; k++)
+                    for(IdxT j= (mx(1) <= delta ? 0 : mx(1)-delta); j<imsize(1) && j<=mx(1)+delta; j++)
+                        for(IdxT i= (mx(0) <= delta ? 0 : mx(0)-delta); i<imsize(0) && i<=mx(0)+delta; i++) {
                             if( im(i,j,k,s) > mxv) {ok=false; goto done;}
             }
         } else {
@@ -186,42 +199,54 @@ template<class FloatT, class IdxT>
 void Boxxer3D<FloatT,IdxT>::filterLoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma)
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
-    IVecT imsize={im.sX,im.sY,im.sZ};
+    IVecT imsize = {static_cast<IdxT>(im.sX), static_cast<IdxT>(im.sY), static_cast<IdxT>(im.sZ)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         LoGFilter3D<FloatT,IdxT> filter(imsize,sigma);
         #pragma omp for
         for(IdxT n=0; n<nT; n++)
-            filter.filter(im.slice(n),fim.slice(n));
+            catcher.run([&]{
+                filter.filter(im.slice(n),fim.slice(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 template<class FloatT, class IdxT>
 void Boxxer3D<FloatT,IdxT>::filterDoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma, FloatT sigma_ratio)
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
-    IVecT imsize={im.sX,im.sY,im.sZ};
+    IVecT imsize = {static_cast<IdxT>(im.sX), static_cast<IdxT>(im.sY), static_cast<IdxT>(im.sZ)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         DoGFilter3D<FloatT,IdxT> filter(imsize,sigma,sigma_ratio);
         #pragma omp for
         for(IdxT n=0; n<nT; n++)
-            filter.filter(im.slice(n),fim.slice(n));
+            catcher.run([&]{
+                filter.filter(im.slice(n),fim.slice(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 template<class FloatT, class IdxT>
 void Boxxer3D<FloatT,IdxT>::filterGauss(const ImageStackT &im, ImageStackT &fim, const VecT &sigma)
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
-    IVecT imsize={im.sX,im.sY,im.sZ};
+    IVecT imsize = {static_cast<IdxT>(im.sX), static_cast<IdxT>(im.sY), static_cast<IdxT>(im.sZ)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         GaussFilter3D<FloatT,IdxT> filter(imsize,sigma);
         #pragma omp for
         for(IdxT n=0; n<nT; n++)
-            filter.filter(im.slice(n),fim.slice(n));
+            catcher.run([&]{
+                filter.filter(im.slice(n),fim.slice(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 /**
@@ -234,15 +259,18 @@ IdxT Boxxer3D<FloatT,IdxT>::enumerateImageMaxima(const ImageStackT &im, IMatT &m
     IdxT nT=static_cast<IdxT>(im.n_slices);
     arma::field<IMatT> frame_maxima(nT);
     arma::field<VecT> frame_max_vals(nT);
-    IVecT imsize={im.sX,im.sY,im.sZ};
+    IVecT imsize = {static_cast<IdxT>(im.sX), static_cast<IdxT>(im.sY), static_cast<IdxT>(im.sZ)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         Maxima3D<FloatT,IdxT> maxima3D(imsize, neighborhood_size);
         #pragma omp for
-        for(IdxT n=0; n<nT; n++) {
-            maxima3D.find_maxima(im.slice(n), frame_maxima(n), frame_max_vals(n));
-        }
+        for(IdxT n=0; n<nT; n++)
+            catcher.run([&]{
+                maxima3D.find_maxima(im.slice(n), frame_maxima(n), frame_max_vals(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
     return combine_maxima(frame_maxima, frame_max_vals, maxima, max_vals);
 }
 
@@ -254,7 +282,6 @@ IdxT Boxxer3D<FloatT,IdxT>::combine_maxima(const arma::field<IMatT> &frame_maxim
     IdxT Nmaxima=0;
     for(IdxT n=0; n<frame_max_vals.n_elem; n++) Nmaxima += frame_max_vals(n).n_elem;
     IdxT nrows = frame_maxima(0).n_rows;
-    assert(nrows>=3);
     maxima.resize(nrows+1,Nmaxima);
     max_vals.resize(Nmaxima);
     IdxT Nsaved=0;
@@ -277,7 +304,7 @@ void Boxxer3D<FloatT,IdxT>::checkMaxima(const ImageStackT &im, IMatT &maxima, Ve
     for(IdxT n=0; n<Nmaxima; n++){
         FloatT val=im(maxima(0,n), maxima(1,n), maxima(2,n), maxima(3,n));
         if (val!=max_vals(n)) {
-            prIdxTf(" (%i,%i,%i,%i):%.9f!= %.9f\n",maxima(0,n), maxima(1,n), maxima(2,n), maxima(3,n), val, max_vals(n));
+            printf(" (%i,%i,%i,%i):%.9f!= %.9f\n",maxima(0,n), maxima(1,n), maxima(2,n), maxima(3,n), val, max_vals(n));
         }
     }
 }

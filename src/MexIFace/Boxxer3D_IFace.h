@@ -14,16 +14,16 @@
 
 using namespace boxxer;
 
-template<class FloatT, class IdxT>
+template<class FloatT, class IdxT_>
 class Boxxer3D_IFace : public mexiface::MexIFace,
-                       public mexiface::MexIFaceHandler<Boxxer3D<FloatT,IdxT>>
+                       public mexiface::MexIFaceHandler<Boxxer3D<FloatT,IdxT_>>
 {
 public:
     Boxxer3D_IFace();
 
 private:
-    using BoxxerT = Boxxer3D<FloatT,IdxT>;
-    using mexiface::MexIFaceHandler<BoxxerT>::obj;
+    using BoxxerT = Boxxer3D<FloatT,IdxT_>;
+    using mexiface::MexIFaceHandler<Boxxer3D<FloatT,IdxT_>>::obj;
     using IMatT = typename BoxxerT::IMatT;
     using VecT = typename BoxxerT::VecT;
 
@@ -59,14 +59,14 @@ Boxxer3D_IFace<FloatT,IdxT>::Boxxer3D_IFace()
     staticmethodmap["enumerateImageMaxima"] = std::bind(&Boxxer3D_IFace::objEnumerateImageMaxima, this);
 }
 
-template<class FloatT, class IdxT>
-void Boxxer3D_IFace<FloatT,IdxT>::objConstruct()
+template<class FloatT, class IdxT_>
+void Boxxer3D_IFace<FloatT,IdxT_>::objConstruct()
 {
     // [in] imsize - size:[3] type IdxT. Image size [X Y]
     // [in] sigma - size:[3, nScales] type FloatT.  scale-space sigmas Each column is a scale.
     // [out] handle - A new MexIFace object handle
     checkNumArgs(1,2);
-    auto imsize = getVec<IdxT>();
+    auto imsize = getVec<IdxT_>();
     auto sigma = getMat<FloatT>();
     this->outputHandle(new BoxxerT(imsize,sigma));
 }
@@ -86,7 +86,7 @@ void Boxxer3D_IFace<FloatT,IdxT>::objFilterScaledLoG()
     // [out] fimage: Stack of imsize x nScales filtered frames. Size 4D: [x y z S]
     checkNumArgs(1,1);
     auto im = getCube<FloatT>();
-    auto fims = makeOutputArray<FloatT>(ims.n_rows, ims.n_cols, ims.n_slices, obj->nScales);
+    auto fims = makeOutputArray<FloatT>(im.n_rows, im.n_cols, im.n_slices, obj->nScales);
     obj->filterScaledLoG(im,fims);
 }
 
@@ -97,7 +97,7 @@ void Boxxer3D_IFace<FloatT,IdxT>::objFilterScaledDoG()
     // [out] fimage: Stack of imsize x nScales filtered frames. Size 4D: [x y z S]
     checkNumArgs(1,1);
     auto im = getCube<FloatT>();
-    auto fims = makeOutputArray<FloatT>(ims.n_rows, ims.n_cols, ims.n_slices, obj->nScales);
+    auto fims = makeOutputArray<FloatT>(im.n_rows, im.n_cols, im.n_slices, obj->nScales);
     obj->filterScaledDoG(im,fims);
 }
 
@@ -151,7 +151,7 @@ void Boxxer3D_IFace<FloatT,IdxT>::objFilterLoG()
     checkNumArgs(1,2);
     auto ims = getHypercube<FloatT>();
     auto sigma = getVec<FloatT>();
-    auto fims = makeOutputArray(ims.sX, ims.sY, ims.sZ, ims.sN);
+    auto fims = makeOutputArray<FloatT>(ims.sX, ims.sY, ims.sZ, ims.sN);
     BoxxerT::filterLoG(ims,fims,sigma);
 }
 
@@ -169,7 +169,7 @@ void Boxxer3D_IFace<FloatT,IdxT>::objFilterDoG()
     auto ims = getHypercube<FloatT>();
     auto sigma = getVec<FloatT>();
     auto sigma_ratio=getAsFloat<FloatT>();
-    auto fims = makeOutputArray(ims.sX, ims.sY, ims.sZ, ims.sN);
+    auto fims = makeOutputArray<FloatT>(ims.sX, ims.sY, ims.sZ, ims.sN);
     BoxxerT::filterDoG(ims, fims, sigma, sigma_ratio);
 }
 
@@ -185,7 +185,7 @@ void Boxxer3D_IFace<FloatT,IdxT>::objFilterGauss()
     checkNumArgs(1,2);
     auto ims = getHypercube<FloatT>();
     auto sigma = getVec<FloatT>();
-    auto fims = makeOutputArray(ims.sX, ims.sY, ims.sZ, ims.sN);
+    auto fims = makeOutputArray<FloatT>(ims.sX, ims.sY, ims.sZ, ims.sN);
     BoxxerT::filterGauss(ims, fims, sigma);
 }
 

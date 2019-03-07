@@ -29,12 +29,12 @@ Boxxer2D<FloatT,IdxT>::Boxxer2D(const IVecT &imsize, const MatT &_sigma)
     if(imsize.n_elem!=dim){
         std::ostringstream msg;
         msg<<"Got image size with incorrect number of elements(dim="<<dim<<"): "<<imsize.n_elem;
-        throw ParameterSizeError(msg.str());
+        throw ParameterShapeError(msg.str());
     }
     if(sigma.n_rows!=dim){
         std::ostringstream msg;
         msg<<"Got sigmas with incorrect number of elements(dim="<<dim<<"): #rows"<<sigma.n_rows;
-        throw ParameterSizeError(msg.str());
+        throw ParameterShapeError(msg.str());
     }
 }
 
@@ -44,7 +44,7 @@ void Boxxer2D<FloatT,IdxT>::setDoGSigmaRatio(FloatT _sigma_ratio)
     if(_sigma_ratio<=1) {
         std::ostringstream msg;
         msg<<"Got bad sigma ratio: "<<_sigma_ratio;
-        throw ParameterSizeError(msg.str());
+        throw ParameterShapeError(msg.str());
     }
     sigma_ratio=_sigma_ratio;
 }
@@ -53,17 +53,17 @@ template<class FloatT, class IdxT>
 void Boxxer2D<FloatT,IdxT>::filterScaledLoG(const ImageStackT &im, ScaledImageStackT &fim) const
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
-    omp_exception_catcher::OMPExceptionCatcher catcher();
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
-        catcher.run([&]{
-            //Each LoGFilter2D object has internal storage and so each thread must have its own copy.
-            std::vector<LoGFilter2D<FloatT,IdxT>> filters;
-            for(IdxT s=0; s<nScales; s++) filters.push_back(LoGFilter2D<FloatT,IdxT>(imsize,sigma.col(s)));
-            #pragma omp for
-            for(IdxT n=0; n<nT; n++) for(IdxT s=0; s<nScales; s++)
+        //Each LoGFilter2D object has internal storage and so each thread must have its own copy.
+        std::vector<LoGFilter2D<FloatT,IdxT>> filters;
+        for(IdxT s=0; s<nScales; s++) filters.push_back(LoGFilter2D<FloatT,IdxT>(imsize,sigma.col(s)));
+        #pragma omp for
+        for(IdxT n=0; n<nT; n++) for(IdxT s=0; s<nScales; s++)
+            catcher.run([&]{
                 filters[s].filter(im.slice(n),fim.slice(n).slice(s));
-        });
+            });
     }
     catcher.rethrow(); //Rethrow any caught exceptions
 }
@@ -72,6 +72,7 @@ template<class FloatT, class IdxT>
 void Boxxer2D<FloatT,IdxT>::filterScaledDoG(const ImageStackT &im, ScaledImageStackT &fim) const
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         //Each LoGFilter2D object has internal storage and so each thread must have its own copy.
@@ -79,10 +80,12 @@ void Boxxer2D<FloatT,IdxT>::filterScaledDoG(const ImageStackT &im, ScaledImageSt
         for(IdxT s=0; s<nScales; s++)
             filters.push_back(DoGFilter2D<FloatT,IdxT>(imsize,sigma.col(s),sigma_ratio));
         #pragma omp for
-        for(IdxT n=0; n<nT; n++) for(IdxT s=0; s<nScales; s++) {
-            filters[s].filter(im.slice(n),fim.slice(n).slice(s));
-        }
+        for(IdxT n=0; n<nT; n++) for(IdxT s=0; s<nScales; s++)
+            catcher.run([&]{
+                filters[s].filter(im.slice(n),fim.slice(n).slice(s));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 /**
@@ -97,6 +100,7 @@ IdxT Boxxer2D<FloatT,IdxT>::scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &ma
     IdxT nT=static_cast<IdxT>(im.n_slices);
     arma::field<IMatT> frame_maxima(nT); //These will come back 3xN
     arma::field<VecT> frame_max_vals(nT);
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         std::vector<LoGFilter2D<FloatT,IdxT>> filters;
@@ -104,10 +108,13 @@ IdxT Boxxer2D<FloatT,IdxT>::scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &ma
         auto sim = make_scaled_image();
         #pragma omp for
         for(IdxT n=0; n<nT; n++) {
-            for(IdxT s=0; s<nScales; s++) filters[s].filter(im.slice(n),sim.slice(s));
-            scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
+            catcher.run([&]{
+                for(IdxT s=0; s<nScales; s++) filters[s].filter(im.slice(n),sim.slice(s));
+                    scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
+            });
         }
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
     return combine_maxima(frame_maxima, frame_max_vals, maxima, max_vals);
 }
 
@@ -118,6 +125,7 @@ IdxT Boxxer2D<FloatT,IdxT>::scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &ma
     IdxT nT=static_cast<IdxT>(im.n_slices);
     arma::field<IMatT> frame_maxima(nT); //These will come back 3xN
     arma::field<VecT> frame_max_vals(nT);
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         std::vector<DoGFilter2D<FloatT,IdxT>> filters;
@@ -125,10 +133,13 @@ IdxT Boxxer2D<FloatT,IdxT>::scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &ma
         auto sim = make_scaled_image();
         #pragma omp for
         for(IdxT n=0; n<nT; n++) {
-            for(IdxT s=0; s<nScales; s++) filters[s].filter(im.slice(n),sim.slice(s));
-            scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
+            catcher.run([&]{
+                for(IdxT s=0; s<nScales; s++) filters[s].filter(im.slice(n),sim.slice(s));
+                    scaleSpaceFrameMaxima(sim, frame_maxima(n), frame_max_vals(n), neighborhood_size, scale_neighborhood_size);
+            });
         }
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
     return combine_maxima(frame_maxima, frame_max_vals, maxima, max_vals);
 }
 
@@ -167,11 +178,11 @@ Boxxer2D<FloatT,IdxT>::scaleSpaceFrameMaximaRefine(const ScaledImageT &im, IMatT
     for(IdxT n=0; n<nMaxima; n++) {
         IVecT mx = maxima.col(n);
         FloatT mxv = max_vals(n);
-        if ( (mx(0)-delta < 0 || mx(0)+delta>=imsize(0)) || 
-             (mx(1)-delta < 0 || mx(1)+delta>=imsize(1))) {
+        if ( (mx(0) < delta || mx(0)+delta>=imsize(0)) ||
+             (mx(1) < delta || mx(1)+delta>=imsize(1))) {
             for(IdxT s=0; s<nScales; s++)
-                for(IdxT j=max(0,mx(1)-delta); j<=min(imsize(1)-1,mx(1)+delta); j++)
-                    for(IdxT i=max(0,mx(0)-delta); i<=min(imsize(0)-1,mx(0)+delta); i++)
+                for(IdxT j = (mx(1)<=delta ? 0 : mx(1)-delta); j<imsize(1) && j<=mx(1)+delta; j++)
+                    for(IdxT i = (mx(0)<=delta ? 0 : mx(0)-delta); i<imsize(0) && i<=mx(0)+delta; i++)
                         if( im(i,j,s) > mxv)  goto scale_maxima_reject;
         } else {
             for(IdxT s=0; s<nScales; s++)
@@ -202,13 +213,17 @@ void Boxxer2D<FloatT,IdxT>::filterLoG(const ImageStackT &im, ImageStackT &fim, c
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
     IVecT imsize={static_cast<IdxT>(im.n_rows),static_cast<IdxT>(im.n_cols)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         LoGFilter2D<FloatT,IdxT> filter(imsize,sigma);
         #pragma omp for
         for(IdxT n=0; n<nT; n++)
-            filter.filter(im.slice(n),fim.slice(n));
+            catcher.run([&]{
+                filter.filter(im.slice(n),fim.slice(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 template<class FloatT, class IdxT>
@@ -216,13 +231,17 @@ void Boxxer2D<FloatT,IdxT>::filterDoG(const ImageStackT &im, ImageStackT &fim, c
 {
     IdxT nT=static_cast<IdxT>(fim.n_slices);
     IVecT imsize={static_cast<IdxT>(im.n_rows),static_cast<IdxT>(im.n_cols)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         DoGFilter2D<FloatT,IdxT> filter(imsize,sigma,sigma_ratio);
         #pragma omp for
         for(IdxT n=0; n<nT; n++)
-            filter.filter(im.slice(n),fim.slice(n));
+            catcher.run([&]{
+                filter.filter(im.slice(n),fim.slice(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 template<class FloatT, class IdxT>
@@ -230,13 +249,17 @@ void Boxxer2D<FloatT,IdxT>::filterGauss(const ImageStackT &im, ImageStackT &fim,
 {
     IdxT nT=static_cast<IdxT>(im.n_slices);
     IVecT imsize={static_cast<IdxT>(im.n_rows),static_cast<IdxT>(im.n_cols)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         GaussFilter2D<FloatT,IdxT> filter(imsize,sigma);
         #pragma omp for
         for(IdxT n=0; n<nT; n++)
-            filter.filter(im.slice(n),fim.slice(n));
+            catcher.run([&]{
+                filter.filter(im.slice(n),fim.slice(n));
+            });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
 }
 
 /**
@@ -249,14 +272,17 @@ IdxT Boxxer2D<FloatT,IdxT>::enumerateImageMaxima(const ImageStackT &im, IMatT &m
     arma::field<IMatT> frame_maxima(nT);
     arma::field<VecT> frame_max_vals(nT);
     IVecT imsize={static_cast<IdxT>(im.n_rows),static_cast<IdxT>(im.n_cols)};
+    omp_exception_catcher::OMPExceptionCatcher catcher;
     #pragma omp parallel
     {
         Maxima2D<FloatT,IdxT> maxima2D(imsize, neighborhood_size);
         #pragma omp for
-        for(IdxT n=0; n<nT; n++) {
-            maxima2D.find_maxima(im.slice(n), frame_maxima(n), frame_max_vals(n));
-        }
+        for(IdxT n=0; n<nT; n++)
+            catcher.run([&]{
+                maxima2D.find_maxima(im.slice(n), frame_maxima(n), frame_max_vals(n));
+        });
     }
+    catcher.rethrow(); //Rethrow any caught exceptions
     return combine_maxima(frame_maxima, frame_max_vals, maxima, max_vals);
 }
 
@@ -268,7 +294,6 @@ IdxT Boxxer2D<FloatT,IdxT>::combine_maxima(const arma::field<IMatT> &frame_maxim
     IdxT Nmaxima=0;
     for(IdxT n=0; n<frame_max_vals.n_elem; n++) Nmaxima += frame_max_vals(n).n_elem;
     IdxT nrows = frame_maxima(0).n_rows;
-    assert(nrows>=2);
     maxima.resize(nrows+1,Nmaxima);
     max_vals.resize(Nmaxima);
     IdxT Nsaved=0;
@@ -295,7 +320,6 @@ void Boxxer2D<FloatT,IdxT>::checkMaxima(const ImageStackT &im, IMatT &maxima, Ve
         }
     }
 }
-
 
 /* Explicit Template Instantiation */
 template class Boxxer2D<float,uint32_t>;

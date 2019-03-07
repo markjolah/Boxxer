@@ -8,12 +8,18 @@
 #include <limits>
 #include <iomanip>
 
+#include "Boxxer/BoxxerError.h"
 #include "Boxxer/GaussFilter.h"
 #include "Boxxer/FilterKernels.h"
 
 namespace boxxer {
 
 /* GaussFIRFilter */
+
+template<class FloatT, class IdxT>
+const IdxT GaussFIRFilter<FloatT,IdxT>::max_kernel_hw=30;
+template<class FloatT, class IdxT>
+const FloatT GaussFIRFilter<FloatT,IdxT>::default_sigma_hw_ratio=3.; //hw will be 3sigma if not specified.
 
 template<class FloatT, class IdxT>
 GaussFIRFilter<FloatT,IdxT>::GaussFIRFilter(IdxT dim_, const IVecT &size_, const VecT &sigma_)
@@ -64,7 +70,6 @@ GaussFIRFilter<FloatT,IdxT>::compute_Gauss_FIR_kernel(FloatT sigma, IdxT hw)
     return arma::conv_to<VecT>::from(kernel);
 }
 
-
 template<class FloatT, class IdxT>
 typename GaussFIRFilter<FloatT,IdxT>::VecT
 GaussFIRFilter<FloatT,IdxT>::compute_LoG_FIR_kernel(FloatT sigma, IdxT hw)
@@ -85,9 +90,6 @@ GaussFIRFilter<FloatT,IdxT>::compute_LoG_FIR_kernel(FloatT sigma, IdxT hw)
 //     kernel(0)-=sum;
     return arma::conv_to<VecT>::from(kernel);
 }
-
-
-
 
 /* GaussFilter2D */
 
@@ -126,8 +128,8 @@ void GaussFilter2D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 template<class FloatT, class IdxT>
 void GaussFilter2D<FloatT,IdxT>::filter(const ImageT &im, ImageT &out)
 {
-    gaussFIR_2Dx<FloatT>(im, temp_im, kernels(0));
-    gaussFIR_2Dy<FloatT>(temp_im, out, kernels(1));
+    kernels::gaussFIR_2Dx<FloatT>(im, temp_im, kernels(0));
+    kernels::gaussFIR_2Dy<FloatT>(temp_im, out, kernels(1));
 }
 
 template<class FloatT, class IdxT>
@@ -136,8 +138,8 @@ void GaussFilter2D<FloatT,IdxT>::test_filter(const ImageT &im)
     ImageT fast_out=make_image();
     ImageT slow_out=make_image();
     filter(im, fast_out);
-    gaussFIR_2Dx_small<FloatT>(im, temp_im, kernels(0));
-    gaussFIR_2Dy_small<FloatT>(temp_im, slow_out, kernels(1));
+    kernels::gaussFIR_2Dx_small<FloatT>(im, temp_im, kernels(0));
+    kernels::gaussFIR_2Dy_small<FloatT>(temp_im, slow_out, kernels(1));
     FloatT eps=4.*std::numeric_limits<FloatT>::epsilon();
     for(IdxT y=0; y<this->size(1); y++) for(IdxT x=0; x<this->size(0); x++)
         if( fabs(fast_out(x,y)-slow_out(x,y))>eps )
@@ -152,7 +154,7 @@ std::ostream& operator<< (std::ostream &out, const GaussFilter2D<FloatT,IdxT> &f
     auto k1=filt.kernels(1);
     
     out<<"GaussFilter2D:[size=["<<filt.size(0)<<","<<filt.size(1)<<"]"
-        <<" sigma=["<<filt.sigma(0)<<","<<filt.sigma(1)<<"]"
+       <<" sigma=["<<filt.sigma(0)<<","<<filt.sigma(1)<<"]"
        <<" hw=["<<filt.hw(0)<<","<<filt.hw(1)<<"]"
        <<"\n >>KernelX:(sum:="<<2*arma::sum(k0)-k0(0)<<")\n"<<k0
        <<"\n >>KernelY:(sum:="<<2*arma::sum(k1)-k1(0)<<")\n"<<k1<<"\n";
@@ -243,7 +245,7 @@ template<class FloatT, class IdxT>
 DoGFilter2D<FloatT,IdxT>::DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio)
     : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(2), inhibit_kernels(2)
 {
-    if(!_sigma_ratio>1){
+    if(!(sigma_ratio>1)){
         std::ostringstream msg;
         msg<<"Received bad sigma_ratio: "<<sigma_ratio;
         throw ParameterValueError(msg.str());
@@ -258,7 +260,7 @@ template<class FloatT, class IdxT>
 DoGFilter2D<FloatT,IdxT>::DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)
     : GaussFIRFilter<FloatT,IdxT>(2, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(2), inhibit_kernels(2)
 {
-    if(!_sigma_ratio>1){
+    if(!(sigma_ratio>1)){
         std::ostringstream msg;
         msg<<"Received bad sigma_ratio: "<<sigma_ratio;
         throw ParameterValueError(msg.str());
@@ -287,7 +289,7 @@ void DoGFilter2D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 template<class FloatT, class IdxT>
 void DoGFilter2D<FloatT,IdxT>::set_sigma_ratio(FloatT _sigma_ratio)
 {
-    if(!_sigma_ratio>1){
+    if(!(_sigma_ratio>1)){
         std::ostringstream msg;
         msg<<"Received bad sigma_ratio: "<<sigma_ratio;
         throw ParameterValueError(msg.str());
@@ -330,7 +332,7 @@ template<class FloatT, class IdxT>
 DoGFilter3D<FloatT,IdxT>::DoGFilter3D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio)
     : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(3), inhibit_kernels(3)
 {
-    if(!_sigma_ratio>1){
+    if(!(sigma_ratio>1)){
         std::ostringstream msg;
         msg<<"Received bad sigma_ratio: "<<sigma_ratio;
         throw ParameterValueError(msg.str());
@@ -345,7 +347,7 @@ template<class FloatT, class IdxT>
 DoGFilter3D<FloatT,IdxT>::DoGFilter3D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)
     : GaussFIRFilter<FloatT,IdxT>(3, size, sigma), sigma_ratio(sigma_ratio), excite_kernels(3), inhibit_kernels(3)
 {
-    if(!_sigma_ratio>1){
+    if(!(sigma_ratio>1)){
         std::ostringstream msg;
         msg<<"Received bad sigma_ratio: "<<sigma_ratio;
         throw ParameterValueError(msg.str());
@@ -374,7 +376,7 @@ void DoGFilter3D<FloatT,IdxT>::set_kernel_hw(const IVecT &kernel_half_width)
 template<class FloatT, class IdxT>
 void DoGFilter3D<FloatT,IdxT>::set_sigma_ratio(FloatT _sigma_ratio)
 {
-    if(!_sigma_ratio>1){
+    if(! (_sigma_ratio>1)){
         std::ostringstream msg;
         msg<<"Received bad sigma_ratio: "<<sigma_ratio;
         throw ParameterValueError(msg.str());

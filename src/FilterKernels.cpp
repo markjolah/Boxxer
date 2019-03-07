@@ -5,29 +5,15 @@
  *
  */
 
-#include "FilterKernels.h"
+#include "Boxxer/BoxxerError.h"
+#include "Boxxer/FilterKernels.h"
 
 namespace boxxer {
 
 namespace kernels {
 
 template <class FloatT, class IntT>
-void gaussFIR_1D_small(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[])
-{
-    for(IntT x=0; x<size; x++) {
-        FloatT val = 0.0;
-        for(IntT r=-hw; r<=hw; r++) {
-            if(x+r<-size || x+r>=2*size) continue; //This is beyond mirroring boundary conditions
-            if(x+r<0) val += kernel[abs(r)]*data[-x-r-1];
-            else if(x+r>=size) val += kernel[abs(r)]*data[2*size-r-x-1];
-            else val += kernel[abs(r)]*data[x+r];
-        }
-        fdata[x] = val;
-    }
-}
-
-template <class FloatT, class IntT>
-inline  void gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[])
+void gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[])
 {
     if(size<=2*hw+1) return gaussFIR_1D_small(size, data, fdata, hw, kernel);
     IntT x=0; //x will be guided along by several for loops
@@ -67,6 +53,21 @@ inline  void gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw
 }
 
 template <class FloatT, class IntT>
+void gaussFIR_1D_small(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[])
+{
+    for(IntT x=0; x<size; x++) {
+        FloatT val = 0.0;
+        for(IntT r=-hw; r<=hw; r++) {
+            if(x+r<-size || x+r>=2*size) continue; //This is beyond mirroring boundary conditions
+            if(x+r<0) val += kernel[abs(r)]*data[-x-r-1];
+            else if(x+r>=size) val += kernel[abs(r)]*data[2*size-r-x-1];
+            else val += kernel[abs(r)]*data[x+r];
+        }
+        fdata[x] = val;
+    }
+}
+
+template <class FloatT, class IntT>
 void gaussFIR_1D_arma(const arma::Col<FloatT> &data, arma::Col<FloatT> &fdata, const arma::Col<FloatT> &kernel)
 {
     IntT hw=static_cast<IntT>(kernel.n_elem)-1;
@@ -96,7 +97,11 @@ void gaussFIR_1D_inplace_arma(arma::Col<FloatT> &data, const arma::Col<FloatT> &
 {
     IntT hw=static_cast<IntT>(kernel.n_elem)-1;
     IntT size=static_cast<IntT>(data.n_elem);
-    assert(size>=2*hw+1);
+    if(!(size>=2*hw+1)){
+        std::ostringstream msg;
+        msg<<"Size: "<<size<<" is too small for hw: "<<hw;
+        throw LogicalError(msg.str());
+    }
     arma::Mat<FloatT> buf(hw+1,hw);
     buf.zeros();
     for(IntT x=0; x<hw; x++) for(IntT j=0; j<=hw; j++) buf(j,x)=kernel(j)*data(x); //Initialize buf
@@ -145,7 +150,11 @@ void gaussFIR_1D_inplace(IntT size, FloatT data[], IntT hw, const FloatT kernel[
 {
     //observed similar to safe version with -O2 -O3 makes it slower
     //about 3x slower than 2-vector version when optimized. Time is taken in central loop.
-    assert(size>=2*hw+1);
+    if(!(size>=2*hw+1)){
+        std::ostringstream msg;
+        msg<<"Size: "<<size<<" is too small for hw: "<<hw;
+        throw LogicalError(msg.str());
+    }
     arma::Mat<FloatT> buf_vec(hw+1,hw);
     buf_vec.zeros();
     FloatT *buf=buf_vec.memptr();
@@ -570,11 +579,11 @@ void gaussFIR_3Dz(const arma::Cube<FloatT> &data_vec, arma::Cube<FloatT> &fdata,
 template void gaussFIR_1D<float>(const arma::Col<float> &data, arma::Col<float> &fdata, const arma::Col<float> &kernel);
 template void gaussFIR_1D<double>(const arma::Col<double> &data, arma::Col<double> &fdata, const arma::Col<double> &kernel);
 
-template void gaussFIR_1D<float>(IntT size, const float data[], float fdata[], IntT hw, const float kernel[]);
-template void gaussFIR_1D<double>(IntT size, const double data[], double fdata[], IntT hw, const double kernel[]);
+template void gaussFIR_1D<float>(int32_t size, const float data[], float fdata[], int32_t hw, const float kernel[]);
+template void gaussFIR_1D<double>(int32_t size, const double data[], double fdata[], int32_t hw, const double kernel[]);
 
-template void gaussFIR_1D_small<float>(IntT size, const float data[], float fdata[], IntT hw, const float kernel[]);
-template void gaussFIR_1D_small<double>(IntT size, const double data[], double fdata[], IntT hw, const double kernel[]);
+template void gaussFIR_1D_small<float>(int32_t size, const float data[], float fdata[], int32_t hw, const float kernel[]);
+template void gaussFIR_1D_small<double>(int32_t size, const double data[], double fdata[], int32_t hw, const double kernel[]);
 
 template void gaussFIR_1D_arma<float>(const arma::Col<float> &data, arma::Col<float> &fdata, const arma::Col<float> &kernel);
 template void gaussFIR_1D_arma<double>(const arma::Col<double> &data, arma::Col<double> &fdata, const arma::Col<double> &kernel);
@@ -582,8 +591,8 @@ template void gaussFIR_1D_arma<double>(const arma::Col<double> &data, arma::Col<
 template void gaussFIR_1D_inplace_arma<float>(arma::Col<float> &data, const arma::Col<float> &kernel);
 template void gaussFIR_1D_inplace_arma<double>(arma::Col<double> &data, const arma::Col<double> &kernel);
 
-template void gaussFIR_1D_inplace<float>(IntT size, float data[], IntT hw, const float kernel[]);
-template void gaussFIR_1D_inplace<double>(IntT size, double data[], IntT hw, const double kernel[]);
+template void gaussFIR_1D_inplace<float>(int32_t size, float data[], int32_t hw, const float kernel[]);
+template void gaussFIR_1D_inplace<double>(int32_t size, double data[], int32_t hw, const double kernel[]);
 
 /* 2D Gauss FIR Filters */
 template void gaussFIR_2Dx<float>(const arma::Mat<float> &data, arma::Mat<float> &fdata, const arma::Col<float> &kernel);
