@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/markjolah/OMPExceptionCatcher
+	branch = master
+	commit = 6c273ff49706ef59d98780db1db1288632882177
+	parent = 6958c8b38e3071619b4378cab9c25ff5894072ce
+	method = merge
+	cmdver = 0.4.0
