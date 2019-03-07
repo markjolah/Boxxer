@@ -1,78 +1,80 @@
 /**
  * @file Maxima.h
- * @author Mark J. Olah (mjo\@cs.unm.edu)
- * @date 07-28-2014
- * @brief The class declaration for Maxima2D and Maxima3D, local maxima finders.
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
+ * @brief The class declaration for the local maxima finders Maxima2D and Maxima3D.
  */
-#ifndef _MAXIMA_H
-#define _MAXIMA_H
+#ifndef BOXXER_MAXIMA_H
+#define BOXXER_MAXIMA_H
+
 #include <armadillo>
 
+namespace boxxer {
 
-template <class FloatT>
+template <class FloatT=float, class IdxT=uint32_t>
 class Maxima2D
 {
-    public:
-        typedef int IndexT;
-        typedef arma::Col<IndexT> IVecT;
-        typedef arma::Mat<IndexT> IMatT;
-        typedef arma::Col<FloatT> VecT;
-        typedef arma::Mat<FloatT> ImageT;
-        const int dim=2;
-        IVecT size;
-        int boxsize;
-        Maxima2D(const IVecT &sizeX, int boxsize=3);
-        int find_maxima(const ImageT &im);
-        int find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out);
-        void read_maxima(int Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const;
-        void test_maxima(const ImageT &im);
+public:
+    using IVecT = arma::Col<IdxT>;
+    using IMatT = arma::Mat<IdxT>;
+    using VecT = arma::Col<FloatT>;
+    using ImageT = arma::Mat<FloatT>;
+    const IdxT dim=2;
+    IVecT size;
+    IdxT boxsize;
+    Maxima2D(const IVecT &sizeX, IdxT boxsize=3);
+    IdxT find_maxima(const ImageT &im);
+    IdxT find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out);
+    void read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const;
+    void test_maxima(const ImageT &im);
 private:
-        int max_maxima;//size of maxima and max_vals array
-        IMatT maxima;// 2xN.
-        VecT max_vals; //Nx1
-        IMatT skip_buf;
+    IdxT max_maxima;//size of maxima and max_vals array
+    IMatT maxima;// 2xN.
+    VecT max_vals; //Nx1
+    IMatT skip_buf;
 
-        void detect_maxima(int &Nmaxima, int x, int y, FloatT val);
-        int maxima_3x3(const ImageT &im);
-        int maxima_3x3_edges(const ImageT &im);
-        int maxima_3x3_slow(const ImageT &im);
-        int maxima_5x5(const ImageT &im);
-        int maxima_nxn(const ImageT &im, int filter_size);
+    void detect_maxima(IdxT &Nmaxima, IdxT x, IdxT y, FloatT val);
+    IdxT maxima_3x3(const ImageT &im);
+    IdxT maxima_3x3_edges(const ImageT &im);
+    IdxT maxima_3x3_slow(const ImageT &im);
+    IdxT maxima_5x5(const ImageT &im);
+    IdxT maxima_nxn(const ImageT &im, IdxT filter_size);
 };
 
 
-template <class FloatT>
+template <class FloatT=float, class IdxT=uint32_t>
 class Maxima3D
 {
 public:
-    typedef int IndexT;
-    typedef arma::Col<int> IVecT;
-    typedef arma::Mat<int> IMatT;
-    typedef arma::Cube<int> ICubeT;
-    typedef arma::Col<FloatT> VecT;
-    typedef arma::Cube<FloatT> ImageT;
-    const int dim=3;
+    using IVecT = arma::Col<IdxT>;
+    using IMatT = arma::Mat<IdxT>;
+    using ICubeT = arma::Cube<IdxT>;
+    using VecT = arma::Col<FloatT>;
+    using ImageT = arma::Cube<FloatT>;
+
+    const IdxT dim=3;
     IVecT size;
-    int boxsize;
-    Maxima3D(const IVecT &size, int boxsize=3);
-    int find_maxima(const ImageT &im);
-    int find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out);
-    void read_maxima(int Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const;
+    IdxT boxsize;
+    Maxima3D(const IVecT &size, IdxT boxsize=3);
+    IdxT find_maxima(const ImageT &im);
+    IdxT find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out);
+    void read_maxima(IdxT Nmaxima, IMatT &maxima_out, VecT &max_vals_out) const;
     void test_maxima(const ImageT &im);
 private:
-    int max_maxima;//size of maxima and max_vals array
+    IdxT max_maxima;//size of maxima and max_vals array
     IMatT maxima;// 2xN.
     VecT max_vals; //Nx1
     IMatT skip_buf;
     ICubeT skip_plane_buf;
 
-    void detect_maxima(int &Nmaxima, int x, int y, int z, FloatT val);
-    int maxima_3x3(const ImageT &im);
-    int maxima_3x3_edges(const ImageT &im);
-    int maxima_3x3_slow(const ImageT &im);
-    int maxima_5x5(const ImageT &im);
-    int maxima_nxn(const ImageT &im, int filter_size);
+    void detect_maxima(IdxT &Nmaxima, IdxT x, IdxT y, IdxT z, FloatT val);
+    IdxT maxima_3x3(const ImageT &im);
+    IdxT maxima_3x3_edges(const ImageT &im);
+    IdxT maxima_3x3_slow(const ImageT &im);
+    IdxT maxima_5x5(const ImageT &im);
+    IdxT maxima_nxn(const ImageT &im, IdxT filter_size);
 };
 
+} /* namespace boxxer */
 
-#endif /* _MAXIMA_H */
+#endif /* BOXXER_MAXIMA_H */

@@ -1,15 +1,15 @@
 /**
  * @file Boxxer3D.h
- * @author Mark J. Olah (mjo\@cs.unm.edu)
- * @date 07-28-2014
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
  * @brief The class declaration for Boxxer3D.
  */
-#ifndef _BOXXER3D_H
-#define _BOXXER3D_H
+#ifndef BOXXER_BOXXER3D_H
+#define BOXXER_BOXXER3D_H
 
 #include <armadillo>
-#include "hypercube.h"
-#include "GaussFilter.h"
+
+namespace boxxer {
 
 /**
  * @breif A box finding algroithm for 3D hyperspectral microscopy data.  Which estimates the center coordinates
@@ -94,4 +94,6 @@ Boxxer3D<FloatT>::make_scaled_image() const
     return ScaledImageT(imsize(0),imsize(1),imsize(2),nScales);
 }
 
-#endif /* _BOXXER3D_H */
+} /* namespace boxxer */
+
+#endif /* BOXXER_BOXXER3D_H */

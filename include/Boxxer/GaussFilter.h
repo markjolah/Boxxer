@@ -1,18 +1,20 @@
 /** @file GaussFilter.h
- * @author Mark J. Olah (mjo@@cs.unm.edu)
- * @date 07-23-2014
- * @brief 
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+* @date 2014-2019
+* @brief The class declarations for Gaussian image filter classes.
  * 
  * These classes are meant to be a per-thread worker class or a direct interface
  * for single threaded processes.  Each object has its own local storage of 1 or
  * 2 frames for the transforms.
  */
-#ifndef _GAUSSFILTER_H
-#define _GAUSSFILTER_H
+#ifndef BOXXER_GAUSSFILTER_H
+#define BOXXER_GAUSSFILTER_H
 
 #include <vector>
 #include <memory>
 #include <armadillo>
+
+namespace boxxer {
 
 template<class FloatT>
 class GaussFIRFilter
@@ -250,4 +252,6 @@ LoGFilter3D<FloatT>::make_image() const
     return ImageT(this->size(0),this->size(1),this->size(2));
 }
 
-#endif /* _GAUSSFILTER_H */
+} /* namespace boxxer */
+
+#endif /* BOXXER_GAUSSFILTER_H */

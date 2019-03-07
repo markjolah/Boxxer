@@ -1,14 +1,15 @@
 /** @file filter_kernels.cpp
- * @author Mark J. Olah (mjo@@cs.unm.edu)
- * @date 07-25-2014
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
  * @brief Low level filters templated on their floating point type
  *
  * All kernels are explicitly instantiated for float and double
  */
 
-#include <cassert>
 #include <armadillo>
 #include "filter_kernels.h"
+
+namespace boxxer {
 
 template <class FloatT>
 void gaussFIR_1D(const arma::Col<FloatT> &data, arma::Col<FloatT> &fdata, const arma::Col<FloatT> &kernel)
@@ -633,3 +634,5 @@ template void gaussFIR_3Dz<double>(const arma::Cube<double> &data, arma::Cube<do
 
 template void gaussFIR_3Dz_small<float>(const arma::Cube<float> &data, arma::Cube<float> &fdata, const arma::Col<float> &kernel);
 template void gaussFIR_3Dz_small<double>(const arma::Cube<double> &data, arma::Cube<double> &fdata, const arma::Col<double> &kernel);
+
+} /* namespace boxxer */

@@ -1,18 +1,17 @@
 /** @file GaussFilter.cpp
- * @author Mark J. Olah (mjo@@cs.unm.edu)
- * @date 07-23-2014
- * @brief
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
+ * @brief Gaussian filter class member function definitions.
  *
  */
 
 #include <limits>
-#include <cassert>
 #include <iomanip>
 #include <armadillo>
-// #include "util.h"
-#include "GaussFilter.h"
-#include "filter_kernels.h"
+#include "Boxxer/GaussFilter.h"
+#include "Boxxer/filter_kernels.h"
 
+namespace boxxer {
 
 /* GaussFIRFilter */
 
@@ -607,3 +606,5 @@ template std::ostream& operator<< <double>(std::ostream &out, const LoGFilter2D<
 
 template std::ostream& operator<< <float>(std::ostream &out, const LoGFilter3D<float> &filt);
 template std::ostream& operator<< <double>(std::ostream &out, const LoGFilter3D<double> &filt);
+
+} /* namespace boxxer */

@@ -1,14 +1,16 @@
 /**
  * @file Boxxer2D.cpp
- * @author Mark J. Olah (mjo\@cs.unm.edu)
- * @date 07-24-2014
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
  * @brief The Boxxer2D class definition
  */
-#include <cassert>
-#include "GaussFilter.h"
-#include "Maxima.h"
-#include "Boxxer2D.h"
+
 #include "omp.h"
+#include "Boxxer/GaussFilter.h"
+#include "Boxxer/Maxima.h"
+#include "Boxxer/Boxxer2D.h"
+
+namespace boxxer {
 
 /* Static member variables */
 template<class FloatT>
@@ -283,3 +285,4 @@ void Boxxer2D<FloatT>::checkMaxima(const ImageStackT &im, IMatT &maxima, VecT &m
 template class Boxxer2D<float>;
 template class Boxxer2D<double>;
 
+} /* namespace boxxer */

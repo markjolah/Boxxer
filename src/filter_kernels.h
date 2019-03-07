@@ -1,13 +1,15 @@
 /** @file filter_kernels.h
- * @author Mark J. Olah (mjo@@cs.unm.edu)
- * @date 07-25-2014
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
  * @brief Low level filters templated on their floating point type
  *
  */
-#ifndef _FILTER_KERNELS_H
-#define _FILTER_KERNELS_H
+#ifndef BOXXER_FILTER_KERNELS_H
+#define BOXXER_FILTER_KERNELS_H
 
 #include <armadillo>
+
+namespace boxxer {
 
 /* 1D Gauss FIR Filters */
 template <class FloatT>
@@ -69,6 +71,6 @@ void gaussFIR_3Dz(const arma::Cube<FloatT> &data, arma::Cube<FloatT> &fdata, con
 template <class FloatT>
 void gaussFIR_3Dz_small(const arma::Cube<FloatT> &data, arma::Cube<FloatT> &fdata, const arma::Col<FloatT> &kernel);
 
+} /* namespace boxxer */
 
-
-#endif /* _FILTER_KERNELS_H */
+#endif /* BOXXER_FILTER_KERNELS_H */

@@ -1,15 +1,16 @@
 /**
  * @file Boxxer3D.cpp
- * @author Mark J. Olah (mjo\@cs.unm.edu)
- * @date 07-24-2014
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
  * @brief The class method definitions for Boxxer3D.
  */
 
-#include <cassert>
-#include "GaussFilter.h"
-#include "Maxima.h"
-#include "Boxxer3D.h"
-#include "omp.h"
+#include <omp.h>
+#include "Boxxer/GaussFilter.h"
+#include "Boxxer/Maxima.h"
+#include "Boxxer/Boxxer3D.h"
+
+namespace boxxer {
 
 /* Static member variables */
 template<class FloatT>
@@ -275,3 +276,4 @@ void Boxxer3D<FloatT>::checkMaxima(const ImageStackT &im, IMatT &maxima, VecT &m
 template class Boxxer3D<float>;
 template class Boxxer3D<double>;
 
+} /* namespace boxxer */

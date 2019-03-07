@@ -1,10 +1,42 @@
-/** @file Boxxer2D_Iface.h
- * @author Mark J. Olah (mjo\@cs.unm.edu)
- * @date 07-21-2014
- * @brief The class declaration and inline and templated functions for Boxxer2D_Iface.
+/** @file Boxxer2D_IFace.cpp
+ * @author Mark J. Olah (mjo\@cs.unm DOT edu)
+ * @date 2014-2019
+ * @brief Boxxer2D_IFace declaration and definition.
  */
-#include "Boxxer2D_Iface.h"
-#include "Handle.h"
+
+#include "MexIFace/MexIFace.h"
+#include "Boxxer/Boxxer2D.h"
+
+template<class FloatT, class IdxT>
+class Boxxer2D_IFace  : public mexiface::MexIFace, public mexiface::MexIFaceHandler<Boxxer2D>
+{
+public:
+    typedef float FloatT;
+    typedef Boxxer2D<FloatT>::IMatT IMatT;
+    typedef Boxxer2D<FloatT>::VecT VecT;
+    Boxxer2D_Iface();
+private:
+    Boxxer2D<FloatT> *obj;
+    /* Inherited from Mex_Iface */
+    void objConstruct();
+    void objDestroy();
+    void getObjectFromHandle(const mxArray *mxhandle);
+
+    /* Public method wrappers */
+    void objSetDoGSigmaRatio();
+    void objFilterScaledLoG();
+    void objFilterScaledDoG();
+    void objScaleSpaceLoGMaxima();
+    void objScaleSpaceDoGMaxima();
+
+    /* Static method wrappers */
+    void objFilterLoG();
+    void objFilterDoG();
+    void objFilterGauss();
+    void objEnumerateImageMaxima();
+
+};
+
 
 void mexFunction(int nlhs, mxArray *lhs[], int nrhs, const mxArray *rhs[])
 {

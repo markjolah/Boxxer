@@ -1,18 +1,21 @@
 /**
 * @file Boxxer2D.h
-* @author Mark J. Olah (mjo\@cs.unm.edu)
-* @date 07-28-2014
+* @author Mark J. Olah (mjo\@cs.unm DOT edu)
+* @date 2014-2019
 * @brief The class declaration for Boxxer2D.
 */
-#ifndef _BOXXER2D_H
-#define _BOXXER2D_H
+#ifndef BOXXER_BOXXER2D_H
+#define BOXXER_BOXXER2D_H
 
 #include <armadillo>
-#include "hypercube.h"
+#include "Boxxer/BoxxerError.h"
+
+namespace boxxer {
+
 /**
  * @class Boxxer2D
  * 
- * In this class we make the assumtion that images are stored in column-major format
+ * In this class we make the assumption that images are stored in column-major format
  * and that x=rows, y=cols, t=slices.  This relationship is important in the choice of imsize and sigma
  * parameters.  
  * 
@@ -25,18 +28,18 @@
  * from the matlab interpretation, but only internally within the Boxxer iface.
  * 
  */
-template<class FloatT>
+template<class FloatT, class IdxT>
 class Boxxer2D
 {
 public:
-    typedef arma::Col<int> IVecT;
-    typedef arma::Mat<int> IMatT;
-    typedef arma::Col<FloatT> VecT;
-    typedef arma::Mat<FloatT> MatT;
-    typedef arma::Mat<FloatT> ImageT;
-    typedef arma::Cube<FloatT> ImageStackT;
-    typedef arma::Cube<FloatT> ScaledImageT;
-    typedef Hypercube<FloatT>  ScaledImageStackT;
+    using IVecT = arma::Col<IdxT>;
+    using IMatT = arma::Mat<IdxT>;
+    using VecT = arma::Col<FloatT>;
+    using MatT = arma::Mat<FloatT>;
+    using ImageT = arma::Mat<FloatT>;
+    using ImageStackT = arma::Cube<FloatT>;
+    using ScaledImageT = arma::Cube<FloatT>;
+    using ScaledImageStackT = Hypercube<FloatT>;
  
     static const FloatT DefaultSigmaRatio;
     static const int dim;
@@ -76,7 +79,7 @@ private:
 };
 
 
-template<class FloatT>
+template<class FloatT, class IdxT>
 inline
 typename Boxxer2D<FloatT>::ImageT
 Boxxer2D<FloatT>::make_image() const
@@ -85,7 +88,7 @@ Boxxer2D<FloatT>::make_image() const
 }
 
 
-template<class FloatT>
+template<class FloatT, class IdxT>
 inline
 typename Boxxer2D<FloatT>::ImageStackT
 Boxxer2D<FloatT>::make_image_stack(int nT) const
@@ -93,7 +96,7 @@ Boxxer2D<FloatT>::make_image_stack(int nT) const
     return ImageStackT(imsize(0),imsize(1),nT);
 }
 
-template<class FloatT>
+template<class FloatT, class IdxT>
 inline
 typename Boxxer2D<FloatT>::ScaledImageT
 Boxxer2D<FloatT>::make_scaled_image() const
@@ -101,7 +104,7 @@ Boxxer2D<FloatT>::make_scaled_image() const
     return ScaledImageT(imsize(0),imsize(1),nScales);
 }
 
-template<class FloatT>
+template<class FloatT, class IdxT>
 inline
 typename Boxxer2D<FloatT>::ScaledImageStackT
 Boxxer2D<FloatT>::make_scaled_image_stack(int nT) const
@@ -109,5 +112,6 @@ Boxxer2D<FloatT>::make_scaled_image_stack(int nT) const
     return ScaledImageStackT(imsize(0),imsize(1),nScales,nT);
 }
 
+} /* namespace boxxer */
 
-#endif /* _BOXXER2D_H */
+#endif /* BOXXER_BOXXER2D_H */
