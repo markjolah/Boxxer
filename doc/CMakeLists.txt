@@ -16,7 +16,6 @@ if(DOXYGEN_FOUND)
     set(DOXYGEN_MDFILE_AS_MAINPAGE ${CMAKE_SOURCE_DIR}/README.md)
     set(DOXYGEN_INPUT ${CMAKE_SOURCE_DIR}/README.md
                       ${CMAKE_SOURCE_DIR}/doc/text
-                      ${CMAKE_SOURCE_DIR}/src
                       ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME})
     string(REPLACE ";" " " DOXYGEN_INPUT "${DOXYGEN_INPUT}")
 

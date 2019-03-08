@@ -26,9 +26,12 @@ namespace boxxer {
  *
  */
 namespace kernels {
-
-/**@{*/
-/** 1D Gauss FIR Filters */
+/** @name 1D Gauss FIR Filters
+ *
+ * 1D Gaussian finite-impulse response filters.
+ */
+/** @{*/
+/** This is details? */
 template <class FloatT=float, class IntT=int32_t>
 void gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[]);
 
@@ -51,8 +54,12 @@ void gaussFIR_1D_inplace_arma(arma::Col<FloatT> &data, const arma::Col<FloatT> &
 
 template <class FloatT=float, class IntT=int32_t>
 void gaussFIR_1D_inplace(IntT size, FloatT data[], IntT hw, const FloatT kernel[]);
-/**@}*/
+/** @}*/
 
+/** @name 2D Gauss FIR Filters
+ *
+ * 2D Gaussian finite-impulse response filters.
+ */
 /**@{*/
 /** 2D Gauss FIR Filters */
 template <class FloatT=float, class IntT=int32_t>
@@ -77,7 +84,10 @@ template <class FloatT=float, class IntT=int32_t>
 void gaussFIR_2Dy_small(const arma::Mat<FloatT> &data, arma::Mat<FloatT> &fdata, const arma::Col<FloatT> &kernel);
 /**@}*/
 
-/**@{*/
+/** @name 3D Gauss FIR Filters
+ *
+ * 3D Gaussian finite-impulse response filters.
+ *//**@{*/
 /** 3D Gauss FIR Filters */
 template <class FloatT=float, class IntT=int32_t>
 void gaussFIR_3Dx(const arma::Cube<FloatT> &data, arma::Cube<FloatT> &fdata, const arma::Col<FloatT> &kernel);
