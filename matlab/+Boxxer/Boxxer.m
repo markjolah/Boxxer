@@ -4,7 +4,7 @@
 %
 % This uses the MexIface C++/Matlab class to implement the scale space filtering in parallel with OpenMP
 
-classdef Boxxer < IfaceMixin
+classdef Boxxer < MexIFace.MexIFaceMixin
     properties (Constant=true)
         ValidMaximaNeighborhoodSizes=[3, 5];
     end
@@ -27,7 +27,7 @@ classdef Boxxer < IfaceMixin
  
     methods
         function obj = Boxxer( iface )
-            obj=obj@IfaceMixin(iface);
+            obj = obj@MexIFace.MexIFaceMixin(iface);
         end
 
         function success=initialize(obj, imsize, sigma)
@@ -44,18 +44,18 @@ classdef Boxxer < IfaceMixin
                     error('Boxxer:initialize','sigma rows expected: %i, got:%i',obj.dim,size(sigma,1));
                 end
             end
-            if ~all(imsize>0);
+            if ~all(imsize>0)
                 error('Boxxer:initialize','Got non-positive image size');
             end
-            if ~all(sigma>0);
+            if ~all(sigma>0)
                 error('Boxxer:initialize','Got non-positive sigma');
             end
-            obj.imsize = int32(imsize(:));
+            obj.imsize = uint32(imsize(:));
             obj.sigma = obj.datacaster(sigma);
             obj.nScales = size(obj.sigma,2);
                
-            obj.initialized=obj.openIface(obj.imsize, obj.sigma);
-            success=obj.initialized;
+            obj.initialized = obj.openIFace(obj.imsize, obj.sigma);
+            success = obj.initialized;
         end
 
         function setDoGSigmaRatio(obj, sigma_ratio)
@@ -142,7 +142,7 @@ classdef Boxxer < IfaceMixin
                     error('Boxxer:BadParameter','Sigma value must be size: %ix1',obj.dim);
                 end
             end
-            fimage=obj.callstatic(obj.ifaceHandle,'filterLoG', image, sigma);
+            fimage=obj.callstatic('filterLoG', image, sigma);
         end
         
         function fimage=filterDoG(obj, image, sigma, sigmaRatio)
@@ -173,7 +173,7 @@ classdef Boxxer < IfaceMixin
             if sigmaRatio<=1
                 error('Boxxer:filterDoG','Sigma ratio must be >1.');
             end
-            fimage=obj.callstatic(obj.ifaceHandle,'filterDoG', image, sigma, single(sigmaRatio));
+            fimage=obj.callstatic('filterDoG', image, sigma, single(sigmaRatio));
         end
 
         function fimage=filterGauss(obj, image, sigma)
@@ -191,7 +191,7 @@ classdef Boxxer < IfaceMixin
                     error('Boxxer:BadParameter','Sigma value must be size: %ix1',obj.dim);
                 end
             end
-            fimage=obj.callstatic(obj.ifaceHandle,'filterGauss', image, sigma);
+            fimage=obj.callstatic('filterGauss', image, sigma);
         end
 
         function [maxima, max_vals]=enumerateImageMaxima(obj, image, neighborhoodSize )
@@ -212,7 +212,7 @@ classdef Boxxer < IfaceMixin
             if mod(neighborhoodSize,2)~=1 || neighborhoodSize<3
                 error('Boxxer:ParmaValue','Got invalid neighborhoodSize: %i',neighborhoodSize);
             end
-            [maxima, max_vals]=obj.callstatic(obj.ifaceHandle,'enumerateImageMaxima', image, neighborhoodSize);
+            [maxima, max_vals]=obj.callstatic('enumerateImageMaxima', image, neighborhoodSize);
             maxima=maxima+1; %correct for 0-based C++ coords to 1-based Matlab coords;
         end
       
@@ -256,13 +256,13 @@ classdef Boxxer < IfaceMixin
             %                          rows: [x_px, y_px, frame_idx, scale_idx]
             % [in] max_vals - size [N] list of maximum values a maxima positions
             % [in] thresh_val - [optional] A threshold value above which the maxima will be selected.
-            %                              if ommitted then use triThres to estimate threshold values.
+            %                              if ommitted then use Boxxer.triThres to estimate threshold values.
             % [out] fmaxima - size [3,K] or [4,K] The filtered list of maxima same number of rows as maxima.
             % [out] fmax_vals - size [K] The filtered list of maxima values corrsponding to the maxima
             % [out] filter - size [N].  1 if maxima was selected.  0 otherwise
             if nargin < 3
                 [smax, sidx] = sort(max_vals,'descend');
-                threshIdx = triThres(smax, false);
+                threshIdx = Boxxer.triThres(smax, false);
                 fmaxima = maxima(:,sidx(1:threshIdx));
                 fmax_vals = max_vals(sidx(1:threshIdx));
                 filter = zeros(1,numel(max_vals));
@@ -284,7 +284,7 @@ classdef Boxxer < IfaceMixin
              %  fmaxima - Filtered maxima
              %  fmax_vals - Filtered maxima_vals
             [smax, sidx] = sort(max_vals,'descend');
-            threshIdx = triThres(smax, false);
+            threshIdx = Boxxer.triThres(smax, false);
             if nargin==3 && minNum>0 && threshIdx<minNum
                 threshIdx=min(minNum,numel(max_vals));
             end
@@ -336,7 +336,7 @@ classdef Boxxer < IfaceMixin
             if imFrames==1
                 maxima=maxima(1:3,:);
             end
-            overlayIm = colorspace(dip_image(cosmicNorm(im)*255),'RGB');
+            overlayIm = colorspace(dip_image(Boxxer.cosmicNorm(im)*255),'RGB');
             index_cols=num2cell(maxima,2); %cell array of rows of maxima
             inds = sub2ind(size(im),index_cols{:})-1; %minus 1 for dipimage coords
             normVals=255; %Added this to highlight maxima better

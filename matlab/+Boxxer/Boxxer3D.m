@@ -1,7 +1,7 @@
-classdef Boxxer3D < Boxxer
+classdef Boxxer3D < Boxxer.Boxxer
     methods
         function obj = Boxxer3D( varargin )
-            obj=obj@Boxxer(@Boxxer3D_Iface);
+            obj = obj@Boxxer.Boxxer(@Boxxer3D_IFace);
             if nargin>0
                 obj.initialize(varargin{:});
             end
@@ -12,7 +12,7 @@ classdef Boxxer3D < Boxxer
 %         end
 
         function checkMaxima(obj, image, maxima, max_vals)
-            Nmaxima=length(max_vals);
+            Nmaxima = length(max_vals);
             for n=1:Nmaxima
                 x=maxima(1,n);
                 y=maxima(2,n);

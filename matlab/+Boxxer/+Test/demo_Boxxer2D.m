@@ -7,18 +7,19 @@ imsize=[256, 512]; %[Y X]
 
 
 %% Make sim image
+import('Boxxer.EmitterSim')
 Nparticles=100;
 Nframes=4;
 Nscales=size(sigma,2);
 im=zeros([imsize Nframes],'single');
 tic;
 for i=1:Nscales
-    hss=HSSim(flip(imsize), sigma(:,i)');
-    [nim,npos]=hss.simulate2DImage(Nparticles,Nframes);
-    im=im+nim;
-    bd=Nparticles*Nframes;
-    orig_pos(1:3,(i-1)*bd+1:i*bd)=npos';
-    orig_pos(4,(i-1)*bd+1:i*bd)=i;
+    es=EmitterSim(flip(imsize), sigma(:,i)');
+    [nim,npos]=es.simulate2DImage(Nparticles,Nframes);
+    im = im+nim;
+    bd = Nparticles*Nframes;
+    orig_pos(1:3,(i-1)*bd+1:i*bd) = npos';
+    orig_pos(4,(i-1)*bd+1:i*bd) = i;
 end
 simT=toc;
 fprintf('Simulation time: %.3f s',simT);
@@ -36,14 +37,14 @@ fprintf('Simulation time: %.3f s',simT);
 dip_image(im)
 diptruesize(400);
 tic;
-boxxer=Boxxer2D(imsize, sigma); %put this is backwards since our images will be [Y X]
+boxxer=Boxxer.Boxxer2D(imsize, sigma); %put this is backwards since our images will be [Y X]
 logfim=boxxer.filterLoG(im);
 dogfim=boxxer.filterDoG(im);
 gfim=boxxer.filterGauss(im);
 slogfim=boxxer.filterScaledLoG(im);
 sdogfim=boxxer.filterScaledDoG(im);
 [smaxima, smax_vals] = boxxer.scaleSpaceDoGMaxima(im, 5, 3);
-[fsmaxima, fsmax_vals, filter] = Boxxer2D.filterMaxima(smaxima, smax_vals);
+[fsmaxima, fsmax_vals, filter] = Boxxer.Boxxer2D.filterMaxima(smaxima, smax_vals);
 overlayIm= boxxer.plotScaleMaxima(sdogfim,smaxima,filter);
 toc
 dip_image(overlayIm)
