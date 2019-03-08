@@ -1,0 +1,518 @@
+\hypertarget{namespaceboxxer_1_1kernels}{}\subsection{boxxer\+:\+:kernels Namespace Reference}
+\label{namespaceboxxer_1_1kernels}\index{boxxer\+::kernels@{boxxer\+::kernels}}
+\subsubsection*{Functions}
+\begin{Indent}{\bf 1D Gauss F\+IR Filters}\par
+{\em 1D Gaussian finite-\/impulse response filters. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_aae9636dd5e83f478ed676068c3252627}{gauss\+F\+I\+R\+\_\+1D} (IntT size, const FloatT data\mbox{[}$\,$\mbox{]}, FloatT fdata\mbox{[}$\,$\mbox{]}, IntT hw, const FloatT kernel\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_adf021edf274fc54862b2f9546a47301d}{gauss\+F\+I\+R\+\_\+1D} (const arma\+::\+Col$<$ FloatT $>$ \&data, arma\+::\+Col$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_af07e73b62933910e86eef6b393155c2c}{gauss\+F\+I\+R\+\_\+1\+D\+\_\+small} (IntT size, const FloatT data\mbox{[}$\,$\mbox{]}, FloatT fdata\mbox{[}$\,$\mbox{]}, IntT hw, const FloatT kernel\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a88f298ecd82bf9083fabbb2e8a29d4e6}{gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma} (const arma\+::\+Col$<$ FloatT $>$ \&data, arma\+::\+Col$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ab2a257fbea765aacf09b558e38637479}{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma} (arma\+::\+Col$<$ FloatT $>$ \&data, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ab3d9ad7bd61b25b9e856bd0284607e70}{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace} (IntT size, FloatT data\mbox{[}$\,$\mbox{]}, IntT hw, const FloatT kernel\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf 2D Gauss F\+IR Filters}\par
+{\em 2D Gaussian finite-\/impulse response filters. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_aeee9d632ce320eb89c870a44c37efa65}{gauss\+F\+I\+R\+\_\+2\+Dx} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a638bf7fa9900937a763f190c0a4499ae}{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a1da855e7008385fee013bd868d206040}{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a6efa0d22ae67955f27c6d9ea30342104}{gauss\+F\+I\+R\+\_\+2\+Dy} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_aa54bb3fea2d343c030528a87b7916293}{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ae78e8767ae044f01e07e61a45220ffc5}{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a49fd7ed785cfcea57b4c9e67d3113a69}{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf 3D Gauss F\+IR Filters}\par
+{\em 3D Gaussian finite-\/impulse response filters. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a74811c999b7d18b14dde0a042318fc06}{gauss\+F\+I\+R\+\_\+3\+Dx} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_af7d8fb262d8bde9c9907e141c3c5f55f}{gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ac97f85b9211fcffa432b44a86d30c5df}{gauss\+F\+I\+R\+\_\+3\+Dy} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a0256b4053077d18bbe2228402071555f}{gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a404ef6e2324a0e4ff53e38ad7b07733e}{gauss\+F\+I\+R\+\_\+3\+Dz} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a9a9201ede570bb2d77531d529f39bc99}{gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsubsection{Detailed Description}
+Gaussian finite-\/impulse response kernels\+: 1D, 2D, and 3D
+
+Template parameters for all namespace member functions. FloatT -\/ float (default) or double. IntT -\/ {\bfseries signed} integer\+: int32\+\_\+t (default) or int64\+\_\+t.
+
+All kernels are explicitly instantiated for\+:
+\begin{DoxyItemize}
+\item FloatT = float, IntT = int32\+\_\+t
+\item FloatT = double, IntT = int32\+\_\+t
+\end{DoxyItemize}
+
+There is no testing for integer overflow. Probably int32\+\_\+t will be sensible for most applications. 
+
+\subsubsection{Function Documentation}
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+1D@{gauss\+F\+I\+R\+\_\+1D}}
+\index{gauss\+F\+I\+R\+\_\+1D@{gauss\+F\+I\+R\+\_\+1D}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+1\+D(\+Int\+T size, const Float\+T data[], Float\+T fdata[], Int\+T hw, const Float\+T kernel[])}{gaussFIR_1D(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[])}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1D (
+\begin{DoxyParamCaption}
+\item[{IntT}]{size, }
+\item[{const FloatT}]{data\mbox{[}$\,$\mbox{]}, }
+\item[{FloatT}]{fdata\mbox{[}$\,$\mbox{]}, }
+\item[{IntT}]{hw, }
+\item[{const FloatT}]{kernel\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_aae9636dd5e83f478ed676068c3252627}{}\label{namespaceboxxer_1_1kernels_aae9636dd5e83f478ed676068c3252627}
+This is details? \index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+1D@{gauss\+F\+I\+R\+\_\+1D}}
+\index{gauss\+F\+I\+R\+\_\+1D@{gauss\+F\+I\+R\+\_\+1D}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+1\+D(const arma\+::\+Col$<$ Float\+T $>$ \&data, arma\+::\+Col$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_1D(const arma::Col< FloatT > &data, arma::Col< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1D (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Col$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_adf021edf274fc54862b2f9546a47301d}{}\label{namespaceboxxer_1_1kernels_adf021edf274fc54862b2f9546a47301d}
+This is details? 
+
+Definition at line 39 of file Filter\+Kernels.\+h.
+
+
+
+References gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma(), gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace(), gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma(), gauss\+F\+I\+R\+\_\+1\+D\+\_\+small(), gauss\+F\+I\+R\+\_\+2\+Dx(), gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma(), gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small(), gauss\+F\+I\+R\+\_\+2\+Dy(), gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor(), gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor(), gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small(), gauss\+F\+I\+R\+\_\+3\+Dx(), gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small(), gauss\+F\+I\+R\+\_\+3\+Dy(), gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small(), gauss\+F\+I\+R\+\_\+3\+Dz(), and gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small().
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{namespaceboxxer_1_1kernels_adf021edf274fc54862b2f9546a47301d_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma}}
+\index{gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma(const arma\+::\+Col$<$ Float\+T $>$ \&data, arma\+::\+Col$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_1D_arma(const arma::Col< FloatT > &data, arma::Col< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Col$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a88f298ecd82bf9083fabbb2e8a29d4e6}{}\label{namespaceboxxer_1_1kernels_a88f298ecd82bf9083fabbb2e8a29d4e6}
+This is details? 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a88f298ecd82bf9083fabbb2e8a29d4e6_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace}}
+\index{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace(\+Int\+T size, Float\+T data[], Int\+T hw, const Float\+T kernel[])}{gaussFIR_1D_inplace(IntT size, FloatT data[], IntT hw, const FloatT kernel[])}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace (
+\begin{DoxyParamCaption}
+\item[{IntT}]{size, }
+\item[{FloatT}]{data\mbox{[}$\,$\mbox{]}, }
+\item[{IntT}]{hw, }
+\item[{const FloatT}]{kernel\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_ab3d9ad7bd61b25b9e856bd0284607e70}{}\label{namespaceboxxer_1_1kernels_ab3d9ad7bd61b25b9e856bd0284607e70}
+This is details? 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_ab3d9ad7bd61b25b9e856bd0284607e70_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma}}
+\index{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma(arma\+::\+Col$<$ Float\+T $>$ \&data, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_1D_inplace_arma(arma::Col< FloatT > &data, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma (
+\begin{DoxyParamCaption}
+\item[{arma\+::\+Col$<$ FloatT $>$ \&}]{data, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_ab2a257fbea765aacf09b558e38637479}{}\label{namespaceboxxer_1_1kernels_ab2a257fbea765aacf09b558e38637479}
+This is details? 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_ab2a257fbea765aacf09b558e38637479_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+1\+D\+\_\+small@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+small}}
+\index{gauss\+F\+I\+R\+\_\+1\+D\+\_\+small@{gauss\+F\+I\+R\+\_\+1\+D\+\_\+small}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+1\+D\+\_\+small(\+Int\+T size, const Float\+T data[], Float\+T fdata[], Int\+T hw, const Float\+T kernel[])}{gaussFIR_1D_small(IntT size, const FloatT data[], FloatT fdata[], IntT hw, const FloatT kernel[])}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+small (
+\begin{DoxyParamCaption}
+\item[{IntT}]{size, }
+\item[{const FloatT}]{data\mbox{[}$\,$\mbox{]}, }
+\item[{FloatT}]{fdata\mbox{[}$\,$\mbox{]}, }
+\item[{IntT}]{hw, }
+\item[{const FloatT}]{kernel\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_af07e73b62933910e86eef6b393155c2c}{}\label{namespaceboxxer_1_1kernels_af07e73b62933910e86eef6b393155c2c}
+This is details? 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_af07e73b62933910e86eef6b393155c2c_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dx@{gauss\+F\+I\+R\+\_\+2\+Dx}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dx@{gauss\+F\+I\+R\+\_\+2\+Dx}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dx(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dx(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dx (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_aeee9d632ce320eb89c870a44c37efa65}{}\label{namespaceboxxer_1_1kernels_aeee9d632ce320eb89c870a44c37efa65}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_aeee9d632ce320eb89c870a44c37efa65_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma@{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma@{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dx_arma(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a1da855e7008385fee013bd868d206040}{}\label{namespaceboxxer_1_1kernels_a1da855e7008385fee013bd868d206040}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a1da855e7008385fee013bd868d206040_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small@{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small@{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dx_small(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a638bf7fa9900937a763f190c0a4499ae}{}\label{namespaceboxxer_1_1kernels_a638bf7fa9900937a763f190c0a4499ae}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a638bf7fa9900937a763f190c0a4499ae_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dy@{gauss\+F\+I\+R\+\_\+2\+Dy}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dy@{gauss\+F\+I\+R\+\_\+2\+Dy}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dy(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dy(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a6efa0d22ae67955f27c6d9ea30342104}{}\label{namespaceboxxer_1_1kernels_a6efa0d22ae67955f27c6d9ea30342104}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a6efa0d22ae67955f27c6d9ea30342104_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor@{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor@{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dy_colmajor(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_ae78e8767ae044f01e07e61a45220ffc5}{}\label{namespaceboxxer_1_1kernels_ae78e8767ae044f01e07e61a45220ffc5}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_ae78e8767ae044f01e07e61a45220ffc5_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor@{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor@{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dy_rowmajor(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_aa54bb3fea2d343c030528a87b7916293}{}\label{namespaceboxxer_1_1kernels_aa54bb3fea2d343c030528a87b7916293}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_aa54bb3fea2d343c030528a87b7916293_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small@{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small}}
+\index{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small@{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small(const arma\+::\+Mat$<$ Float\+T $>$ \&data, arma\+::\+Mat$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_2Dy_small(const arma::Mat< FloatT > &data, arma::Mat< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Mat$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Mat$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a49fd7ed785cfcea57b4c9e67d3113a69}{}\label{namespaceboxxer_1_1kernels_a49fd7ed785cfcea57b4c9e67d3113a69}
+2D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a49fd7ed785cfcea57b4c9e67d3113a69_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+3\+Dx@{gauss\+F\+I\+R\+\_\+3\+Dx}}
+\index{gauss\+F\+I\+R\+\_\+3\+Dx@{gauss\+F\+I\+R\+\_\+3\+Dx}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+3\+Dx(const arma\+::\+Cube$<$ Float\+T $>$ \&data, arma\+::\+Cube$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_3Dx(const arma::Cube< FloatT > &data, arma::Cube< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dx (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Cube$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Cube$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a74811c999b7d18b14dde0a042318fc06}{}\label{namespaceboxxer_1_1kernels_a74811c999b7d18b14dde0a042318fc06}
+3D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a74811c999b7d18b14dde0a042318fc06_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small@{gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small}}
+\index{gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small@{gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small(const arma\+::\+Cube$<$ Float\+T $>$ \&data, arma\+::\+Cube$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_3Dx_small(const arma::Cube< FloatT > &data, arma::Cube< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Cube$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Cube$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_af7d8fb262d8bde9c9907e141c3c5f55f}{}\label{namespaceboxxer_1_1kernels_af7d8fb262d8bde9c9907e141c3c5f55f}
+3D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_af7d8fb262d8bde9c9907e141c3c5f55f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+3\+Dy@{gauss\+F\+I\+R\+\_\+3\+Dy}}
+\index{gauss\+F\+I\+R\+\_\+3\+Dy@{gauss\+F\+I\+R\+\_\+3\+Dy}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+3\+Dy(const arma\+::\+Cube$<$ Float\+T $>$ \&data, arma\+::\+Cube$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_3Dy(const arma::Cube< FloatT > &data, arma::Cube< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dy (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Cube$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Cube$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_ac97f85b9211fcffa432b44a86d30c5df}{}\label{namespaceboxxer_1_1kernels_ac97f85b9211fcffa432b44a86d30c5df}
+3D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_ac97f85b9211fcffa432b44a86d30c5df_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small@{gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small}}
+\index{gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small@{gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small(const arma\+::\+Cube$<$ Float\+T $>$ \&data, arma\+::\+Cube$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_3Dy_small(const arma::Cube< FloatT > &data, arma::Cube< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Cube$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Cube$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a0256b4053077d18bbe2228402071555f}{}\label{namespaceboxxer_1_1kernels_a0256b4053077d18bbe2228402071555f}
+3D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a0256b4053077d18bbe2228402071555f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+3\+Dz@{gauss\+F\+I\+R\+\_\+3\+Dz}}
+\index{gauss\+F\+I\+R\+\_\+3\+Dz@{gauss\+F\+I\+R\+\_\+3\+Dz}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+3\+Dz(const arma\+::\+Cube$<$ Float\+T $>$ \&data, arma\+::\+Cube$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_3Dz(const arma::Cube< FloatT > &data, arma::Cube< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dz (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Cube$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Cube$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a404ef6e2324a0e4ff53e38ad7b07733e}{}\label{namespaceboxxer_1_1kernels_a404ef6e2324a0e4ff53e38ad7b07733e}
+3D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a404ef6e2324a0e4ff53e38ad7b07733e_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::kernels@{boxxer\+::kernels}!gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small@{gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small}}
+\index{gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small@{gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small}!boxxer\+::kernels@{boxxer\+::kernels}}
+\paragraph[{\texorpdfstring{gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small(const arma\+::\+Cube$<$ Float\+T $>$ \&data, arma\+::\+Cube$<$ Float\+T $>$ \&fdata, const arma\+::\+Col$<$ Float\+T $>$ \&kernel)}{gaussFIR_3Dz_small(const arma::Cube< FloatT > &data, arma::Cube< FloatT > &fdata, const arma::Col< FloatT > &kernel)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ void boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small (
+\begin{DoxyParamCaption}
+\item[{const arma\+::\+Cube$<$ FloatT $>$ \&}]{data, }
+\item[{arma\+::\+Cube$<$ FloatT $>$ \&}]{fdata, }
+\item[{const arma\+::\+Col$<$ FloatT $>$ \&}]{kernel}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceboxxer_1_1kernels_a9a9201ede570bb2d77531d529f39bc99}{}\label{namespaceboxxer_1_1kernels_a9a9201ede570bb2d77531d529f39bc99}
+3D Gauss F\+IR Filters 
+
+Referenced by gauss\+F\+I\+R\+\_\+1\+D().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceboxxer_1_1kernels_a9a9201ede570bb2d77531d529f39bc99_icgraph}
+\end{center}
+\end{figure}
+
+

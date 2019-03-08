@@ -1,0 +1,458 @@
+\hypertarget{classboxxer_1_1Boxxer2D}{}\subsection{boxxer\+:\+:Boxxer2D$<$ FloatT, IdxT $>$ Class Template Reference}
+\label{classboxxer_1_1Boxxer2D}\index{boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$@{boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$}}
+
+
+{\ttfamily \#include $<$/home/travis/build/markjolah/\+Boxxer/include/\+Boxxer/\+Boxxer2\+D.\+h$>$}
+
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_acb4dc89c7e1bd2099e7de7b83621ba4f}{I\+VecT} = arma\+::\+Col$<$ IdxT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}{I\+MatT} = arma\+::\+Mat$<$ IdxT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} = arma\+::\+Col$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_a4af9f3e10a7ceb1c20e1d731263d9aeb}{MatT} = arma\+::\+Mat$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_ad1c52f05a957159bf373b4d8c4361ffe}{ImageT} = arma\+::\+Mat$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} = arma\+::\+Cube$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_ad8d3ac7a59998612e4ce00500416c8c1}{Scaled\+ImageT} = arma\+::\+Cube$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1Boxxer2D_a2937a772edcf9cec5f617fbcf1d8a6fe}{Scaled\+Image\+StackT} = hypercube\+::\+Hypercube$<$ FloatT $>$
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_a9f87f606cf304f6006d055ef20d25f73}{Boxxer2D} (const \hyperlink{classboxxer_1_1Boxxer2D_acb4dc89c7e1bd2099e7de7b83621ba4f}{I\+VecT} \&\hyperlink{classboxxer_1_1Boxxer2D_a6f76692e32f0c907d48a72a801a62b9a}{imsize}, const \hyperlink{classboxxer_1_1Boxxer2D_a4af9f3e10a7ceb1c20e1d731263d9aeb}{MatT} \&\hyperlink{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}{sigma})
+\item 
+void \hyperlink{classboxxer_1_1Boxxer2D_a9fcfdebe9f2896232c50b482005db219}{set\+Do\+G\+Sigma\+Ratio} (FloatT \hyperlink{classboxxer_1_1Boxxer2D_a0fffedee4a39644c5c48fba99e297111}{sigma\+\_\+ratio})
+\item 
+void \hyperlink{classboxxer_1_1Boxxer2D_a3291815bf3f9a0762f542bfe636b6da4}{filter\+Scaled\+LoG} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_a2937a772edcf9cec5f617fbcf1d8a6fe}{Scaled\+Image\+StackT} \&fim) const 
+\item 
+void \hyperlink{classboxxer_1_1Boxxer2D_a35393374b3c73f09c7a6a4a45ec82856}{filter\+Scaled\+DoG} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_a2937a772edcf9cec5f617fbcf1d8a6fe}{Scaled\+Image\+StackT} \&fim) const 
+\item 
+IdxT \hyperlink{classboxxer_1_1Boxxer2D_ad5dffcdf4797f49541b9c44c9551987a}{scale\+Space\+Lo\+G\+Maxima} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}{I\+MatT} \&maxima, \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&max\+\_\+vals, IdxT neighborhood\+\_\+size, IdxT scale\+\_\+neighborhood\+\_\+size) const 
+\item 
+IdxT \hyperlink{classboxxer_1_1Boxxer2D_ad3d93a33dcef252f4f0be57a27535f6e}{scale\+Space\+Do\+G\+Maxima} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}{I\+MatT} \&maxima, \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&max\+\_\+vals, IdxT neighborhood\+\_\+size, IdxT scale\+\_\+neighborhood\+\_\+size) const 
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_ad1c52f05a957159bf373b4d8c4361ffe}{ImageT} \hyperlink{classboxxer_1_1Boxxer2D_a3a3deae8a4d6105bcf5793151278f9b7}{make\+\_\+image} () const 
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \hyperlink{classboxxer_1_1Boxxer2D_aa481bbbab9b8aff1f470a5c82fb71f9b}{make\+\_\+image\+\_\+stack} (IdxT nT) const 
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_ad8d3ac7a59998612e4ce00500416c8c1}{Scaled\+ImageT} \hyperlink{classboxxer_1_1Boxxer2D_a4817f3e6707a0ca9330ae6f0dbfb89da}{make\+\_\+scaled\+\_\+image} () const 
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_a2937a772edcf9cec5f617fbcf1d8a6fe}{Scaled\+Image\+StackT} \hyperlink{classboxxer_1_1Boxxer2D_a5c2ee267ed5ac1c61d3b7a9c935e0922}{make\+\_\+scaled\+\_\+image\+\_\+stack} (IdxT nT) const 
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classboxxer_1_1Boxxer2D_a15a892fce4934b21f5c1fcba2c8cb285}{filter\+LoG} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&fim, const \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&\hyperlink{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}{sigma})
+\item 
+static void \hyperlink{classboxxer_1_1Boxxer2D_a42be1c0ec28f5e56b56466c23a691330}{filter\+DoG} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&fim, const \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&\hyperlink{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}{sigma}, FloatT \hyperlink{classboxxer_1_1Boxxer2D_a0fffedee4a39644c5c48fba99e297111}{sigma\+\_\+ratio})
+\item 
+static void \hyperlink{classboxxer_1_1Boxxer2D_ab02b4b192594387e705630aec04befcc}{filter\+Gauss} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&fim, const \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&\hyperlink{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}{sigma})
+\item 
+static void \hyperlink{classboxxer_1_1Boxxer2D_a627557e88133731402ac74c03940141f}{check\+Maxima} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}{I\+MatT} \&maxima, \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&max\+\_\+vals)
+\item 
+static IdxT \hyperlink{classboxxer_1_1Boxxer2D_adc8ce4f6cb5af431aae17763d89042a5}{enumerate\+Image\+Maxima} (const \hyperlink{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{Image\+StackT} \&im, \hyperlink{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}{I\+MatT} \&maxima, \hyperlink{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{VecT} \&max\+\_\+vals, IdxT neighborhood\+\_\+size)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+IdxT \hyperlink{classboxxer_1_1Boxxer2D_a7577d773fec8de75968ef12fe2c1c59b}{n\+Scales}
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_acb4dc89c7e1bd2099e7de7b83621ba4f}{I\+VecT} \hyperlink{classboxxer_1_1Boxxer2D_a6f76692e32f0c907d48a72a801a62b9a}{imsize}
+\item 
+\hyperlink{classboxxer_1_1Boxxer2D_a4af9f3e10a7ceb1c20e1d731263d9aeb}{MatT} \hyperlink{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}{sigma}
+\item 
+FloatT \hyperlink{classboxxer_1_1Boxxer2D_a0fffedee4a39644c5c48fba99e297111}{sigma\+\_\+ratio}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const FloatT \hyperlink{classboxxer_1_1Boxxer2D_a2175ae26a8a47e6bc57a6fb89cc9e177}{Default\+Sigma\+Ratio}
+\item 
+static const IdxT \hyperlink{classboxxer_1_1Boxxer2D_a66f41631af87252601a33480c0433eea}{dim}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$\\*
+class boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$}
+
+In this class we make the assumption that images are stored in column-\/major format and that x=rows, y=cols, t=slices. This relationship is important in the choice of imsize and sigma parameters.
+
+imsize = \mbox{[}nrows, ncols, nframes\mbox{]}; sigma = \mbox{[} sigma\+\_\+rows (X scale=1), sigma\+\_\+rows (X scale=2); sigma\+\_\+cols(Y scale=1), sigma\+\_\+cols (Y scale=2)\mbox{]}
+
+This is contrary to normal image coordinates in matlab, but for this low level it is easier to think about x as the first index into an image and understand that the meaning for \char`\"{}\+X\char`\"{} and \char`\"{}\+Y\char`\"{} will be reversed from the matlab interpretation, but only internally within the Boxxer\+\_\+\+I\+Face Mex\+I\+Face class. 
+
+Definition at line 33 of file Boxxer2\+D.\+h.
+
+
+
+\subsubsection{Member Typedef Documentation}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!Image\+StackT@{Image\+StackT}}
+\index{Image\+StackT@{Image\+StackT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{Image\+StackT}{ImageStackT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf Image\+StackT} =  arma\+::\+Cube$<$FloatT$>$}\hypertarget{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}{}\label{classboxxer_1_1Boxxer2D_a35da86be183f5f24cb3d13cbf7cf45ee}
+
+
+Definition at line 41 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!ImageT@{ImageT}}
+\index{ImageT@{ImageT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{ImageT}{ImageT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf ImageT} =  arma\+::\+Mat$<$FloatT$>$}\hypertarget{classboxxer_1_1Boxxer2D_ad1c52f05a957159bf373b4d8c4361ffe}{}\label{classboxxer_1_1Boxxer2D_ad1c52f05a957159bf373b4d8c4361ffe}
+
+
+Definition at line 40 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!I\+MatT@{I\+MatT}}
+\index{I\+MatT@{I\+MatT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{I\+MatT}{IMatT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf I\+MatT} =  arma\+::\+Mat$<$IdxT$>$}\hypertarget{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}{}\label{classboxxer_1_1Boxxer2D_ad6e571d3e7685b8c634661e03382a32f}
+
+
+Definition at line 37 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!I\+VecT@{I\+VecT}}
+\index{I\+VecT@{I\+VecT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{I\+VecT}{IVecT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf I\+VecT} =  arma\+::\+Col$<$IdxT$>$}\hypertarget{classboxxer_1_1Boxxer2D_acb4dc89c7e1bd2099e7de7b83621ba4f}{}\label{classboxxer_1_1Boxxer2D_acb4dc89c7e1bd2099e7de7b83621ba4f}
+
+
+Definition at line 36 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!MatT@{MatT}}
+\index{MatT@{MatT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{MatT}{MatT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf MatT} =  arma\+::\+Mat$<$FloatT$>$}\hypertarget{classboxxer_1_1Boxxer2D_a4af9f3e10a7ceb1c20e1d731263d9aeb}{}\label{classboxxer_1_1Boxxer2D_a4af9f3e10a7ceb1c20e1d731263d9aeb}
+
+
+Definition at line 39 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!Scaled\+Image\+StackT@{Scaled\+Image\+StackT}}
+\index{Scaled\+Image\+StackT@{Scaled\+Image\+StackT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{Scaled\+Image\+StackT}{ScaledImageStackT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf Scaled\+Image\+StackT} =  hypercube\+::\+Hypercube$<$FloatT$>$}\hypertarget{classboxxer_1_1Boxxer2D_a2937a772edcf9cec5f617fbcf1d8a6fe}{}\label{classboxxer_1_1Boxxer2D_a2937a772edcf9cec5f617fbcf1d8a6fe}
+
+
+Definition at line 43 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!Scaled\+ImageT@{Scaled\+ImageT}}
+\index{Scaled\+ImageT@{Scaled\+ImageT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{Scaled\+ImageT}{ScaledImageT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf Scaled\+ImageT} =  arma\+::\+Cube$<$FloatT$>$}\hypertarget{classboxxer_1_1Boxxer2D_ad8d3ac7a59998612e4ce00500416c8c1}{}\label{classboxxer_1_1Boxxer2D_ad8d3ac7a59998612e4ce00500416c8c1}
+
+
+Definition at line 42 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!VecT@{VecT}}
+\index{VecT@{VecT}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{VecT}{VecT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf VecT} =  arma\+::\+Col$<$FloatT$>$}\hypertarget{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}{}\label{classboxxer_1_1Boxxer2D_aeb45bfe57b8975660fc7076a2794acf8}
+
+
+Definition at line 38 of file Boxxer2\+D.\+h.
+
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!Boxxer2D@{Boxxer2D}}
+\index{Boxxer2D@{Boxxer2D}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{Boxxer2\+D(const I\+Vec\+T \&imsize, const Mat\+T \&sigma)}{Boxxer2D(const IVecT &imsize, const MatT &sigma)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::{\bf Boxxer2D} (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\+VecT} \&}]{imsize, }
+\item[{const {\bf MatT} \&}]{sigma}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Boxxer2D_a9f87f606cf304f6006d055ef20d25f73}{}\label{classboxxer_1_1Boxxer2D_a9f87f606cf304f6006d055ef20d25f73}
+
+
+\subsubsection{Member Function Documentation}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!check\+Maxima@{check\+Maxima}}
+\index{check\+Maxima@{check\+Maxima}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{check\+Maxima(const Image\+Stack\+T \&im, I\+Mat\+T \&maxima, Vec\+T \&max\+\_\+vals)}{checkMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ static void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::check\+Maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf I\+MatT} \&}]{maxima, }
+\item[{{\bf VecT} \&}]{max\+\_\+vals}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_a627557e88133731402ac74c03940141f}{}\label{classboxxer_1_1Boxxer2D_a627557e88133731402ac74c03940141f}
+
+
+Referenced by boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classboxxer_1_1Boxxer2D_a627557e88133731402ac74c03940141f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!enumerate\+Image\+Maxima@{enumerate\+Image\+Maxima}}
+\index{enumerate\+Image\+Maxima@{enumerate\+Image\+Maxima}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{enumerate\+Image\+Maxima(const Image\+Stack\+T \&im, I\+Mat\+T \&maxima, Vec\+T \&max\+\_\+vals, Idx\+T neighborhood\+\_\+size)}{enumerateImageMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ static IdxT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::enumerate\+Image\+Maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf I\+MatT} \&}]{maxima, }
+\item[{{\bf VecT} \&}]{max\+\_\+vals, }
+\item[{IdxT}]{neighborhood\+\_\+size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_adc8ce4f6cb5af431aae17763d89042a5}{}\label{classboxxer_1_1Boxxer2D_adc8ce4f6cb5af431aae17763d89042a5}
+
+
+Referenced by boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classboxxer_1_1Boxxer2D_adc8ce4f6cb5af431aae17763d89042a5_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!filter\+DoG@{filter\+DoG}}
+\index{filter\+DoG@{filter\+DoG}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{filter\+Do\+G(const Image\+Stack\+T \&im, Image\+Stack\+T \&fim, const Vec\+T \&sigma, Float\+T sigma\+\_\+ratio)}{filterDoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma, FloatT sigma_ratio)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ static void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::filter\+DoG (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf Image\+StackT} \&}]{fim, }
+\item[{const {\bf VecT} \&}]{sigma, }
+\item[{FloatT}]{sigma\+\_\+ratio}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_a42be1c0ec28f5e56b56466c23a691330}{}\label{classboxxer_1_1Boxxer2D_a42be1c0ec28f5e56b56466c23a691330}
+
+
+Referenced by boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classboxxer_1_1Boxxer2D_a42be1c0ec28f5e56b56466c23a691330_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!filter\+Gauss@{filter\+Gauss}}
+\index{filter\+Gauss@{filter\+Gauss}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{filter\+Gauss(const Image\+Stack\+T \&im, Image\+Stack\+T \&fim, const Vec\+T \&sigma)}{filterGauss(const ImageStackT &im, ImageStackT &fim, const VecT &sigma)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ static void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::filter\+Gauss (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf Image\+StackT} \&}]{fim, }
+\item[{const {\bf VecT} \&}]{sigma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_ab02b4b192594387e705630aec04befcc}{}\label{classboxxer_1_1Boxxer2D_ab02b4b192594387e705630aec04befcc}
+
+
+Referenced by boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{classboxxer_1_1Boxxer2D_ab02b4b192594387e705630aec04befcc_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!filter\+LoG@{filter\+LoG}}
+\index{filter\+LoG@{filter\+LoG}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{filter\+Lo\+G(const Image\+Stack\+T \&im, Image\+Stack\+T \&fim, const Vec\+T \&sigma)}{filterLoG(const ImageStackT &im, ImageStackT &fim, const VecT &sigma)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ static void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::filter\+LoG (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf Image\+StackT} \&}]{fim, }
+\item[{const {\bf VecT} \&}]{sigma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_a15a892fce4934b21f5c1fcba2c8cb285}{}\label{classboxxer_1_1Boxxer2D_a15a892fce4934b21f5c1fcba2c8cb285}
+
+
+Referenced by boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classboxxer_1_1Boxxer2D_a15a892fce4934b21f5c1fcba2c8cb285_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!filter\+Scaled\+DoG@{filter\+Scaled\+DoG}}
+\index{filter\+Scaled\+DoG@{filter\+Scaled\+DoG}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{filter\+Scaled\+Do\+G(const Image\+Stack\+T \&im, Scaled\+Image\+Stack\+T \&fim) const }{filterScaledDoG(const ImageStackT &im, ScaledImageStackT &fim) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::filter\+Scaled\+DoG (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf Scaled\+Image\+StackT} \&}]{fim}
+\end{DoxyParamCaption}
+) const}\hypertarget{classboxxer_1_1Boxxer2D_a35393374b3c73f09c7a6a4a45ec82856}{}\label{classboxxer_1_1Boxxer2D_a35393374b3c73f09c7a6a4a45ec82856}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!filter\+Scaled\+LoG@{filter\+Scaled\+LoG}}
+\index{filter\+Scaled\+LoG@{filter\+Scaled\+LoG}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{filter\+Scaled\+Lo\+G(const Image\+Stack\+T \&im, Scaled\+Image\+Stack\+T \&fim) const }{filterScaledLoG(const ImageStackT &im, ScaledImageStackT &fim) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::filter\+Scaled\+LoG (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf Scaled\+Image\+StackT} \&}]{fim}
+\end{DoxyParamCaption}
+) const}\hypertarget{classboxxer_1_1Boxxer2D_a3291815bf3f9a0762f542bfe636b6da4}{}\label{classboxxer_1_1Boxxer2D_a3291815bf3f9a0762f542bfe636b6da4}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!make\+\_\+image@{make\+\_\+image}}
+\index{make\+\_\+image@{make\+\_\+image}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{make\+\_\+image() const }{make_image() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf ImageT} {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::make\+\_\+image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classboxxer_1_1Boxxer2D_a3a3deae8a4d6105bcf5793151278f9b7}{}\label{classboxxer_1_1Boxxer2D_a3a3deae8a4d6105bcf5793151278f9b7}
+
+
+Definition at line 61 of file Boxxer2\+D.\+h.
+
+
+
+References boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::imsize.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!make\+\_\+image\+\_\+stack@{make\+\_\+image\+\_\+stack}}
+\index{make\+\_\+image\+\_\+stack@{make\+\_\+image\+\_\+stack}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{make\+\_\+image\+\_\+stack(\+Idx\+T n\+T) const }{make_image_stack(IdxT nT) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf Image\+StackT} {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::make\+\_\+image\+\_\+stack (
+\begin{DoxyParamCaption}
+\item[{IdxT}]{nT}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classboxxer_1_1Boxxer2D_aa481bbbab9b8aff1f470a5c82fb71f9b}{}\label{classboxxer_1_1Boxxer2D_aa481bbbab9b8aff1f470a5c82fb71f9b}
+
+
+Definition at line 62 of file Boxxer2\+D.\+h.
+
+
+
+References boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::imsize.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!make\+\_\+scaled\+\_\+image@{make\+\_\+scaled\+\_\+image}}
+\index{make\+\_\+scaled\+\_\+image@{make\+\_\+scaled\+\_\+image}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{make\+\_\+scaled\+\_\+image() const }{make_scaled_image() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf Scaled\+ImageT} {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::make\+\_\+scaled\+\_\+image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classboxxer_1_1Boxxer2D_a4817f3e6707a0ca9330ae6f0dbfb89da}{}\label{classboxxer_1_1Boxxer2D_a4817f3e6707a0ca9330ae6f0dbfb89da}
+
+
+Definition at line 63 of file Boxxer2\+D.\+h.
+
+
+
+References boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::imsize.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!make\+\_\+scaled\+\_\+image\+\_\+stack@{make\+\_\+scaled\+\_\+image\+\_\+stack}}
+\index{make\+\_\+scaled\+\_\+image\+\_\+stack@{make\+\_\+scaled\+\_\+image\+\_\+stack}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{make\+\_\+scaled\+\_\+image\+\_\+stack(\+Idx\+T n\+T) const }{make_scaled_image_stack(IdxT nT) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf Scaled\+Image\+StackT} {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack (
+\begin{DoxyParamCaption}
+\item[{IdxT}]{nT}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classboxxer_1_1Boxxer2D_a5c2ee267ed5ac1c61d3b7a9c935e0922}{}\label{classboxxer_1_1Boxxer2D_a5c2ee267ed5ac1c61d3b7a9c935e0922}
+
+
+Definition at line 64 of file Boxxer2\+D.\+h.
+
+
+
+References boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::check\+Maxima(), boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::enumerate\+Image\+Maxima(), boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::filter\+Do\+G(), boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::filter\+Gauss(), boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::filter\+Lo\+G(), and boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::imsize.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classboxxer_1_1Boxxer2D_a5c2ee267ed5ac1c61d3b7a9c935e0922_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!scale\+Space\+Do\+G\+Maxima@{scale\+Space\+Do\+G\+Maxima}}
+\index{scale\+Space\+Do\+G\+Maxima@{scale\+Space\+Do\+G\+Maxima}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{scale\+Space\+Do\+G\+Maxima(const Image\+Stack\+T \&im, I\+Mat\+T \&maxima, Vec\+T \&max\+\_\+vals, Idx\+T neighborhood\+\_\+size, Idx\+T scale\+\_\+neighborhood\+\_\+size) const }{scaleSpaceDoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::scale\+Space\+Do\+G\+Maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf I\+MatT} \&}]{maxima, }
+\item[{{\bf VecT} \&}]{max\+\_\+vals, }
+\item[{IdxT}]{neighborhood\+\_\+size, }
+\item[{IdxT}]{scale\+\_\+neighborhood\+\_\+size}
+\end{DoxyParamCaption}
+) const}\hypertarget{classboxxer_1_1Boxxer2D_ad3d93a33dcef252f4f0be57a27535f6e}{}\label{classboxxer_1_1Boxxer2D_ad3d93a33dcef252f4f0be57a27535f6e}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!scale\+Space\+Lo\+G\+Maxima@{scale\+Space\+Lo\+G\+Maxima}}
+\index{scale\+Space\+Lo\+G\+Maxima@{scale\+Space\+Lo\+G\+Maxima}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{scale\+Space\+Lo\+G\+Maxima(const Image\+Stack\+T \&im, I\+Mat\+T \&maxima, Vec\+T \&max\+\_\+vals, Idx\+T neighborhood\+\_\+size, Idx\+T scale\+\_\+neighborhood\+\_\+size) const }{scaleSpaceLoGMaxima(const ImageStackT &im, IMatT &maxima, VecT &max_vals, IdxT neighborhood_size, IdxT scale_neighborhood_size) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::scale\+Space\+Lo\+G\+Maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf Image\+StackT} \&}]{im, }
+\item[{{\bf I\+MatT} \&}]{maxima, }
+\item[{{\bf VecT} \&}]{max\+\_\+vals, }
+\item[{IdxT}]{neighborhood\+\_\+size, }
+\item[{IdxT}]{scale\+\_\+neighborhood\+\_\+size}
+\end{DoxyParamCaption}
+) const}\hypertarget{classboxxer_1_1Boxxer2D_ad5dffcdf4797f49541b9c44c9551987a}{}\label{classboxxer_1_1Boxxer2D_ad5dffcdf4797f49541b9c44c9551987a}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!set\+Do\+G\+Sigma\+Ratio@{set\+Do\+G\+Sigma\+Ratio}}
+\index{set\+Do\+G\+Sigma\+Ratio@{set\+Do\+G\+Sigma\+Ratio}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{set\+Do\+G\+Sigma\+Ratio(\+Float\+T sigma\+\_\+ratio)}{setDoGSigmaRatio(FloatT sigma_ratio)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::set\+Do\+G\+Sigma\+Ratio (
+\begin{DoxyParamCaption}
+\item[{FloatT}]{sigma\+\_\+ratio}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Boxxer2D_a9fcfdebe9f2896232c50b482005db219}{}\label{classboxxer_1_1Boxxer2D_a9fcfdebe9f2896232c50b482005db219}
+
+
+\subsubsection{Member Data Documentation}
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!Default\+Sigma\+Ratio@{Default\+Sigma\+Ratio}}
+\index{Default\+Sigma\+Ratio@{Default\+Sigma\+Ratio}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{Default\+Sigma\+Ratio}{DefaultSigmaRatio}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ const FloatT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::Default\+Sigma\+Ratio\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_a2175ae26a8a47e6bc57a6fb89cc9e177}{}\label{classboxxer_1_1Boxxer2D_a2175ae26a8a47e6bc57a6fb89cc9e177}
+
+
+Definition at line 45 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!dim@{dim}}
+\index{dim@{dim}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{dim}{dim}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ const IdxT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::dim\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Boxxer2D_a66f41631af87252601a33480c0433eea}{}\label{classboxxer_1_1Boxxer2D_a66f41631af87252601a33480c0433eea}
+
+
+Definition at line 46 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!imsize@{imsize}}
+\index{imsize@{imsize}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{imsize}{imsize}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf I\+VecT} {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::imsize}\hypertarget{classboxxer_1_1Boxxer2D_a6f76692e32f0c907d48a72a801a62b9a}{}\label{classboxxer_1_1Boxxer2D_a6f76692e32f0c907d48a72a801a62b9a}
+
+
+Definition at line 49 of file Boxxer2\+D.\+h.
+
+
+
+Referenced by boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image(), boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image\+\_\+stack(), boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image(), and boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+scaled\+\_\+image\+\_\+stack().
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!n\+Scales@{n\+Scales}}
+\index{n\+Scales@{n\+Scales}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{n\+Scales}{nScales}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::n\+Scales}\hypertarget{classboxxer_1_1Boxxer2D_a7577d773fec8de75968ef12fe2c1c59b}{}\label{classboxxer_1_1Boxxer2D_a7577d773fec8de75968ef12fe2c1c59b}
+
+
+Definition at line 48 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!sigma@{sigma}}
+\index{sigma@{sigma}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{sigma}{sigma}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf MatT} {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::sigma}\hypertarget{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}{}\label{classboxxer_1_1Boxxer2D_a925fe4151cca3a34cba36f1a10b8e382}
+
+
+Definition at line 50 of file Boxxer2\+D.\+h.
+
+\index{boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}!sigma\+\_\+ratio@{sigma\+\_\+ratio}}
+\index{sigma\+\_\+ratio@{sigma\+\_\+ratio}!boxxer\+::\+Boxxer2D@{boxxer\+::\+Boxxer2D}}
+\paragraph[{\texorpdfstring{sigma\+\_\+ratio}{sigma_ratio}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ FloatT {\bf boxxer\+::\+Boxxer2D}$<$ FloatT, IdxT $>$\+::sigma\+\_\+ratio}\hypertarget{classboxxer_1_1Boxxer2D_a0fffedee4a39644c5c48fba99e297111}{}\label{classboxxer_1_1Boxxer2D_a0fffedee4a39644c5c48fba99e297111}
+
+
+Definition at line 51 of file Boxxer2\+D.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Boxxer2D_8h}{Boxxer2\+D.\+h}\end{DoxyCompactItemize}

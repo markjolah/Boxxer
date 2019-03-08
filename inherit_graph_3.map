@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$structboxxer_1_1LogicalError.html" title="Internal logical error. Bad logic or broken promises. " alt="" coords="167,5,299,31"/>
+<area shape="rect" id="node3" href="$structboxxer_1_1NumericalError.html" title="Internal numerical error. " alt="" coords="159,55,307,80"/>
+<area shape="rect" id="node4" href="$structboxxer_1_1ParameterShapeError.html" title="Parameters are the incorrect shape, size or number of dimensions. " alt="" coords="140,104,325,129"/>
+<area shape="rect" id="node5" href="$structboxxer_1_1ParameterValueError.html" title="Parameter value is not valid. " alt="" coords="142,153,323,179"/>
+</map>

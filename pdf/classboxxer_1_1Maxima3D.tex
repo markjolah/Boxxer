@@ -1,0 +1,188 @@
+\hypertarget{classboxxer_1_1Maxima3D}{}\subsection{boxxer\+:\+:Maxima3D$<$ FloatT, IdxT $>$ Class Template Reference}
+\label{classboxxer_1_1Maxima3D}\index{boxxer\+::\+Maxima3\+D$<$ Float\+T, Idx\+T $>$@{boxxer\+::\+Maxima3\+D$<$ Float\+T, Idx\+T $>$}}
+
+
+{\ttfamily \#include $<$/home/travis/build/markjolah/\+Boxxer/include/\+Boxxer/\+Maxima.\+h$>$}
+
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classboxxer_1_1Maxima3D_a5fee3acd26edc152ba90e90812e40c1f}{I\+VecT} = arma\+::\+Col$<$ IdxT $>$
+\item 
+using \hyperlink{classboxxer_1_1Maxima3D_a51dcfe38a24fa1264aabbc4369d795bb}{I\+MatT} = arma\+::\+Mat$<$ IdxT $>$
+\item 
+using \hyperlink{classboxxer_1_1Maxima3D_af84c08251794d634d33f2b388d465724}{I\+CubeT} = arma\+::\+Cube$<$ IdxT $>$
+\item 
+using \hyperlink{classboxxer_1_1Maxima3D_a3b589b4792d6446b7418a565314b126b}{VecT} = arma\+::\+Col$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}{ImageT} = arma\+::\+Cube$<$ FloatT $>$
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classboxxer_1_1Maxima3D_abec4b44770198fd079c0c84a8e418ec9}{Maxima3D} (const \hyperlink{classboxxer_1_1Maxima3D_a5fee3acd26edc152ba90e90812e40c1f}{I\+VecT} \&\hyperlink{classboxxer_1_1Maxima3D_a71f401fe66798eeeb8581faa5f9e0927}{size}, IdxT \hyperlink{classboxxer_1_1Maxima3D_a2902bed080ed07e6409e540f0bb82c34}{boxsize}=\hyperlink{classboxxer_1_1Maxima3D_a31e443fae0ba2fec7cdaebee0d207f31}{Min\+Boxsize})
+\item 
+IdxT \hyperlink{classboxxer_1_1Maxima3D_ad30559dd64e36cad467d0faa7e3db33c}{find\+\_\+maxima} (const \hyperlink{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}{ImageT} \&im)
+\item 
+IdxT \hyperlink{classboxxer_1_1Maxima3D_ad4ad309b255fc5b04730a8c40d068473}{find\+\_\+maxima} (const \hyperlink{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}{ImageT} \&im, \hyperlink{classboxxer_1_1Maxima3D_a51dcfe38a24fa1264aabbc4369d795bb}{I\+MatT} \&maxima\+\_\+out, \hyperlink{classboxxer_1_1Maxima3D_a3b589b4792d6446b7418a565314b126b}{VecT} \&max\+\_\+vals\+\_\+out)
+\item 
+void \hyperlink{classboxxer_1_1Maxima3D_a3a2f1e54987e235f59e2f1c1af5b2614}{read\+\_\+maxima} (\hyperlink{classboxxer_1_1Maxima3D_a51dcfe38a24fa1264aabbc4369d795bb}{I\+MatT} \&maxima\+\_\+out, \hyperlink{classboxxer_1_1Maxima3D_a3b589b4792d6446b7418a565314b126b}{VecT} \&max\+\_\+vals\+\_\+out) const 
+\item 
+void \hyperlink{classboxxer_1_1Maxima3D_a1057e4adf9dbb6410bc246648ae7d4bb}{test\+\_\+maxima} (const \hyperlink{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}{ImageT} \&im)
+\item 
+bool \hyperlink{classboxxer_1_1Maxima3D_ae01e8a792ba04cefd5d8abbaf40bb669}{check\+\_\+maxima} (const \hyperlink{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}{ImageT} \&im, IdxT x, IdxT y, IdxT z, IdxT neigborhood\+Size=\hyperlink{classboxxer_1_1Maxima3D_a31e443fae0ba2fec7cdaebee0d207f31}{Min\+Boxsize})
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classboxxer_1_1Maxima3D_a5fee3acd26edc152ba90e90812e40c1f}{I\+VecT} \hyperlink{classboxxer_1_1Maxima3D_a71f401fe66798eeeb8581faa5f9e0927}{size}
+\item 
+IdxT \hyperlink{classboxxer_1_1Maxima3D_a2902bed080ed07e6409e540f0bb82c34}{boxsize}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const IdxT \hyperlink{classboxxer_1_1Maxima3D_a31e443fae0ba2fec7cdaebee0d207f31}{Min\+Boxsize}
+\item 
+static const IdxT \hyperlink{classboxxer_1_1Maxima3D_ae446af4adb99b87f2211f3b4d83b6273}{Ndim}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$\\*
+class boxxer\+::\+Maxima3\+D$<$ Float\+T, Idx\+T $>$}
+
+
+
+Definition at line 52 of file Maxima.\+h.
+
+
+
+\subsubsection{Member Typedef Documentation}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!I\+CubeT@{I\+CubeT}}
+\index{I\+CubeT@{I\+CubeT}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{I\+CubeT}{ICubeT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::{\bf I\+CubeT} =  arma\+::\+Cube$<$IdxT$>$}\hypertarget{classboxxer_1_1Maxima3D_af84c08251794d634d33f2b388d465724}{}\label{classboxxer_1_1Maxima3D_af84c08251794d634d33f2b388d465724}
+
+
+Definition at line 57 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!ImageT@{ImageT}}
+\index{ImageT@{ImageT}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{ImageT}{ImageT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::{\bf ImageT} =  arma\+::\+Cube$<$FloatT$>$}\hypertarget{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}{}\label{classboxxer_1_1Maxima3D_aebf2125d25bccd44361a369831600569}
+
+
+Definition at line 59 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!I\+MatT@{I\+MatT}}
+\index{I\+MatT@{I\+MatT}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{I\+MatT}{IMatT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::{\bf I\+MatT} =  arma\+::\+Mat$<$IdxT$>$}\hypertarget{classboxxer_1_1Maxima3D_a51dcfe38a24fa1264aabbc4369d795bb}{}\label{classboxxer_1_1Maxima3D_a51dcfe38a24fa1264aabbc4369d795bb}
+
+
+Definition at line 56 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!I\+VecT@{I\+VecT}}
+\index{I\+VecT@{I\+VecT}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{I\+VecT}{IVecT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::{\bf I\+VecT} =  arma\+::\+Col$<$IdxT$>$}\hypertarget{classboxxer_1_1Maxima3D_a5fee3acd26edc152ba90e90812e40c1f}{}\label{classboxxer_1_1Maxima3D_a5fee3acd26edc152ba90e90812e40c1f}
+
+
+Definition at line 55 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!VecT@{VecT}}
+\index{VecT@{VecT}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{VecT}{VecT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::{\bf VecT} =  arma\+::\+Col$<$FloatT$>$}\hypertarget{classboxxer_1_1Maxima3D_a3b589b4792d6446b7418a565314b126b}{}\label{classboxxer_1_1Maxima3D_a3b589b4792d6446b7418a565314b126b}
+
+
+Definition at line 58 of file Maxima.\+h.
+
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!Maxima3D@{Maxima3D}}
+\index{Maxima3D@{Maxima3D}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{Maxima3\+D(const I\+Vec\+T \&size, Idx\+T boxsize=\+Min\+Boxsize)}{Maxima3D(const IVecT &size, IdxT boxsize=MinBoxsize)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::{\bf Maxima3D} (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\+VecT} \&}]{size, }
+\item[{IdxT}]{boxsize = {\ttfamily {\bf Min\+Boxsize}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Maxima3D_abec4b44770198fd079c0c84a8e418ec9}{}\label{classboxxer_1_1Maxima3D_abec4b44770198fd079c0c84a8e418ec9}
+
+
+\subsubsection{Member Function Documentation}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!check\+\_\+maxima@{check\+\_\+maxima}}
+\index{check\+\_\+maxima@{check\+\_\+maxima}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{check\+\_\+maxima(const Image\+T \&im, Idx\+T x, Idx\+T y, Idx\+T z, Idx\+T neigborhood\+Size=\+Min\+Boxsize)}{check_maxima(const ImageT &im, IdxT x, IdxT y, IdxT z, IdxT neigborhoodSize=MinBoxsize)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ bool {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::check\+\_\+maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf ImageT} \&}]{im, }
+\item[{IdxT}]{x, }
+\item[{IdxT}]{y, }
+\item[{IdxT}]{z, }
+\item[{IdxT}]{neigborhood\+Size = {\ttfamily {\bf Min\+Boxsize}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Maxima3D_ae01e8a792ba04cefd5d8abbaf40bb669}{}\label{classboxxer_1_1Maxima3D_ae01e8a792ba04cefd5d8abbaf40bb669}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!find\+\_\+maxima@{find\+\_\+maxima}}
+\index{find\+\_\+maxima@{find\+\_\+maxima}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{find\+\_\+maxima(const Image\+T \&im)}{find_maxima(const ImageT &im)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::find\+\_\+maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf ImageT} \&}]{im}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Maxima3D_ad30559dd64e36cad467d0faa7e3db33c}{}\label{classboxxer_1_1Maxima3D_ad30559dd64e36cad467d0faa7e3db33c}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!find\+\_\+maxima@{find\+\_\+maxima}}
+\index{find\+\_\+maxima@{find\+\_\+maxima}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{find\+\_\+maxima(const Image\+T \&im, I\+Mat\+T \&maxima\+\_\+out, Vec\+T \&max\+\_\+vals\+\_\+out)}{find_maxima(const ImageT &im, IMatT &maxima_out, VecT &max_vals_out)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::find\+\_\+maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf ImageT} \&}]{im, }
+\item[{{\bf I\+MatT} \&}]{maxima\+\_\+out, }
+\item[{{\bf VecT} \&}]{max\+\_\+vals\+\_\+out}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Maxima3D_ad4ad309b255fc5b04730a8c40d068473}{}\label{classboxxer_1_1Maxima3D_ad4ad309b255fc5b04730a8c40d068473}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!read\+\_\+maxima@{read\+\_\+maxima}}
+\index{read\+\_\+maxima@{read\+\_\+maxima}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{read\+\_\+maxima(\+I\+Mat\+T \&maxima\+\_\+out, Vec\+T \&max\+\_\+vals\+\_\+out) const }{read_maxima(IMatT &maxima_out, VecT &max_vals_out) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::read\+\_\+maxima (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+MatT} \&}]{maxima\+\_\+out, }
+\item[{{\bf VecT} \&}]{max\+\_\+vals\+\_\+out}
+\end{DoxyParamCaption}
+) const}\hypertarget{classboxxer_1_1Maxima3D_a3a2f1e54987e235f59e2f1c1af5b2614}{}\label{classboxxer_1_1Maxima3D_a3a2f1e54987e235f59e2f1c1af5b2614}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!test\+\_\+maxima@{test\+\_\+maxima}}
+\index{test\+\_\+maxima@{test\+\_\+maxima}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{test\+\_\+maxima(const Image\+T \&im)}{test_maxima(const ImageT &im)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::test\+\_\+maxima (
+\begin{DoxyParamCaption}
+\item[{const {\bf ImageT} \&}]{im}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1Maxima3D_a1057e4adf9dbb6410bc246648ae7d4bb}{}\label{classboxxer_1_1Maxima3D_a1057e4adf9dbb6410bc246648ae7d4bb}
+
+
+\subsubsection{Member Data Documentation}
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!boxsize@{boxsize}}
+\index{boxsize@{boxsize}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{boxsize}{boxsize}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::boxsize}\hypertarget{classboxxer_1_1Maxima3D_a2902bed080ed07e6409e540f0bb82c34}{}\label{classboxxer_1_1Maxima3D_a2902bed080ed07e6409e540f0bb82c34}
+
+
+Definition at line 65 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!Min\+Boxsize@{Min\+Boxsize}}
+\index{Min\+Boxsize@{Min\+Boxsize}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{Min\+Boxsize}{MinBoxsize}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ const IdxT {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::Min\+Boxsize\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Maxima3D_a31e443fae0ba2fec7cdaebee0d207f31}{}\label{classboxxer_1_1Maxima3D_a31e443fae0ba2fec7cdaebee0d207f31}
+
+
+Definition at line 61 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!Ndim@{Ndim}}
+\index{Ndim@{Ndim}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{Ndim}{Ndim}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ const IdxT {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::Ndim\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classboxxer_1_1Maxima3D_ae446af4adb99b87f2211f3b4d83b6273}{}\label{classboxxer_1_1Maxima3D_ae446af4adb99b87f2211f3b4d83b6273}
+
+
+Definition at line 62 of file Maxima.\+h.
+
+\index{boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}!size@{size}}
+\index{size@{size}!boxxer\+::\+Maxima3D@{boxxer\+::\+Maxima3D}}
+\paragraph[{\texorpdfstring{size}{size}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf I\+VecT} {\bf boxxer\+::\+Maxima3D}$<$ FloatT, IdxT $>$\+::size}\hypertarget{classboxxer_1_1Maxima3D_a71f401fe66798eeeb8581faa5f9e0927}{}\label{classboxxer_1_1Maxima3D_a71f401fe66798eeeb8581faa5f9e0927}
+
+
+Definition at line 64 of file Maxima.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Maxima_8h}{Maxima.\+h}\end{DoxyCompactItemize}

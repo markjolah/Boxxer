@@ -1,0 +1,19 @@
+<map id="boxxer::kernels::gaussFIR_1D" name="boxxer::kernels::gaussFIR_1D">
+<area shape="rect" id="node2" href="$namespaceboxxer_1_1kernels.html#a88f298ecd82bf9083fabbb2e8a29d4e6" title="boxxer::kernels::gaussFIR\l_1D_arma" alt="" coords="255,5,417,44"/>
+<area shape="rect" id="node3" href="$namespaceboxxer_1_1kernels.html#ab3d9ad7bd61b25b9e856bd0284607e70" title="boxxer::kernels::gaussFIR\l_1D_inplace" alt="" coords="255,68,417,107"/>
+<area shape="rect" id="node4" href="$namespaceboxxer_1_1kernels.html#ab2a257fbea765aacf09b558e38637479" title="boxxer::kernels::gaussFIR\l_1D_inplace_arma" alt="" coords="255,131,417,169"/>
+<area shape="rect" id="node5" href="$namespaceboxxer_1_1kernels.html#af07e73b62933910e86eef6b393155c2c" title="boxxer::kernels::gaussFIR\l_1D_small" alt="" coords="255,193,417,232"/>
+<area shape="rect" id="node6" href="$namespaceboxxer_1_1kernels.html#aeee9d632ce320eb89c870a44c37efa65" title="boxxer::kernels::gaussFIR_2Dx" alt="" coords="240,256,432,281"/>
+<area shape="rect" id="node7" href="$namespaceboxxer_1_1kernels.html#a1da855e7008385fee013bd868d206040" title="boxxer::kernels::gaussFIR\l_2Dx_arma" alt="" coords="255,305,417,344"/>
+<area shape="rect" id="node8" href="$namespaceboxxer_1_1kernels.html#a638bf7fa9900937a763f190c0a4499ae" title="boxxer::kernels::gaussFIR\l_2Dx_small" alt="" coords="255,368,417,407"/>
+<area shape="rect" id="node9" href="$namespaceboxxer_1_1kernels.html#a6efa0d22ae67955f27c6d9ea30342104" title="boxxer::kernels::gaussFIR_2Dy" alt="" coords="240,431,432,456"/>
+<area shape="rect" id="node10" href="$namespaceboxxer_1_1kernels.html#ae78e8767ae044f01e07e61a45220ffc5" title="boxxer::kernels::gaussFIR\l_2Dy_colmajor" alt="" coords="255,480,417,519"/>
+<area shape="rect" id="node11" href="$namespaceboxxer_1_1kernels.html#aa54bb3fea2d343c030528a87b7916293" title="boxxer::kernels::gaussFIR\l_2Dy_rowmajor" alt="" coords="255,543,417,581"/>
+<area shape="rect" id="node12" href="$namespaceboxxer_1_1kernels.html#a49fd7ed785cfcea57b4c9e67d3113a69" title="boxxer::kernels::gaussFIR\l_2Dy_small" alt="" coords="255,605,417,644"/>
+<area shape="rect" id="node13" href="$namespaceboxxer_1_1kernels.html#a74811c999b7d18b14dde0a042318fc06" title="boxxer::kernels::gaussFIR_3Dx" alt="" coords="240,668,432,693"/>
+<area shape="rect" id="node14" href="$namespaceboxxer_1_1kernels.html#af7d8fb262d8bde9c9907e141c3c5f55f" title="boxxer::kernels::gaussFIR\l_3Dx_small" alt="" coords="255,717,417,756"/>
+<area shape="rect" id="node15" href="$namespaceboxxer_1_1kernels.html#ac97f85b9211fcffa432b44a86d30c5df" title="boxxer::kernels::gaussFIR_3Dy" alt="" coords="240,780,432,805"/>
+<area shape="rect" id="node16" href="$namespaceboxxer_1_1kernels.html#a0256b4053077d18bbe2228402071555f" title="boxxer::kernels::gaussFIR\l_3Dy_small" alt="" coords="255,829,417,868"/>
+<area shape="rect" id="node17" href="$namespaceboxxer_1_1kernels.html#a404ef6e2324a0e4ff53e38ad7b07733e" title="boxxer::kernels::gaussFIR_3Dz" alt="" coords="240,892,432,917"/>
+<area shape="rect" id="node18" href="$namespaceboxxer_1_1kernels.html#a9a9201ede570bb2d77531d529f39bc99" title="boxxer::kernels::gaussFIR\l_3Dz_small" alt="" coords="255,941,417,980"/>
+</map>

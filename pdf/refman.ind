@@ -1,0 +1,656 @@
+\begin{theindex}
+
+  \item {boxsize}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+  \item {boxxer}, \hyperpage{4}
+    \subitem {Boxxer\+Error}, \hyperpage{5}
+  \item {Boxxer2\+D.\+h}, \hyperpage{64}
+  \item {Boxxer2D}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{17}
+  \item {Boxxer3\+D.\+h}, \hyperpage{65}
+  \item {Boxxer3D}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{23}
+  \item {boxxer\+::\+Boxxer2\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{14}
+  \item {boxxer\+::\+Boxxer2D}
+    \subitem {Boxxer2D}, \hyperpage{17}
+    \subitem {check\+Maxima}, \hyperpage{17}
+    \subitem {Default\+Sigma\+Ratio}, \hyperpage{20}
+    \subitem {dim}, \hyperpage{20}
+    \subitem {enumerate\+Image\+Maxima}, \hyperpage{17}
+    \subitem {filter\+DoG}, \hyperpage{17}
+    \subitem {filter\+Gauss}, \hyperpage{18}
+    \subitem {filter\+LoG}, \hyperpage{18}
+    \subitem {filter\+Scaled\+DoG}, \hyperpage{18}
+    \subitem {filter\+Scaled\+LoG}, \hyperpage{19}
+    \subitem {I\+MatT}, \hyperpage{16}
+    \subitem {I\+VecT}, \hyperpage{16}
+    \subitem {Image\+StackT}, \hyperpage{16}
+    \subitem {ImageT}, \hyperpage{16}
+    \subitem {imsize}, \hyperpage{20}
+    \subitem {make\+\_\+image}, \hyperpage{19}
+    \subitem {make\+\_\+image\+\_\+stack}, \hyperpage{19}
+    \subitem {make\+\_\+scaled\+\_\+image}, \hyperpage{19}
+    \subitem {make\+\_\+scaled\+\_\+image\+\_\+stack}, \hyperpage{19}
+    \subitem {MatT}, \hyperpage{16}
+    \subitem {n\+Scales}, \hyperpage{20}
+    \subitem {scale\+Space\+Do\+G\+Maxima}, \hyperpage{20}
+    \subitem {scale\+Space\+Lo\+G\+Maxima}, \hyperpage{20}
+    \subitem {Scaled\+Image\+StackT}, \hyperpage{16}
+    \subitem {Scaled\+ImageT}, \hyperpage{16}
+    \subitem {set\+Do\+G\+Sigma\+Ratio}, \hyperpage{20}
+    \subitem {sigma}, \hyperpage{20}
+    \subitem {sigma\+\_\+ratio}, \hyperpage{20}
+    \subitem {VecT}, \hyperpage{17}
+  \item {boxxer\+::\+Boxxer3\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{21}
+  \item {boxxer\+::\+Boxxer3D}
+    \subitem {Boxxer3D}, \hyperpage{23}
+    \subitem {check\+Maxima}, \hyperpage{23}
+    \subitem {Default\+Sigma\+Ratio}, \hyperpage{26}
+    \subitem {dim}, \hyperpage{26}
+    \subitem {enumerate\+Image\+Maxima}, \hyperpage{23}
+    \subitem {filter\+DoG}, \hyperpage{23}
+    \subitem {filter\+Gauss}, \hyperpage{24}
+    \subitem {filter\+LoG}, \hyperpage{24}
+    \subitem {filter\+Scaled\+DoG}, \hyperpage{24}
+    \subitem {filter\+Scaled\+LoG}, \hyperpage{25}
+    \subitem {I\+MatT}, \hyperpage{22}
+    \subitem {I\+VecT}, \hyperpage{22}
+    \subitem {Image\+StackT}, \hyperpage{22}
+    \subitem {ImageT}, \hyperpage{22}
+    \subitem {imsize}, \hyperpage{26}
+    \subitem {make\+\_\+image}, \hyperpage{25}
+    \subitem {make\+\_\+image\+\_\+stack}, \hyperpage{25}
+    \subitem {make\+\_\+scaled\+\_\+image}, \hyperpage{25}
+    \subitem {MatT}, \hyperpage{22}
+    \subitem {n\+Scales}, \hyperpage{26}
+    \subitem {scale\+Space\+Do\+G\+Maxima}, \hyperpage{25}
+    \subitem {scale\+Space\+Lo\+G\+Maxima}, \hyperpage{26}
+    \subitem {Scaled\+ImageT}, \hyperpage{22}
+    \subitem {set\+Do\+G\+Sigma\+Ratio}, \hyperpage{26}
+    \subitem {sigma}, \hyperpage{26}
+    \subitem {sigma\+\_\+ratio}, \hyperpage{26}
+    \subitem {VecT}, \hyperpage{22}
+  \item {boxxer\+::\+Do\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{27}
+  \item {boxxer\+::\+Do\+G\+Filter2D}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{29}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{29}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{30}
+    \subitem {dim}, \hyperpage{30}
+    \subitem {Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {filter}, \hyperpage{29}
+    \subitem {hw}, \hyperpage{30}
+    \subitem {I\+VecT}, \hyperpage{28}
+    \subitem {ImageT}, \hyperpage{28}
+    \subitem {make\+\_\+image}, \hyperpage{29}
+    \subitem {MatT}, \hyperpage{29}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{30}
+    \subitem {operator$<$$<$}, \hyperpage{30}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{29}
+    \subitem {set\+\_\+sigma\+\_\+ratio}, \hyperpage{29}
+    \subitem {sigma}, \hyperpage{30}
+    \subitem {sigma\+\_\+ratio}, \hyperpage{30}
+    \subitem {size}, \hyperpage{30}
+    \subitem {test\+\_\+filter}, \hyperpage{30}
+    \subitem {VecT}, \hyperpage{29}
+  \item {boxxer\+::\+Do\+G\+Filter3\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{31}
+  \item {boxxer\+::\+Do\+G\+Filter3D}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{33}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{33}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{34}
+    \subitem {dim}, \hyperpage{34}
+    \subitem {Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {filter}, \hyperpage{33}
+    \subitem {hw}, \hyperpage{34}
+    \subitem {I\+VecT}, \hyperpage{33}
+    \subitem {ImageT}, \hyperpage{33}
+    \subitem {make\+\_\+image}, \hyperpage{33}
+    \subitem {MatT}, \hyperpage{33}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{34}
+    \subitem {operator$<$$<$}, \hyperpage{34}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{33}
+    \subitem {set\+\_\+sigma\+\_\+ratio}, \hyperpage{34}
+    \subitem {sigma}, \hyperpage{34}
+    \subitem {sigma\+\_\+ratio}, \hyperpage{34}
+    \subitem {size}, \hyperpage{34}
+    \subitem {test\+\_\+filter}, \hyperpage{34}
+    \subitem {VecT}, \hyperpage{33}
+  \item {boxxer\+::\+Gauss\+F\+I\+R\+Filter}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{45}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{45}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{45}
+    \subitem {dim}, \hyperpage{45}
+    \subitem {Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {hw}, \hyperpage{45}
+    \subitem {I\+VecT}, \hyperpage{44}
+    \subitem {MatT}, \hyperpage{44}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{45}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{45}
+    \subitem {sigma}, \hyperpage{45}
+    \subitem {size}, \hyperpage{45}
+    \subitem {VecT}, \hyperpage{44}
+  \item {boxxer\+::\+Gauss\+F\+I\+R\+Filter$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{43}
+  \item {boxxer\+::\+Gauss\+Filter2\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{35}
+  \item {boxxer\+::\+Gauss\+Filter2D}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{37}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{37}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{38}
+    \subitem {dim}, \hyperpage{38}
+    \subitem {filter}, \hyperpage{37}
+    \subitem {Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {hw}, \hyperpage{38}
+    \subitem {I\+VecT}, \hyperpage{37}
+    \subitem {ImageT}, \hyperpage{37}
+    \subitem {make\+\_\+image}, \hyperpage{37}
+    \subitem {MatT}, \hyperpage{37}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{38}
+    \subitem {operator$<$$<$}, \hyperpage{38}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{37}
+    \subitem {sigma}, \hyperpage{38}
+    \subitem {size}, \hyperpage{38}
+    \subitem {test\+\_\+filter}, \hyperpage{38}
+    \subitem {VecT}, \hyperpage{37}
+  \item {boxxer\+::\+Gauss\+Filter3\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{39}
+  \item {boxxer\+::\+Gauss\+Filter3D}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{41}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{41}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{42}
+    \subitem {dim}, \hyperpage{42}
+    \subitem {filter}, \hyperpage{41}
+    \subitem {Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {hw}, \hyperpage{42}
+    \subitem {I\+VecT}, \hyperpage{40}
+    \subitem {ImageT}, \hyperpage{40}
+    \subitem {make\+\_\+image}, \hyperpage{41}
+    \subitem {MatT}, \hyperpage{41}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{42}
+    \subitem {operator$<$$<$}, \hyperpage{42}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{41}
+    \subitem {sigma}, \hyperpage{42}
+    \subitem {size}, \hyperpage{42}
+    \subitem {test\+\_\+filter}, \hyperpage{41}
+    \subitem {VecT}, \hyperpage{41}
+  \item {boxxer\+::\+Lo\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{46}
+  \item {boxxer\+::\+Lo\+G\+Filter2D}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{48}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{48}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{49}
+    \subitem {dim}, \hyperpage{49}
+    \subitem {filter}, \hyperpage{48}
+    \subitem {hw}, \hyperpage{49}
+    \subitem {I\+VecT}, \hyperpage{48}
+    \subitem {ImageT}, \hyperpage{48}
+    \subitem {Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {make\+\_\+image}, \hyperpage{48}
+    \subitem {MatT}, \hyperpage{48}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{49}
+    \subitem {operator$<$$<$}, \hyperpage{49}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{48}
+    \subitem {sigma}, \hyperpage{49}
+    \subitem {size}, \hyperpage{49}
+    \subitem {test\+\_\+filter}, \hyperpage{49}
+    \subitem {VecT}, \hyperpage{48}
+  \item {boxxer\+::\+Lo\+G\+Filter3\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{50}
+  \item {boxxer\+::\+Lo\+G\+Filter3D}
+    \subitem {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{52}
+    \subitem {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}, 
+		\hyperpage{52}
+    \subitem {default\+\_\+sigma\+\_\+hw\+\_\+ratio}, \hyperpage{53}
+    \subitem {dim}, \hyperpage{53}
+    \subitem {filter}, \hyperpage{52}
+    \subitem {hw}, \hyperpage{53}
+    \subitem {I\+VecT}, \hyperpage{51}
+    \subitem {ImageT}, \hyperpage{51}
+    \subitem {Lo\+G\+Filter3D}, \hyperpage{52}
+    \subitem {make\+\_\+image}, \hyperpage{52}
+    \subitem {MatT}, \hyperpage{52}
+    \subitem {max\+\_\+kernel\+\_\+hw}, \hyperpage{53}
+    \subitem {operator$<$$<$}, \hyperpage{53}
+    \subitem {set\+\_\+kernel\+\_\+hw}, \hyperpage{52}
+    \subitem {sigma}, \hyperpage{53}
+    \subitem {size}, \hyperpage{53}
+    \subitem {test\+\_\+filter}, \hyperpage{52}
+    \subitem {VecT}, \hyperpage{52}
+  \item {boxxer\+::\+Logical\+Error}, \hyperpage{54}
+    \subitem {Logical\+Error}, \hyperpage{55}
+  \item {boxxer\+::\+Maxima2\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{55}
+  \item {boxxer\+::\+Maxima2D}
+    \subitem {boxsize}, \hyperpage{56}
+    \subitem {check\+\_\+maxima}, \hyperpage{56}
+    \subitem {find\+\_\+maxima}, \hyperpage{56}
+    \subitem {I\+MatT}, \hyperpage{56}
+    \subitem {I\+VecT}, \hyperpage{56}
+    \subitem {ImageT}, \hyperpage{56}
+    \subitem {Maxima2D}, \hyperpage{56}
+    \subitem {Min\+Boxsize}, \hyperpage{56}
+    \subitem {Ndim}, \hyperpage{57}
+    \subitem {read\+\_\+maxima}, \hyperpage{56}
+    \subitem {size}, \hyperpage{57}
+    \subitem {test\+\_\+maxima}, \hyperpage{56}
+    \subitem {VecT}, \hyperpage{56}
+  \item {boxxer\+::\+Maxima3\+D$<$ Float\+T, Idx\+T $>$}, 
+		\hyperpage{57}
+  \item {boxxer\+::\+Maxima3D}
+    \subitem {boxsize}, \hyperpage{59}
+    \subitem {check\+\_\+maxima}, \hyperpage{59}
+    \subitem {find\+\_\+maxima}, \hyperpage{59}
+    \subitem {I\+CubeT}, \hyperpage{58}
+    \subitem {I\+MatT}, \hyperpage{58}
+    \subitem {I\+VecT}, \hyperpage{58}
+    \subitem {ImageT}, \hyperpage{58}
+    \subitem {Maxima3D}, \hyperpage{59}
+    \subitem {Min\+Boxsize}, \hyperpage{59}
+    \subitem {Ndim}, \hyperpage{59}
+    \subitem {read\+\_\+maxima}, \hyperpage{59}
+    \subitem {size}, \hyperpage{59}
+    \subitem {test\+\_\+maxima}, \hyperpage{59}
+    \subitem {VecT}, \hyperpage{58}
+  \item {boxxer\+::\+Numerical\+Error}, \hyperpage{60}
+    \subitem {Numerical\+Error}, \hyperpage{61}
+  \item {boxxer\+::\+Parameter\+Shape\+Error}, \hyperpage{61}
+    \subitem {Parameter\+Shape\+Error}, \hyperpage{62}
+  \item {boxxer\+::\+Parameter\+Value\+Error}, \hyperpage{62}
+    \subitem {Parameter\+Value\+Error}, \hyperpage{63}
+  \item {boxxer\+::kernels}, \hyperpage{5}
+    \subitem {gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma}, \hyperpage{8}
+    \subitem {gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace}, \hyperpage{9}
+    \subitem {gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma}, 
+		\hyperpage{9}
+    \subitem {gauss\+F\+I\+R\+\_\+1\+D\+\_\+small}, \hyperpage{9}
+    \subitem {gauss\+F\+I\+R\+\_\+1D}, \hyperpage{6}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dx}, \hyperpage{10}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma}, \hyperpage{10}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small}, \hyperpage{10}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dy}, \hyperpage{11}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor}, \hyperpage{11}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor}, \hyperpage{11}
+    \subitem {gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small}, \hyperpage{12}
+    \subitem {gauss\+F\+I\+R\+\_\+3\+Dx}, \hyperpage{12}
+    \subitem {gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small}, \hyperpage{12}
+    \subitem {gauss\+F\+I\+R\+\_\+3\+Dy}, \hyperpage{13}
+    \subitem {gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small}, \hyperpage{13}
+    \subitem {gauss\+F\+I\+R\+\_\+3\+Dz}, \hyperpage{13}
+    \subitem {gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small}, \hyperpage{14}
+  \item {Boxxer\+Error}
+    \subitem {boxxer}, \hyperpage{5}
+  \item {Boxxer\+Error.\+h}, \hyperpage{66}
+
+  \indexspace
+
+  \item {check\+\_\+maxima}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+  \item {check\+Maxima}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{17}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{23}
+  \item {compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+
+  \indexspace
+
+  \item {default\+\_\+sigma\+\_\+hw\+\_\+ratio}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+  \item {Default\+Sigma\+Ratio}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+  \item {dim}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+  \item {Do\+G\+Filter2D}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+  \item {Do\+G\+Filter3D}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+
+  \indexspace
+
+  \item {enumerate\+Image\+Maxima}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{17}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{23}
+
+  \indexspace
+
+  \item {filter}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {filter\+DoG}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{17}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{23}
+  \item {filter\+Gauss}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{18}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{24}
+  \item {Filter\+Kernels.\+h}, \hyperpage{67}
+  \item {filter\+LoG}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{18}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{24}
+  \item {filter\+Scaled\+DoG}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{18}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{24}
+  \item {filter\+Scaled\+LoG}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{19}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{25}
+  \item {find\+\_\+maxima}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+
+  \indexspace
+
+  \item {gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma}
+    \subitem {boxxer\+::kernels}, \hyperpage{8}
+  \item {gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace}
+    \subitem {boxxer\+::kernels}, \hyperpage{9}
+  \item {gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma}
+    \subitem {boxxer\+::kernels}, \hyperpage{9}
+  \item {gauss\+F\+I\+R\+\_\+1\+D\+\_\+small}
+    \subitem {boxxer\+::kernels}, \hyperpage{9}
+  \item {gauss\+F\+I\+R\+\_\+1D}
+    \subitem {boxxer\+::kernels}, \hyperpage{6}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dx}
+    \subitem {boxxer\+::kernels}, \hyperpage{10}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma}
+    \subitem {boxxer\+::kernels}, \hyperpage{10}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small}
+    \subitem {boxxer\+::kernels}, \hyperpage{10}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dy}
+    \subitem {boxxer\+::kernels}, \hyperpage{11}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor}
+    \subitem {boxxer\+::kernels}, \hyperpage{11}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor}
+    \subitem {boxxer\+::kernels}, \hyperpage{11}
+  \item {gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small}
+    \subitem {boxxer\+::kernels}, \hyperpage{12}
+  \item {gauss\+F\+I\+R\+\_\+3\+Dx}
+    \subitem {boxxer\+::kernels}, \hyperpage{12}
+  \item {gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small}
+    \subitem {boxxer\+::kernels}, \hyperpage{12}
+  \item {gauss\+F\+I\+R\+\_\+3\+Dy}
+    \subitem {boxxer\+::kernels}, \hyperpage{13}
+  \item {gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small}
+    \subitem {boxxer\+::kernels}, \hyperpage{13}
+  \item {gauss\+F\+I\+R\+\_\+3\+Dz}
+    \subitem {boxxer\+::kernels}, \hyperpage{13}
+  \item {gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small}
+    \subitem {boxxer\+::kernels}, \hyperpage{14}
+  \item {Gauss\+F\+I\+R\+Filter}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+  \item {Gauss\+Filter.\+h}, \hyperpage{69}
+  \item {Gauss\+Filter2D}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+  \item {Gauss\+Filter3D}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+
+  \indexspace
+
+  \item {hw}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+
+  \indexspace
+
+  \item {I\+CubeT}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{58}
+  \item {I\+MatT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{58}
+  \item {I\+VecT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{28}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{44}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{40}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{51}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{58}
+  \item {Image\+StackT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+  \item {ImageT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{28}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{40}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{51}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{58}
+  \item {imsize}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+
+  \indexspace
+
+  \item {Lo\+G\+Filter2D}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+  \item {Lo\+G\+Filter3D}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {Logical\+Error}
+    \subitem {boxxer\+::\+Logical\+Error}, \hyperpage{55}
+
+  \indexspace
+
+  \item {make\+\_\+image}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{19}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{25}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {make\+\_\+image\+\_\+stack}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{19}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{25}
+  \item {make\+\_\+scaled\+\_\+image}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{19}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{25}
+  \item {make\+\_\+scaled\+\_\+image\+\_\+stack}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{19}
+  \item {MatT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{44}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {max\+\_\+kernel\+\_\+hw}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+  \item {Maxima.\+h}, \hyperpage{70}
+  \item {Maxima2D}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+  \item {Maxima3D}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+  \item {Min\+Boxsize}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+
+  \indexspace
+
+  \item {n\+Scales}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+  \item {Ndim}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{57}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+  \item {Numerical\+Error}
+    \subitem {boxxer\+::\+Numerical\+Error}, \hyperpage{61}
+
+  \indexspace
+
+  \item {operator$<$$<$}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+
+  \indexspace
+
+  \item {Parameter\+Shape\+Error}
+    \subitem {boxxer\+::\+Parameter\+Shape\+Error}, \hyperpage{62}
+  \item {Parameter\+Value\+Error}
+    \subitem {boxxer\+::\+Parameter\+Value\+Error}, \hyperpage{63}
+
+  \indexspace
+
+  \item {R\+E\+A\+D\+M\+E.\+md}, \hyperpage{71}
+  \item {read\+\_\+maxima}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+
+  \indexspace
+
+  \item {scale\+Space\+Do\+G\+Maxima}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{25}
+  \item {scale\+Space\+Lo\+G\+Maxima}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+  \item {Scaled\+Image\+StackT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+  \item {Scaled\+ImageT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{16}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+  \item {set\+\_\+kernel\+\_\+hw}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {set\+\_\+sigma\+\_\+ratio}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+  \item {set\+Do\+G\+Sigma\+Ratio}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+  \item {sigma}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+  \item {sigma\+\_\+ratio}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{20}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{26}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+  \item {size}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{45}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{42}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{53}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{57}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+
+  \indexspace
+
+  \item {test\+\_\+filter}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{30}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{34}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{38}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{49}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+  \item {test\+\_\+maxima}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{59}
+
+  \indexspace
+
+  \item {VecT}
+    \subitem {boxxer\+::\+Boxxer2D}, \hyperpage{17}
+    \subitem {boxxer\+::\+Boxxer3D}, \hyperpage{22}
+    \subitem {boxxer\+::\+Do\+G\+Filter2D}, \hyperpage{29}
+    \subitem {boxxer\+::\+Do\+G\+Filter3D}, \hyperpage{33}
+    \subitem {boxxer\+::\+Gauss\+F\+I\+R\+Filter}, \hyperpage{44}
+    \subitem {boxxer\+::\+Gauss\+Filter2D}, \hyperpage{37}
+    \subitem {boxxer\+::\+Gauss\+Filter3D}, \hyperpage{41}
+    \subitem {boxxer\+::\+Lo\+G\+Filter2D}, \hyperpage{48}
+    \subitem {boxxer\+::\+Lo\+G\+Filter3D}, \hyperpage{52}
+    \subitem {boxxer\+::\+Maxima2D}, \hyperpage{56}
+    \subitem {boxxer\+::\+Maxima3D}, \hyperpage{58}
+
+\end{theindex}

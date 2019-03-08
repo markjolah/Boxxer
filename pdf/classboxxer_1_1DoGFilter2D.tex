@@ -1,0 +1,286 @@
+\hypertarget{classboxxer_1_1DoGFilter2D}{}\subsection{boxxer\+:\+:Do\+G\+Filter2D$<$ FloatT, IdxT $>$ Class Template Reference}
+\label{classboxxer_1_1DoGFilter2D}\index{boxxer\+::\+Do\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$@{boxxer\+::\+Do\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$}}
+
+
+{\ttfamily \#include $<$/home/travis/build/markjolah/\+Boxxer/include/\+Boxxer/\+Gauss\+Filter.\+h$>$}
+
+
+
+Inheritance diagram for boxxer\+:\+:Do\+G\+Filter2D$<$ FloatT, IdxT $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classboxxer_1_1DoGFilter2D__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for boxxer\+:\+:Do\+G\+Filter2D$<$ FloatT, IdxT $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classboxxer_1_1DoGFilter2D__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classboxxer_1_1DoGFilter2D_a3cf901b2a5f6254149ca635244176c7f}{I\+VecT} = typename \hyperlink{classboxxer_1_1GaussFIRFilter}{Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::\hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT}
+\item 
+using \hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT} = typename \hyperlink{classboxxer_1_1GaussFIRFilter}{Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::\hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT}
+\item 
+using \hyperlink{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}{ImageT} = arma\+::\+Mat$<$ FloatT $>$
+\item 
+using \hyperlink{classboxxer_1_1GaussFIRFilter_a83cf4c7f4782f69918c0e0883fff5412}{MatT} = arma\+::\+Mat$<$ FloatT $>$
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classboxxer_1_1DoGFilter2D_ab423fa2c4bb16faea4c33a92ab08411c}{Do\+G\+Filter2D} (const \hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT} \&\hyperlink{classboxxer_1_1GaussFIRFilter_ac0d4e19bb2be3e8913e77283e7e4317e}{size}, const \hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT} \&\hyperlink{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}{sigma}, FloatT \hyperlink{classboxxer_1_1DoGFilter2D_a68e3d95c06f7d41782be2d1a1db96ace}{sigma\+\_\+ratio})
+\item 
+\hyperlink{classboxxer_1_1DoGFilter2D_aa8b99c2a75dfa10fd171bf2661f05c6a}{Do\+G\+Filter2D} (const \hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT} \&\hyperlink{classboxxer_1_1GaussFIRFilter_ac0d4e19bb2be3e8913e77283e7e4317e}{size}, const \hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT} \&\hyperlink{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}{sigma}, FloatT \hyperlink{classboxxer_1_1DoGFilter2D_a68e3d95c06f7d41782be2d1a1db96ace}{sigma\+\_\+ratio}, const \hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT} \&kernel\+\_\+hw)
+\item 
+void \hyperlink{classboxxer_1_1DoGFilter2D_a3fcf9339a299ad57e3427fce9d59661a}{set\+\_\+kernel\+\_\+hw} (const \hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT} \&kernel\+\_\+half\+\_\+width)
+\item 
+void \hyperlink{classboxxer_1_1DoGFilter2D_af6c4276ff6195d6052d834d9c7fbb04c}{set\+\_\+sigma\+\_\+ratio} (FloatT \hyperlink{classboxxer_1_1DoGFilter2D_a68e3d95c06f7d41782be2d1a1db96ace}{sigma\+\_\+ratio})
+\item 
+\hyperlink{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}{ImageT} \hyperlink{classboxxer_1_1DoGFilter2D_a78c7c1791abff3bc665bac7becc0dec1}{make\+\_\+image} () const 
+\item 
+void \hyperlink{classboxxer_1_1DoGFilter2D_a2d5cf92732000f8c444b32041b89fe00}{filter} (const \hyperlink{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}{ImageT} \&im, \hyperlink{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}{ImageT} \&out)
+\item 
+void \hyperlink{classboxxer_1_1DoGFilter2D_a560b334f15bc28f411b065b22ffd4bb7}{test\+\_\+filter} (const \hyperlink{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}{ImageT} \&im)
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT} \hyperlink{classboxxer_1_1GaussFIRFilter_a5dd6de5fe82092ec30141ab920d75dfd}{compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel} (FloatT \hyperlink{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}{sigma}, IdxT \hyperlink{classboxxer_1_1GaussFIRFilter_ae17a4e137303e452a9223ba34825e0da}{hw})
+\item 
+static \hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT} \hyperlink{classboxxer_1_1GaussFIRFilter_ad6a618b47db57b570278cc57b05d8c03}{compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel} (FloatT \hyperlink{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}{sigma}, IdxT \hyperlink{classboxxer_1_1GaussFIRFilter_ae17a4e137303e452a9223ba34825e0da}{hw})
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+FloatT \hyperlink{classboxxer_1_1DoGFilter2D_a68e3d95c06f7d41782be2d1a1db96ace}{sigma\+\_\+ratio}
+\item 
+IdxT \hyperlink{classboxxer_1_1GaussFIRFilter_ac7adcd4d8f8efee00a65262f596c8eda}{dim}
+\item 
+\hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT} \hyperlink{classboxxer_1_1GaussFIRFilter_ac0d4e19bb2be3e8913e77283e7e4317e}{size}
+\item 
+\hyperlink{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{VecT} \hyperlink{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}{sigma}
+\item 
+\hyperlink{classboxxer_1_1GaussFIRFilter_a0083c8c9ab6032dd458b4dc93852c2b8}{I\+VecT} \hyperlink{classboxxer_1_1GaussFIRFilter_ae17a4e137303e452a9223ba34825e0da}{hw}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const IdxT \hyperlink{classboxxer_1_1GaussFIRFilter_a7f85e018f78753ee4fedf65c04b0c65a}{max\+\_\+kernel\+\_\+hw}
+\item 
+static const FloatT \hyperlink{classboxxer_1_1GaussFIRFilter_a72b51cd7549510735179cb9c94f5f43f}{default\+\_\+sigma\+\_\+hw\+\_\+ratio}
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Float\+T\+\_\+ , class Idx\+T\+\_\+ $>$ }\\std\+::ostream \& \hyperlink{classboxxer_1_1DoGFilter2D_a5226e7e31cc72aeef946cd5d60bc3f49}{operator$<$$<$} (std\+::ostream \&out, const \hyperlink{classboxxer_1_1DoGFilter2D}{Do\+G\+Filter2D}$<$ Float\+T\+\_\+, Idx\+T\+\_\+ $>$ \&filt)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$\\*
+class boxxer\+::\+Do\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$}
+
+
+
+Definition at line 70 of file Gauss\+Filter.\+h.
+
+
+
+\subsubsection{Member Typedef Documentation}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!ImageT@{ImageT}}
+\index{ImageT@{ImageT}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{ImageT}{ImageT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::{\bf ImageT} =  arma\+::\+Mat$<$FloatT$>$}\hypertarget{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}{}\label{classboxxer_1_1DoGFilter2D_aef097cf982b1705c47b2e2b34baf1bb1}
+
+
+Definition at line 75 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!I\+VecT@{I\+VecT}}
+\index{I\+VecT@{I\+VecT}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{I\+VecT}{IVecT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::{\bf I\+VecT} =  typename {\bf Gauss\+F\+I\+R\+Filter}$<$FloatT,IdxT$>$\+::{\bf I\+VecT}}\hypertarget{classboxxer_1_1DoGFilter2D_a3cf901b2a5f6254149ca635244176c7f}{}\label{classboxxer_1_1DoGFilter2D_a3cf901b2a5f6254149ca635244176c7f}
+
+
+Definition at line 73 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!MatT@{MatT}}
+\index{MatT@{MatT}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{MatT}{MatT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::{\bf MatT} =  arma\+::\+Mat$<$FloatT$>$\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_a83cf4c7f4782f69918c0e0883fff5412}{}\label{classboxxer_1_1GaussFIRFilter_a83cf4c7f4782f69918c0e0883fff5412}
+
+
+Definition at line 26 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!VecT@{VecT}}
+\index{VecT@{VecT}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{VecT}{VecT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ using {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::{\bf VecT} =  typename {\bf Gauss\+F\+I\+R\+Filter}$<$FloatT,IdxT$>$\+::{\bf VecT}}\hypertarget{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}{}\label{classboxxer_1_1DoGFilter2D_a77bd6efdb8dc5643aa30c2575c9da261}
+
+
+Definition at line 74 of file Gauss\+Filter.\+h.
+
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!Do\+G\+Filter2D@{Do\+G\+Filter2D}}
+\index{Do\+G\+Filter2D@{Do\+G\+Filter2D}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{Do\+G\+Filter2\+D(const I\+Vec\+T \&size, const Vec\+T \&sigma, Float\+T sigma\+\_\+ratio)}{DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::{\bf Do\+G\+Filter2D} (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\+VecT} \&}]{size, }
+\item[{const {\bf VecT} \&}]{sigma, }
+\item[{FloatT}]{sigma\+\_\+ratio}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1DoGFilter2D_ab423fa2c4bb16faea4c33a92ab08411c}{}\label{classboxxer_1_1DoGFilter2D_ab423fa2c4bb16faea4c33a92ab08411c}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!Do\+G\+Filter2D@{Do\+G\+Filter2D}}
+\index{Do\+G\+Filter2D@{Do\+G\+Filter2D}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{Do\+G\+Filter2\+D(const I\+Vec\+T \&size, const Vec\+T \&sigma, Float\+T sigma\+\_\+ratio, const I\+Vec\+T \&kernel\+\_\+hw)}{DoGFilter2D(const IVecT &size, const VecT &sigma, FloatT sigma_ratio, const IVecT &kernel_hw)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::{\bf Do\+G\+Filter2D} (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\+VecT} \&}]{size, }
+\item[{const {\bf VecT} \&}]{sigma, }
+\item[{FloatT}]{sigma\+\_\+ratio, }
+\item[{const {\bf I\+VecT} \&}]{kernel\+\_\+hw}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1DoGFilter2D_aa8b99c2a75dfa10fd171bf2661f05c6a}{}\label{classboxxer_1_1DoGFilter2D_aa8b99c2a75dfa10fd171bf2661f05c6a}
+
+
+\subsubsection{Member Function Documentation}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel@{compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}}
+\index{compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel@{compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel(\+Float\+T sigma, Idx\+T hw)}{compute_Gauss_FIR_kernel(FloatT sigma, IdxT hw)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ static {\bf VecT} {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::compute\+\_\+\+Gauss\+\_\+\+F\+I\+R\+\_\+kernel (
+\begin{DoxyParamCaption}
+\item[{FloatT}]{sigma, }
+\item[{IdxT}]{hw}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_a5dd6de5fe82092ec30141ab920d75dfd}{}\label{classboxxer_1_1GaussFIRFilter_a5dd6de5fe82092ec30141ab920d75dfd}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel@{compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}}
+\index{compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel@{compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel(\+Float\+T sigma, Idx\+T hw)}{compute_LoG_FIR_kernel(FloatT sigma, IdxT hw)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ static {\bf VecT} {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::compute\+\_\+\+Lo\+G\+\_\+\+F\+I\+R\+\_\+kernel (
+\begin{DoxyParamCaption}
+\item[{FloatT}]{sigma, }
+\item[{IdxT}]{hw}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_ad6a618b47db57b570278cc57b05d8c03}{}\label{classboxxer_1_1GaussFIRFilter_ad6a618b47db57b570278cc57b05d8c03}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!filter@{filter}}
+\index{filter@{filter}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{filter(const Image\+T \&im, Image\+T \&out)}{filter(const ImageT &im, ImageT &out)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::filter (
+\begin{DoxyParamCaption}
+\item[{const {\bf ImageT} \&}]{im, }
+\item[{{\bf ImageT} \&}]{out}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1DoGFilter2D_a2d5cf92732000f8c444b32041b89fe00}{}\label{classboxxer_1_1DoGFilter2D_a2d5cf92732000f8c444b32041b89fe00}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!make\+\_\+image@{make\+\_\+image}}
+\index{make\+\_\+image@{make\+\_\+image}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{make\+\_\+image() const }{make_image() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ {\bf ImageT} {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::make\+\_\+image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classboxxer_1_1DoGFilter2D_a78c7c1791abff3bc665bac7becc0dec1}{}\label{classboxxer_1_1DoGFilter2D_a78c7c1791abff3bc665bac7becc0dec1}
+
+
+Definition at line 83 of file Gauss\+Filter.\+h.
+
+
+
+References boxxer\+::\+Gauss\+F\+I\+R\+Filter$<$ Float\+T, Idx\+T $>$\+::size.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!set\+\_\+kernel\+\_\+hw@{set\+\_\+kernel\+\_\+hw}}
+\index{set\+\_\+kernel\+\_\+hw@{set\+\_\+kernel\+\_\+hw}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{set\+\_\+kernel\+\_\+hw(const I\+Vec\+T \&kernel\+\_\+half\+\_\+width)}{set_kernel_hw(const IVecT &kernel_half_width)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::set\+\_\+kernel\+\_\+hw (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\+VecT} \&}]{kernel\+\_\+half\+\_\+width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classboxxer_1_1DoGFilter2D_a3fcf9339a299ad57e3427fce9d59661a}{}\label{classboxxer_1_1DoGFilter2D_a3fcf9339a299ad57e3427fce9d59661a}
+
+
+Implements \hyperlink{classboxxer_1_1GaussFIRFilter_a7ada113680b67f052d11afe346ddf8bc}{boxxer\+::\+Gauss\+F\+I\+R\+Filter$<$ Float\+T, Idx\+T $>$}.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!set\+\_\+sigma\+\_\+ratio@{set\+\_\+sigma\+\_\+ratio}}
+\index{set\+\_\+sigma\+\_\+ratio@{set\+\_\+sigma\+\_\+ratio}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{set\+\_\+sigma\+\_\+ratio(\+Float\+T sigma\+\_\+ratio)}{set_sigma_ratio(FloatT sigma_ratio)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::set\+\_\+sigma\+\_\+ratio (
+\begin{DoxyParamCaption}
+\item[{FloatT}]{sigma\+\_\+ratio}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1DoGFilter2D_af6c4276ff6195d6052d834d9c7fbb04c}{}\label{classboxxer_1_1DoGFilter2D_af6c4276ff6195d6052d834d9c7fbb04c}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!test\+\_\+filter@{test\+\_\+filter}}
+\index{test\+\_\+filter@{test\+\_\+filter}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{test\+\_\+filter(const Image\+T \&im)}{test_filter(const ImageT &im)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ void {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::test\+\_\+filter (
+\begin{DoxyParamCaption}
+\item[{const {\bf ImageT} \&}]{im}
+\end{DoxyParamCaption}
+)}\hypertarget{classboxxer_1_1DoGFilter2D_a560b334f15bc28f411b065b22ffd4bb7}{}\label{classboxxer_1_1DoGFilter2D_a560b334f15bc28f411b065b22ffd4bb7}
+
+
+\subsubsection{Friends And Related Function Documentation}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{operator$<$$<$}{operator<<}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ template$<$class Float\+T\+\_\+ , class Idx\+T\+\_\+ $>$ std\+::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{out, }
+\item[{const {\bf Do\+G\+Filter2D}$<$ Float\+T\+\_\+, Idx\+T\+\_\+ $>$ \&}]{filt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classboxxer_1_1DoGFilter2D_a5226e7e31cc72aeef946cd5d60bc3f49}{}\label{classboxxer_1_1DoGFilter2D_a5226e7e31cc72aeef946cd5d60bc3f49}
+
+
+\subsubsection{Member Data Documentation}
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!default\+\_\+sigma\+\_\+hw\+\_\+ratio@{default\+\_\+sigma\+\_\+hw\+\_\+ratio}}
+\index{default\+\_\+sigma\+\_\+hw\+\_\+ratio@{default\+\_\+sigma\+\_\+hw\+\_\+ratio}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{default\+\_\+sigma\+\_\+hw\+\_\+ratio}{default_sigma_hw_ratio}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ const FloatT {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::default\+\_\+sigma\+\_\+hw\+\_\+ratio\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_a72b51cd7549510735179cb9c94f5f43f}{}\label{classboxxer_1_1GaussFIRFilter_a72b51cd7549510735179cb9c94f5f43f}
+
+
+Definition at line 41 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!dim@{dim}}
+\index{dim@{dim}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{dim}{dim}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ IdxT {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::dim\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_ac7adcd4d8f8efee00a65262f596c8eda}{}\label{classboxxer_1_1GaussFIRFilter_ac7adcd4d8f8efee00a65262f596c8eda}
+
+
+Definition at line 28 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!hw@{hw}}
+\index{hw@{hw}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{hw}{hw}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ {\bf I\+VecT} {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::hw\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_ae17a4e137303e452a9223ba34825e0da}{}\label{classboxxer_1_1GaussFIRFilter_ae17a4e137303e452a9223ba34825e0da}
+
+
+Definition at line 31 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!max\+\_\+kernel\+\_\+hw@{max\+\_\+kernel\+\_\+hw}}
+\index{max\+\_\+kernel\+\_\+hw@{max\+\_\+kernel\+\_\+hw}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{max\+\_\+kernel\+\_\+hw}{max_kernel_hw}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ const IdxT {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::max\+\_\+kernel\+\_\+hw\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_a7f85e018f78753ee4fedf65c04b0c65a}{}\label{classboxxer_1_1GaussFIRFilter_a7f85e018f78753ee4fedf65c04b0c65a}
+
+
+Definition at line 40 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!sigma@{sigma}}
+\index{sigma@{sigma}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{sigma}{sigma}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ {\bf VecT} {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::sigma\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}{}\label{classboxxer_1_1GaussFIRFilter_a66ced06c688fd544d5f1f8be39aa2125}
+
+
+Definition at line 30 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!sigma\+\_\+ratio@{sigma\+\_\+ratio}}
+\index{sigma\+\_\+ratio@{sigma\+\_\+ratio}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{sigma\+\_\+ratio}{sigma_ratio}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT  = float, class IdxT  = uint32\+\_\+t$>$ FloatT {\bf boxxer\+::\+Do\+G\+Filter2D}$<$ FloatT, IdxT $>$\+::sigma\+\_\+ratio}\hypertarget{classboxxer_1_1DoGFilter2D_a68e3d95c06f7d41782be2d1a1db96ace}{}\label{classboxxer_1_1DoGFilter2D_a68e3d95c06f7d41782be2d1a1db96ace}
+
+
+Definition at line 77 of file Gauss\+Filter.\+h.
+
+\index{boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}!size@{size}}
+\index{size@{size}!boxxer\+::\+Do\+G\+Filter2D@{boxxer\+::\+Do\+G\+Filter2D}}
+\paragraph[{\texorpdfstring{size}{size}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class FloatT = float, class IdxT = uint32\+\_\+t$>$ {\bf I\+VecT} {\bf boxxer\+::\+Gauss\+F\+I\+R\+Filter}$<$ FloatT, IdxT $>$\+::size\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classboxxer_1_1GaussFIRFilter_ac0d4e19bb2be3e8913e77283e7e4317e}{}\label{classboxxer_1_1GaussFIRFilter_ac0d4e19bb2be3e8913e77283e7e4317e}
+
+
+Definition at line 29 of file Gauss\+Filter.\+h.
+
+
+
+Referenced by boxxer\+::\+Gauss\+Filter2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image(), boxxer\+::\+Do\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image(), boxxer\+::\+Lo\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image(), boxxer\+::\+Gauss\+Filter3\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image(), boxxer\+::\+Do\+G\+Filter3\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image(), and boxxer\+::\+Lo\+G\+Filter3\+D$<$ Float\+T, Idx\+T $>$\+::make\+\_\+image().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{GaussFilter_8h}{Gauss\+Filter.\+h}\end{DoxyCompactItemize}

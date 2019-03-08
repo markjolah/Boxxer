@@ -1,0 +1,85 @@
+\hypertarget{FilterKernels_8h}{}\subsection{Filter\+Kernels.\+h File Reference}
+\label{FilterKernels_8h}\index{Filter\+Kernels.\+h@{Filter\+Kernels.\+h}}
+
+
+The \hyperlink{namespaceboxxer_1_1kernels}{boxxer\+::kernels} namespace -\/ low-\/level Gaussian finite-\/impulse response filters.  
+
+
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$armadillo$>$}\\*
+Include dependency graph for Filter\+Kernels.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{FilterKernels_8h__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceboxxer}{boxxer}
+\item 
+ \hyperlink{namespaceboxxer_1_1kernels}{boxxer\+::kernels}
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{Indent}{\bf 1D Gauss F\+IR Filters}\par
+{\em 1D Gaussian finite-\/impulse response filters. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_aae9636dd5e83f478ed676068c3252627}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1D} (IntT size, const FloatT data\mbox{[}$\,$\mbox{]}, FloatT fdata\mbox{[}$\,$\mbox{]}, IntT hw, const FloatT kernel\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_adf021edf274fc54862b2f9546a47301d}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1D} (const arma\+::\+Col$<$ FloatT $>$ \&data, arma\+::\+Col$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_af07e73b62933910e86eef6b393155c2c}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+small} (IntT size, const FloatT data\mbox{[}$\,$\mbox{]}, FloatT fdata\mbox{[}$\,$\mbox{]}, IntT hw, const FloatT kernel\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a88f298ecd82bf9083fabbb2e8a29d4e6}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+arma} (const arma\+::\+Col$<$ FloatT $>$ \&data, arma\+::\+Col$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ab2a257fbea765aacf09b558e38637479}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace\+\_\+arma} (arma\+::\+Col$<$ FloatT $>$ \&data, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ab3d9ad7bd61b25b9e856bd0284607e70}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+1\+D\+\_\+inplace} (IntT size, FloatT data\mbox{[}$\,$\mbox{]}, IntT hw, const FloatT kernel\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf 2D Gauss F\+IR Filters}\par
+{\em 2D Gaussian finite-\/impulse response filters. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_aeee9d632ce320eb89c870a44c37efa65}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dx} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a638bf7fa9900937a763f190c0a4499ae}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+small} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a1da855e7008385fee013bd868d206040}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dx\+\_\+arma} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a6efa0d22ae67955f27c6d9ea30342104}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_aa54bb3fea2d343c030528a87b7916293}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+rowmajor} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ae78e8767ae044f01e07e61a45220ffc5}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+colmajor} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a49fd7ed785cfcea57b4c9e67d3113a69}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+2\+Dy\+\_\+small} (const arma\+::\+Mat$<$ FloatT $>$ \&data, arma\+::\+Mat$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf 3D Gauss F\+IR Filters}\par
+{\em 3D Gaussian finite-\/impulse response filters. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a74811c999b7d18b14dde0a042318fc06}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dx} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_af7d8fb262d8bde9c9907e141c3c5f55f}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dx\+\_\+small} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_ac97f85b9211fcffa432b44a86d30c5df}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dy} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a0256b4053077d18bbe2228402071555f}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dy\+\_\+small} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a404ef6e2324a0e4ff53e38ad7b07733e}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dz} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\item 
+{\footnotesize template$<$class FloatT  = float, class IntT  = int32\+\_\+t$>$ }\\void \hyperlink{namespaceboxxer_1_1kernels_a9a9201ede570bb2d77531d529f39bc99}{boxxer\+::kernels\+::gauss\+F\+I\+R\+\_\+3\+Dz\+\_\+small} (const arma\+::\+Cube$<$ FloatT $>$ \&data, arma\+::\+Cube$<$ FloatT $>$ \&fdata, const arma\+::\+Col$<$ FloatT $>$ \&kernel)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsubsection{Detailed Description}
+The \hyperlink{namespaceboxxer_1_1kernels}{boxxer\+::kernels} namespace -\/ low-\/level Gaussian finite-\/impulse response filters. 
+
+\begin{DoxyAuthor}{Author}
+Mark J. Olah (mjo@cs.\+unm D\+OT edu) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2014-\/2019 
+\end{DoxyDate}

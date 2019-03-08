@@ -1,0 +1,7 @@
+<map id="boxxer::Boxxer3D::make_scaled_image" name="boxxer::Boxxer3D::make_scaled_image">
+<area shape="rect" id="node2" href="$classboxxer_1_1Boxxer3D.html#a44cf5445f8991f735207651fcb6d5962" title="boxxer::Boxxer3D::checkMaxima" alt="" coords="208,5,408,31"/>
+<area shape="rect" id="node3" href="$classboxxer_1_1Boxxer3D.html#a2fbe5c1f5d3b705ddcca7d13a92f9283" title="boxxer::Boxxer3D::enumerate\lImageMaxima" alt="" coords="216,55,400,93"/>
+<area shape="rect" id="node4" href="$classboxxer_1_1Boxxer3D.html#a523dff6ee90ba9f6e6bb0e8e4258a905" title="boxxer::Boxxer3D::filterDoG" alt="" coords="221,117,395,143"/>
+<area shape="rect" id="node5" href="$classboxxer_1_1Boxxer3D.html#a210c289db79c6db6596df92d77052f47" title="boxxer::Boxxer3D::filter\lGauss" alt="" coords="234,167,382,205"/>
+<area shape="rect" id="node6" href="$classboxxer_1_1Boxxer3D.html#ad242333de1472fea719db9958dfe6f46" title="boxxer::Boxxer3D::filterLoG" alt="" coords="223,229,393,255"/>
+</map>

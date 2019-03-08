@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classboxxer_1_1GaussFIRFilter.html" title="boxxer::GaussFIRFilter\l\&lt; FloatT, IdxT \&gt;" alt="" coords="5,163,152,201"/>
+<area shape="rect" id="node2" href="$classboxxer_1_1DoGFilter2D.html" title="boxxer::DoGFilter2D\l\&lt; FloatT, IdxT \&gt;" alt="" coords="205,5,338,44"/>
+<area shape="rect" id="node3" href="$classboxxer_1_1DoGFilter3D.html" title="boxxer::DoGFilter3D\l\&lt; FloatT, IdxT \&gt;" alt="" coords="205,68,338,107"/>
+<area shape="rect" id="node4" href="$classboxxer_1_1GaussFilter2D.html" title="boxxer::GaussFilter2D\l\&lt; FloatT, IdxT \&gt;" alt="" coords="200,131,343,169"/>
+<area shape="rect" id="node5" href="$classboxxer_1_1GaussFilter3D.html" title="boxxer::GaussFilter3D\l\&lt; FloatT, IdxT \&gt;" alt="" coords="200,193,343,232"/>
+<area shape="rect" id="node6" href="$classboxxer_1_1LoGFilter2D.html" title="boxxer::LoGFilter2D\l\&lt; FloatT, IdxT \&gt;" alt="" coords="206,256,337,295"/>
+<area shape="rect" id="node7" href="$classboxxer_1_1LoGFilter3D.html" title="boxxer::LoGFilter3D\l\&lt; FloatT, IdxT \&gt;" alt="" coords="206,319,337,357"/>
+</map>

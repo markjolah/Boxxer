@@ -1,0 +1,50 @@
+\hypertarget{GaussFilter_8h}{}\subsection{Gauss\+Filter.\+h File Reference}
+\label{GaussFilter_8h}\index{Gauss\+Filter.\+h@{Gauss\+Filter.\+h}}
+
+
+The class declarations for Gaussian image filter classes.  
+
+
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$ostream$>$}\\*
+{\ttfamily \#include $<$armadillo$>$}\\*
+Include dependency graph for Gauss\+Filter.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{GaussFilter_8h__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classboxxer_1_1GaussFIRFilter}{boxxer\+::\+Gauss\+F\+I\+R\+Filter$<$ Float\+T, Idx\+T $>$}
+\item 
+class \hyperlink{classboxxer_1_1GaussFilter2D}{boxxer\+::\+Gauss\+Filter2\+D$<$ Float\+T, Idx\+T $>$}
+\item 
+class \hyperlink{classboxxer_1_1DoGFilter2D}{boxxer\+::\+Do\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$}
+\item 
+class \hyperlink{classboxxer_1_1LoGFilter2D}{boxxer\+::\+Lo\+G\+Filter2\+D$<$ Float\+T, Idx\+T $>$}
+\item 
+class \hyperlink{classboxxer_1_1GaussFilter3D}{boxxer\+::\+Gauss\+Filter3\+D$<$ Float\+T, Idx\+T $>$}
+\item 
+class \hyperlink{classboxxer_1_1DoGFilter3D}{boxxer\+::\+Do\+G\+Filter3\+D$<$ Float\+T, Idx\+T $>$}
+\item 
+class \hyperlink{classboxxer_1_1LoGFilter3D}{boxxer\+::\+Lo\+G\+Filter3\+D$<$ Float\+T, Idx\+T $>$}
+\end{DoxyCompactItemize}
+\subsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceboxxer}{boxxer}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The class declarations for Gaussian image filter classes. 
+
+\begin{DoxyAuthor}{Author}
+Mark J. Olah (mjo@cs.\+unm D\+OT edu) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2014-\/2019 These classes are meant to be a per-\/thread worker class or a direct interface for single threaded processes. Each object has its own local storage of which is only 1 or 2 frames in size. 
+\end{DoxyDate}
