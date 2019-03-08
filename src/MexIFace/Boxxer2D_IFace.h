@@ -7,6 +7,7 @@
 #ifndef BOXXER_BOXXER2D_IFACE
 #define BOXXER_BOXXER2D_IFACE
 
+#include <cstdint>
 #include <functional>
 
 #include "MexIFace/MexIFace.h"

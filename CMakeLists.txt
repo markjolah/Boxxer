@@ -85,7 +85,7 @@ endif()
 if(OPT_MATLAB)
     message(STATUS "*** Matlab Module Building Enabled ***")
     add_subdirectory(src/MexIFace)
-    mexiface_configure_install() #Matlab code and startupMappel.m configure and install
+    mexiface_configure_install() #Matlab code and startup${PROJECT_NAME}.m configure and install
 endif()
 
 ### Documentation
